@@ -115,19 +115,10 @@ class HomePage extends StatelessWidget {
                   Icons.home_rounded,
                   size: 32,
                 )),
-
+            //toggle button
             ToggleButton(
               size: 100,
-              onToggle: (isDark) {
-                if (MediaQuery.of(context).platformBrightness ==
-                    Brightness.light) {
-                  theme:
-                  ThemeData.dark();
-                } else {
-                  theme:
-                  ThemeData.light();
-                }
-              },
+              //onToggle: (isDark) {if (MediaQuery.of(context).platformBrightness ==Brightness.light) {theme:ThemeData.dark();} else {theme:ThemeData.light();}},
             ),
           ],
         ),

@@ -6,11 +6,11 @@ import 'package:flutter/src/widgets/framework.dart';
 
 class ToggleButton extends StatefulWidget {
   final double size;
-  final Function onToggle;
+  //final Function onToggle;
   const ToggleButton({
     super.key,
     required this.size,
-    required this.onToggle,
+    //required this.onToggle,
   });
 
   @override
@@ -26,7 +26,7 @@ class _ToggleButtonState extends State<ToggleButton> {
       onTap: () {
         setState(() {
           isOn = !isOn;
-          widget.onToggle(isOn);
+          //widget.onToggle(isOn);
         });
       },
       child: Icon(
