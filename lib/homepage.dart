@@ -4,6 +4,7 @@ import 'package:waterdetection/productmenupage.dart';
 
 import 'components/chart.dart';
 import 'components/icon_btn_state.dart';
+import 'historypage.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({super.key});
@@ -54,7 +55,7 @@ class HomePage extends StatelessWidget {
         child: Stack(
           fit: StackFit.expand,
           children: <Widget>[
-            Material(color: Color(0xff232d37)),
+            //Material(color: Color(0xff232d37)),
             //arrow icon
             Positioned(
               top: 10,
@@ -67,7 +68,7 @@ class HomePage extends StatelessWidget {
                   );
                 },
                 icon: Icon(Icons.arrow_back_rounded,
-                    size: 32, color: Colors.white),
+                    size: 32, color: Colors.black),
               ),
             ),
             //bonjour
@@ -79,17 +80,25 @@ class HomePage extends StatelessWidget {
                 style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
-                    color: Colors.white),
+                    color: Colors.black),
               ),
             ),
             //calendar icon
             Positioned(
-              top: 20,
+              top: 10,
               right: 60,
-              child: Icon(
-                Icons.calendar_month_rounded,
-                size: 32,
-                color: Colors.white,
+              child: IconButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => DetailsPage()),
+                  );
+                },
+                icon: Icon(
+                  Icons.calendar_month_rounded,
+                  size: 32,
+                  color: Colors.black,
+                ),
               ),
             ),
             //notification icon
@@ -99,7 +108,7 @@ class HomePage extends StatelessWidget {
               child: Icon(
                 Icons.notifications_rounded,
                 size: 32,
-                color: Colors.white,
+                color: Colors.black,
               ),
             ),
             //signout button
@@ -111,7 +120,7 @@ class HomePage extends StatelessWidget {
                 icon: Icon(
                   Icons.logout,
                   size: 32,
-                  color: Colors.white,
+                  color: Colors.black,
                 ),
               ),
             ),
@@ -122,7 +131,7 @@ class HomePage extends StatelessWidget {
                 child: Icon(
                   Icons.home_rounded,
                   size: 32,
-                  color: Colors.white,
+                  color: Colors.black,
                 )),
             //toggle button
             Positioned(
@@ -130,11 +139,11 @@ class HomePage extends StatelessWidget {
               left: 200,
               child: ToggleButton(
                 size: 32,
-                color: Colors.white,
+                color: Colors.black,
                 //onToggle: (isDark) {if (MediaQuery.of(context).platformBrightness ==Brightness.light) {theme:ThemeData.dark();} else {theme:ThemeData.light();}},
               ),
             ),
-            Chart(),
+            //Chart(),
           ],
         ),
       ),

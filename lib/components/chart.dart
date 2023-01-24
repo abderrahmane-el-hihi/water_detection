@@ -72,13 +72,13 @@ class _ChartState extends State<Chart> {
     Widget text;
     switch (value.toInt()) {
       case 2:
-        text = const Text('MAR', style: style);
+        text = const Text('mar', style: style);
         break;
       case 5:
-        text = const Text('JUN', style: style);
+        text = const Text('jun', style: style);
         break;
       case 8:
-        text = const Text('SEP', style: style);
+        text = const Text('sep', style: style);
         break;
       default:
         text = const Text('', style: style);
@@ -94,19 +94,28 @@ class _ChartState extends State<Chart> {
   Widget leftTitleWidgets(double value, TitleMeta meta) {
     const style = TextStyle(
       color: Color(0xff67727d),
-      fontWeight: FontWeight.bold,
+      //fontWeight: FontWeight.bold,
       fontSize: 15,
     );
     String text;
     switch (value.toInt()) {
+      case 0:
+        text = '0%';
+        break;
       case 1:
-        text = '10K';
+        text = '30%';
+        break;
+      case 2:
+        text = '40%';
         break;
       case 3:
-        text = '30k';
+        text = '60%';
+        break;
+      case 4:
+        text = '70%';
         break;
       case 5:
-        text = '50k';
+        text = '90%';
         break;
       default:
         return Container();
