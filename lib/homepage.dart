@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:waterdetection/productmenupage.dart';
 
+import 'components/chart.dart';
 import 'components/icon_btn_state.dart';
 
 class HomePage extends StatelessWidget {
@@ -53,19 +54,21 @@ class HomePage extends StatelessWidget {
         child: Stack(
           fit: StackFit.expand,
           children: <Widget>[
+            Material(color: Color(0xff232d37)),
             //arrow icon
             Positioned(
               top: 10,
               left: 10,
               child: IconButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ProductMenuPage()),
-                    );
-                  },
-                  icon: Icon(Icons.arrow_back_rounded, size: 32)),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ProductMenuPage()),
+                  );
+                },
+                icon: Icon(Icons.arrow_back_rounded,
+                    size: 32, color: Colors.white),
+              ),
             ),
             //bonjour
             Positioned(
@@ -73,7 +76,10 @@ class HomePage extends StatelessWidget {
               left: 70,
               child: Text(
                 'Bonjour.',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white),
               ),
             ),
             //calendar icon
@@ -83,6 +89,7 @@ class HomePage extends StatelessWidget {
               child: Icon(
                 Icons.calendar_month_rounded,
                 size: 32,
+                color: Colors.white,
               ),
             ),
             //notification icon
@@ -92,6 +99,7 @@ class HomePage extends StatelessWidget {
               child: Icon(
                 Icons.notifications_rounded,
                 size: 32,
+                color: Colors.white,
               ),
             ),
             //signout button
@@ -103,10 +111,10 @@ class HomePage extends StatelessWidget {
                 icon: Icon(
                   Icons.logout,
                   size: 32,
+                  color: Colors.white,
                 ),
               ),
             ),
-
             //home icon
             Positioned(
                 bottom: 10,
@@ -114,12 +122,19 @@ class HomePage extends StatelessWidget {
                 child: Icon(
                   Icons.home_rounded,
                   size: 32,
+                  color: Colors.white,
                 )),
             //toggle button
-            ToggleButton(
-              size: 100,
-              //onToggle: (isDark) {if (MediaQuery.of(context).platformBrightness ==Brightness.light) {theme:ThemeData.dark();} else {theme:ThemeData.light();}},
+            Positioned(
+              top: 20,
+              left: 200,
+              child: ToggleButton(
+                size: 32,
+                color: Colors.white,
+                //onToggle: (isDark) {if (MediaQuery.of(context).platformBrightness ==Brightness.light) {theme:ThemeData.dark();} else {theme:ThemeData.light();}},
+              ),
             ),
+            Chart(),
           ],
         ),
       ),
