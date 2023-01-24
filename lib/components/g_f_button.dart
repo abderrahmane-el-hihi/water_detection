@@ -24,13 +24,14 @@ class G_F_Button extends StatelessWidget {
               style:
                   TextStyle(color: Color.fromARGB(255, 0, 0, 0), fontSize: 12),
             ),
-            //Image.asset(imgpath),
+            //Image.asset('assets/lib/images/google.png'),
           ],
         ),
         width: 130,
         height: 58,
-        padding: EdgeInsets.all(25),
+        //padding: EdgeInsets.all(25),
         margin: EdgeInsets.symmetric(horizontal: 25),
+        padding: EdgeInsets.symmetric(horizontal: 30, vertical: 18),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
           color: Color.fromRGBO(255, 255, 255, 1),

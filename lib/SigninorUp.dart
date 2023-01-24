@@ -30,7 +30,9 @@ class _SigninorUpState extends State<SigninorUp> {
         ontap: switchpages,
       );
     } else {
-      return SignUpPage();
+      return SignUpPage(
+        ontap: switchpages,
+      );
     }
   }
 }

@@ -6,7 +6,8 @@ import 'package:waterdetection/loginpage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class SignUpPage extends StatelessWidget {
-  SignUpPage({super.key});
+  final Function()? ontap;
+  SignUpPage({super.key, required this.ontap});
   //text editing controllers
   final emailcontroller = TextEditingController();
   final passwcontroller = TextEditingController();
@@ -23,96 +24,115 @@ class SignUpPage extends StatelessWidget {
     return Scaffold(
         backgroundColor: Color.fromARGB(255, 255, 255, 255),
         body: SafeArea(
-          child: Center(
-            child: Column(
-              children: [
-                SizedBox(height: 50),
+          child: SingleChildScrollView(
+            child: Center(
+              child: Column(
+                children: [
+                  SizedBox(height: 50),
 
-                Text(
-                  'Sign Up',
-                  style: TextStyle(color: Colors.grey[700], fontSize: 16),
-                ),
-                SizedBox(height: 75),
-                //name textfield
-                Text_Field(
+                  Text(
+                    'Sign Up',
+                    style: TextStyle(color: Colors.grey[700], fontSize: 16),
+                  ),
+                  SizedBox(height: 75),
+                  //name textfield
+                  Text_Field(
                     controller: emailcontroller,
                     hinText: 'Name',
-                    obsecureText: false),
-                SizedBox(height: 10),
-                //last name textfield
-                Text_Field(
+                    obsecureText: false,
+                    preicon: Icons.person,
+                  ),
+                  SizedBox(height: 10),
+                  //last name textfield
+                  Text_Field(
                     controller: emailcontroller,
                     hinText: 'Last Name',
-                    obsecureText: false),
-                SizedBox(height: 10),
-                //email textfield
-                Text_Field(
+                    obsecureText: false,
+                    preicon: Icons.person,
+                  ),
+                  SizedBox(height: 10),
+                  //email textfield
+                  Text_Field(
                     controller: emailcontroller,
                     hinText: 'E-mail Address',
-                    obsecureText: false),
+                    obsecureText: false,
+                    preicon: Icons.email_rounded,
+                  ),
 
-                SizedBox(height: 10),
-                //password textfield
-                Text_Field(
+                  SizedBox(height: 10),
+                  //password textfield
+                  Text_Field(
                     controller: passwcontroller,
                     hinText: 'Password',
-                    obsecureText: true),
-                SizedBox(height: 10),
-                //signin buton
-                L_Button(onTap: SignUp, text: 'Sign Up'),
+                    obsecureText: true,
+                    preicon: Icons.lock,
+                  ),
+                  SizedBox(height: 10),
+                  //signin buton
+                  L_Button(onTap: SignUp, text: 'Sign Up'),
 
-                //SizedBox(height: 25),
+                  //SizedBox(height: 25),
 
-                SizedBox(height: 25),
+                  SizedBox(height: 25),
 
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Divider(
-                            color: Color.fromRGBO(179, 179, 179, 1),
-                            thickness: 1),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                        child: Text(
-                          'OR',
-                          style: TextStyle(
-                              color: Color.fromRGBO(179, 179, 179, 1)),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Divider(
+                              color: Color.fromRGBO(179, 179, 179, 1),
+                              thickness: 1),
                         ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                          child: Text(
+                            'OR',
+                            style: TextStyle(
+                                color: Color.fromRGBO(179, 179, 179, 1)),
+                          ),
+                        ),
+                        Expanded(
+                          child: Divider(
+                              color: Color.fromRGBO(179, 179, 179, 1),
+                              thickness: 1),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 50),
+                  //google and facebook buttons
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      //google
+                      G_F_Button(
+                        onTap: SignIn,
+                        text: 'Google',
+                        //imgpath: 'lib/images/google.png'
                       ),
-                      Expanded(
-                        child: Divider(
-                            color: Color.fromRGBO(179, 179, 179, 1),
-                            thickness: 1),
+
+                      //Padding(padding: const EdgeInsets.symmetric(horizontal: 15.0)),
+
+                      //facebook
+                      G_F_Button(
+                        onTap: SignIn,
+                        text: 'Facebook',
+                        //imgpath: 'lib/images/facebook.png'
                       ),
                     ],
                   ),
-                ),
-                SizedBox(height: 50),
-                //google and facebook buttons
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    //google
-                    G_F_Button(
-                      onTap: SignIn,
-                      text: 'Google',
-                      //imgpath: 'lib/images/google.png'
+                  SizedBox(height: 25),
+                  //alredy have account
+                  GestureDetector(
+                    onTap: ontap,
+                    child: Text(
+                      'already have account',
+                      style: TextStyle(color: Color.fromRGBO(121, 158, 255, 1)),
                     ),
-
-                    //Padding(padding: const EdgeInsets.symmetric(horizontal: 15.0)),
-
-                    //facebook
-                    G_F_Button(
-                      onTap: SignIn,
-                      text: 'Facebook',
-                      //imgpath: 'lib/images/facebook.png'
-                    ),
-                  ],
-                ),
-              ],
+                  )
+                ],
+              ),
             ),
           ),
         ));

@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:waterdetection/serianumpage.dart';
 import 'SigninorUp.dart';
 import 'package:waterdetection/homepage.dart';
 import 'package:waterdetection/loginpage.dart';
@@ -16,7 +17,7 @@ class AuthPage extends StatelessWidget {
           builder: (context, snapshot) {
             //user logged in
             if (snapshot.hasData) {
-              return HomePage();
+              return SerialPage();
             } else {
               return SigninorUp();
             }

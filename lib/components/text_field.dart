@@ -4,12 +4,14 @@ class Text_Field extends StatelessWidget {
   final controller;
   final String hinText;
   final bool obsecureText;
+  final preicon;
 
   const Text_Field({
     super.key,
     required this.controller,
     required this.hinText,
     required this.obsecureText,
+    required this.preicon,
   });
 
   @override
@@ -20,6 +22,7 @@ class Text_Field extends StatelessWidget {
         controller: controller,
         obscureText: obsecureText,
         decoration: InputDecoration(
+          prefixIcon: Icon(preicon),
           enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(color: Color.fromRGBO(179, 179, 179, 1))),
           focusedBorder: OutlineInputBorder(

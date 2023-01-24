@@ -86,16 +86,20 @@ class _LoginPageState extends State<LoginPage> {
 
                   //email textfield
                   Text_Field(
-                      controller: emailcontroller,
-                      hinText: 'E-mail Address',
-                      obsecureText: false),
+                    controller: emailcontroller,
+                    hinText: 'E-mail Address',
+                    obsecureText: false,
+                    preicon: Icons.email_rounded,
+                  ),
 
                   SizedBox(height: 10),
                   //password textfield
                   Text_Field(
-                      controller: passwcontroller,
-                      hinText: 'Password',
-                      obsecureText: true),
+                    controller: passwcontroller,
+                    hinText: 'Password',
+                    obsecureText: true,
+                    preicon: Icons.lock,
+                  ),
                   SizedBox(height: 10),
                   //signin buuton
                   L_Button(onTap: SignIn, text: 'Sign In'),
