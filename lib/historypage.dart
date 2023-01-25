@@ -5,6 +5,7 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
 import 'components/chart.dart';
+import 'homepage.dart';
 
 class DetailsPage extends StatelessWidget {
   const DetailsPage({super.key});
@@ -12,10 +13,28 @@ class DetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xff232d37),
+      //backgroundColor: Color(0xff232d37),
       body: SafeArea(
-        child: Center(
-          child: Chart(),
+        child: Column(
+          children: [
+            Row(
+              children: [
+                IconButton(
+                    onPressed: (() {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => HomePage()));
+                    }),
+                    icon: Icon(Icons.arrow_back_rounded)),
+                Text('History'),
+              ],
+            ),
+            SizedBox(
+              height: 100,
+            ),
+            Center(
+              child: Chart(),
+            ),
+          ],
         ),
       ),
     );

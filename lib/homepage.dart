@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:waterdetection/productmenupage.dart';
+import 'package:waterdetection/settingspage.dart';
 
 import 'components/chart.dart';
 import 'components/icon_btn_state.dart';
@@ -8,11 +9,6 @@ import 'historypage.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({super.key});
-
-  //signout method
-  void SignOut() {
-    FirebaseAuth.instance.signOut();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -111,16 +107,20 @@ class HomePage extends StatelessWidget {
                 color: Colors.black,
               ),
             ),
-            //signout button
+
             Positioned(
               bottom: 10,
               right: 20,
               child: IconButton(
-                onPressed: SignOut,
+                onPressed: (() {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => SettingsPage()),
+                  );
+                }),
                 icon: Icon(
-                  Icons.logout,
+                  Icons.settings_rounded,
                   size: 32,
-                  color: Colors.black,
                 ),
               ),
             ),
