@@ -46,105 +46,108 @@ class HomePage extends StatelessWidget {
      */
 
     return Scaffold(
-      //appBar: AppBar(title: Text('Stack')),
+      appBar: AppBar(
+        //backgroundColor: Colors.white,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ProductMenuPage()),
+            );
+          },
+          icon: Icon(Icons.arrow_back_rounded,
+              //size: 32,
+              color: Color.fromARGB(255, 255, 255, 255)),
+        ),
+        title: Text('Bonjour.'),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => DetailsPage()),
+              );
+            },
+            icon: Icon(
+              Icons.calendar_month_rounded,
+              //size: 32,
+              color: Color.fromARGB(255, 255, 255, 255),
+            ),
+          ),
+          IconButton(
+            onPressed: (() {}),
+            icon: Icon(
+              Icons.notifications_rounded,
+              //size: 32,
+              color: Color.fromARGB(255, 255, 255, 255),
+            ),
+          ),
+        ],
+      ),
       body: SafeArea(
-        child: Stack(
-          fit: StackFit.expand,
-          children: <Widget>[
-            //Material(color: Color(0xff232d37)),
-            //arrow icon
-            Positioned(
-              top: 10,
-              left: 10,
-              child: IconButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => ProductMenuPage()),
-                  );
-                },
-                icon: Icon(Icons.arrow_back_rounded,
-                    size: 32, color: Colors.black),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              SizedBox(
+                height: 100,
               ),
-            ),
-            //bonjour
-            Positioned(
-              top: 20,
-              left: 70,
-              child: Text(
-                'Bonjour.',
-                style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black),
-              ),
-            ),
-            //calendar icon
-            Positioned(
-              top: 10,
-              right: 60,
-              child: IconButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => DetailsPage()),
-                  );
-                },
-                icon: Icon(
-                  Icons.calendar_month_rounded,
-                  size: 32,
-                  color: Colors.black,
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: Color.fromARGB(255, 187, 187, 187),
+                  /*boxShadow: [
+                    BoxShadow(
+                        color: Colors.black26,
+                        offset: Offset(3, 3),
+                        blurRadius: 3.0,
+                        spreadRadius: 0.5)
+                  ],*/
+                ),
+                width: 350,
+                child: Row(
+                  // mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    //home icon
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 60),
+                      child: IconButton(
+                          onPressed: () {},
+                          icon: Icon(
+                            Icons.home_rounded,
+                            size: 32,
+                            color: Colors.black,
+                          )),
+                    ),
+                    //settings button
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 60),
+                      child: IconButton(
+                        onPressed: (() {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => SettingsPage()),
+                          );
+                        }),
+                        icon: Icon(
+                          Icons.settings_rounded,
+                          size: 32,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-            ),
-            //notification icon
-            Positioned(
-              top: 20,
-              right: 20,
-              child: Icon(
-                Icons.notifications_rounded,
-                size: 32,
-                color: Colors.black,
+              SizedBox(
+                height: 20,
               ),
-            ),
-
-            Positioned(
-              bottom: 10,
-              right: 20,
-              child: IconButton(
-                onPressed: (() {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => SettingsPage()),
-                  );
-                }),
-                icon: Icon(
-                  Icons.settings_rounded,
-                  size: 32,
-                ),
-              ),
-            ),
-            //home icon
-            Positioned(
-                bottom: 10,
-                left: 20,
-                child: Icon(
-                  Icons.home_rounded,
-                  size: 32,
-                  color: Colors.black,
-                )),
-            //toggle button
-            Positioned(
-              top: 20,
-              left: 200,
-              child: ToggleButton(
-                size: 32,
-                color: Colors.black,
-                //onToggle: (isDark) {if (MediaQuery.of(context).platformBrightness ==Brightness.light) {theme:ThemeData.dark();} else {theme:ThemeData.light();}},
-              ),
-            ),
-            //Chart(),
-          ],
+              /*Image(
+                image: AssetImage('assets/google.png'),
+                height: 24,
+              ),*/
+            ],
+          ),
         ),
       ),
     );

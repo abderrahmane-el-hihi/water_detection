@@ -5,6 +5,7 @@ import 'package:waterdetection/productmenupage.dart';
 import 'package:waterdetection/serianumpage.dart';
 import 'package:waterdetection/signuppage.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:waterdetection/testpage.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -26,6 +27,9 @@ class MyApp extends StatelessWidget {
       home: AuthPage(),
       //home: SerialPage(),
       //home: ProductMenuPage(),
+      //home: MyWidget(),
+      //splash screen
+      //home: SplashScreen,
     );
   }
 }

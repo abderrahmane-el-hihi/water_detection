@@ -6,13 +6,29 @@ import 'package:waterdetection/productmenupage.dart';
 
 import 'components/text_field.dart';
 
-class SerialPage extends StatelessWidget {
+class SerialPage extends StatefulWidget {
   SerialPage({super.key});
-  //serial naumver controller
-  final serialcontroller = TextEditingController();
-  //submit method
-  void Submit() {}
 
+  @override
+  State<SerialPage> createState() => _SerialPageState();
+}
+
+class _SerialPageState extends State<SerialPage> {
+  //serial number controller
+  final serialcontroller = TextEditingController();
+  bool _isPressed = false;
+  //submit method
+  void Submit() {
+    setState(() {
+      _isPressed = !_isPressed;
+    });
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => ProductMenuPage()),
+    );
+  }
+
+  //////////////////////// ========== the page should be dynamic bsed on firestore db  ========== \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,14 +69,9 @@ class SerialPage extends StatelessWidget {
                       height: 25,
                     ),
                     L_Button(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ProductMenuPage()),
-                          );
-                        },
-                        text: 'Submit')
+                      onTap: Submit,
+                      text: 'Submit',
+                    )
                   ],
                 ),
               ),
@@ -71,3 +82,65 @@ class SerialPage extends StatelessWidget {
     );
   }
 }
+
+
+/*
+ * final Firestore firestore = Firestore.instance;
+  final CollectionReference optionsRef = firestore.collection("options");
+
+  // Get all options from the "options" collection
+  Stream<QuerySnapshot> stream = optionsRef.snapshots();
+
+
+
+  StreamBuilder<QuerySnapshot>(
+  stream: stream,
+  builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+    if (snapshot.hasData) {
+      List<DocumentSnapshot> options = snapshot.data.documents;
+      if (options.length == 1) {
+        return SingleOptionPage(options[0]);
+      } else {
+        return MultipleOptionPage(options);
+      }
+    } else if (snapshot.hasError) {
+      return Text("Error: ${snapshot.error}");
+    } else {
+      return CircularProgressIndicator();
+    }
+  },
+)
+
+
+class SingleOptionPage extends StatelessWidget {
+  final DocumentSnapshot option;
+  SingleOptionPage(this.option);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      // ... display a single option
+    );
+  }
+}
+
+class MultipleOptionPage extends StatelessWidget {
+  final List<DocumentSnapshot> options;
+  MultipleOptionPage(this.options);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      itemCount: options.length,
+      itemBuilder: (BuildContext context, int index) {
+        return ListTile(
+          title: Text(options[index]['name']),
+          // ... other properties
+        );
+      },
+    );
+  }
+}
+
+
+ */

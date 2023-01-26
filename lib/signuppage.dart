@@ -5,17 +5,31 @@ import 'package:waterdetection/components/text_field.dart';
 import 'package:waterdetection/loginpage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-class SignUpPage extends StatelessWidget {
+class SignUpPage extends StatefulWidget {
   final Function()? ontap;
   SignUpPage({super.key, required this.ontap});
+
+  @override
+  State<SignUpPage> createState() => _SignUpPageState();
+}
+
+class _SignUpPageState extends State<SignUpPage> {
   //text editing controllers
   final emailcontroller = TextEditingController();
+
   final passwcontroller = TextEditingController();
-  //signin user method
+
+  //sign up user method
   void SignUp() async {
+    //setstate method
+    setState(() {
+      _isPressed = !_isPressed;
+    });
     await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: emailcontroller.text, password: passwcontroller.text);
   }
+
+  bool _isPressed = false;
 
   void SignIn() {}
 
@@ -68,8 +82,11 @@ class SignUpPage extends StatelessWidget {
                     preicon: Icons.lock,
                   ),
                   SizedBox(height: 10),
-                  //signin buton
-                  L_Button(onTap: SignUp, text: 'Sign Up'),
+                  //sign up buton
+                  L_Button(
+                    onTap: SignUp,
+                    text: 'Sign Up',
+                  ),
 
                   //SizedBox(height: 25),
 
@@ -109,6 +126,7 @@ class SignUpPage extends StatelessWidget {
                       G_F_Button(
                         onTap: SignIn,
                         text: 'Google',
+
                         //imgpath: 'lib/images/google.png'
                       ),
 
@@ -125,7 +143,7 @@ class SignUpPage extends StatelessWidget {
                   SizedBox(height: 25),
                   //alredy have account
                   GestureDetector(
-                    onTap: ontap,
+                    onTap: widget.ontap,
                     child: Text(
                       'already have account',
                       style: TextStyle(color: Color.fromRGBO(121, 158, 255, 1)),

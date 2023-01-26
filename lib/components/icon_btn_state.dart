@@ -7,11 +7,13 @@ import 'package:flutter/src/widgets/framework.dart';
 class ToggleButton extends StatefulWidget {
   final double size;
   final color;
+  //final Function() ontap;
   //final Function onToggle;
   const ToggleButton({
     super.key,
     required this.size,
     required this.color,
+    //required this.ontap,
     //required this.onToggle,
   });
 
@@ -21,6 +23,7 @@ class ToggleButton extends StatefulWidget {
 
 class _ToggleButtonState extends State<ToggleButton> {
   bool isOn = false;
+  bool isDark = false;
 
   @override
   Widget build(BuildContext context) {
@@ -28,8 +31,10 @@ class _ToggleButtonState extends State<ToggleButton> {
       onTap: () {
         setState(() {
           isOn = !isOn;
+          isDark = !isDark;
           //widget.onToggle(isOn);
         });
+        //widget.ontap;
       },
       child: Icon(
         isOn ? Icons.toggle_on : Icons.toggle_off,

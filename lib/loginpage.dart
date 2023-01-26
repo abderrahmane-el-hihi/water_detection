@@ -18,9 +18,14 @@ class _LoginPageState extends State<LoginPage> {
   final emailcontroller = TextEditingController();
 
   final passwcontroller = TextEditingController();
+  bool _isPressed = false;
 
   //signin user method
   void SignIn() async {
+    //setstate method
+    setState(() {
+      _isPressed = !_isPressed;
+    });
     //show loading screen
     showDialog(
       context: context,
@@ -102,7 +107,10 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   SizedBox(height: 10),
                   //signin buuton
-                  L_Button(onTap: SignIn, text: 'Sign In'),
+                  L_Button(
+                    onTap: SignIn,
+                    text: 'Sign In',
+                  ),
 
                   SizedBox(height: 25),
                   //dont have account

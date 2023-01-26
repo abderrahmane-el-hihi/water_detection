@@ -34,6 +34,10 @@ class DetailsPage extends StatelessWidget {
             Center(
               child: Chart(),
             ),
+            SizedBox(
+              height: 50,
+            ),
+            Text('chateau 3ndek wak7 a m3alam'),
           ],
         ),
       ),
