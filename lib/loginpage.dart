@@ -118,7 +118,7 @@ class _LoginPageState extends State<LoginPage> {
                     onTap: widget.ontap,
                     child: Text(
                       'dont have account',
-                      style: TextStyle(color: Color.fromRGBO(121, 158, 255, 1)),
+                      style: TextStyle(color: Color.fromRGBO(0, 78, 131, 10)),
                     ),
                   ),
                   SizedBox(height: 25),

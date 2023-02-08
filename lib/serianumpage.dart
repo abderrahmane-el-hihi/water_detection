@@ -59,14 +59,29 @@ class _SerialPageState extends State<SerialPage> {
                     SizedBox(
                       height: 50,
                     ),
-                    Text_Field(
-                      controller: serialcontroller,
-                      hinText: 'Serial Number',
-                      obsecureText: false,
-                      preicon: Icons.qr_code_scanner_rounded,
+                    Padding(
+                      padding: const EdgeInsets.all(25.0),
+                      child: TextField(
+                        controller: serialcontroller,
+                        obscureText: false,
+                        decoration: InputDecoration(
+                          suffixIcon: Icon(Icons.qr_code_scanner_rounded),
+                          enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Color.fromRGBO(179, 179, 179, 1))),
+                          focusedBorder: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: Colors.grey.shade400)),
+                          fillColor: Color.fromARGB(255, 255, 255, 255),
+                          filled: true,
+                          hintText: 'Serial Number',
+                          hintStyle: TextStyle(
+                              color: Color.fromRGBO(179, 179, 179, 1)),
+                        ),
+                      ),
                     ),
                     SizedBox(
-                      height: 25,
+                      height: 5,
                     ),
                     L_Button(
                       onTap: Submit,

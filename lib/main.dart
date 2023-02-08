@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:splashscreen/splashscreen.dart';
 import 'package:waterdetection/auth_page.dart';
 import 'package:waterdetection/loginpage.dart';
 import 'package:waterdetection/productmenupage.dart';
 import 'package:waterdetection/serianumpage.dart';
 import 'package:waterdetection/signuppage.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:waterdetection/spalshscreen.dart';
+import 'package:waterdetection/test.dart';
 import 'package:waterdetection/testpage.dart';
 import 'firebase_options.dart';
 
@@ -24,12 +27,24 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: AuthPage(),
+      //home: AuthPage(),
       //home: SerialPage(),
       //home: ProductMenuPage(),
       //home: MyWidget(),
+      //home: Test(),
       //splash screen
-      //home: SplashScreen,
+      home: SplashScreen(
+        seconds: 3,
+        navigateAfterSeconds: AuthPage(),
+        title: Text(
+          'Water Detection App',
+          style: TextStyle(
+            color: Color.fromRGBO(0, 78, 131, 10),
+          ),
+        ),
+      ),
+
+      //home: StartScreen(),
     );
   }
 }

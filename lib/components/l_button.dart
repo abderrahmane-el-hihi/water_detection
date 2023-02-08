@@ -28,22 +28,14 @@ class _L_ButtonState extends State<L_Button> {
         padding: EdgeInsets.all(25),
         margin: EdgeInsets.symmetric(horizontal: 25),
         decoration: BoxDecoration(
-          color: _isPressed ? Colors.white : Color.fromRGBO(121, 158, 255, 1),
-          border: Border.all(
-              color: _isPressed
-                  ? Color.fromRGBO(121, 158, 255, 1)
-                  : Colors.transparent,
-              width: 2.0),
+          color: Color.fromRGBO(0, 78, 131, 10),
+          border: Border.all(color: Color.fromRGBO(0, 78, 131, 10), width: 2.0),
           borderRadius: BorderRadius.circular(15),
         ),
         child: Center(
           child: Text(
             _isPressed ? widget.text : widget.text,
-            style: TextStyle(
-                color: _isPressed
-                    ? Color.fromRGBO(121, 158, 255, 1)
-                    : Colors.white,
-                fontSize: 16),
+            style: TextStyle(color: Colors.white, fontSize: 16),
           ),
         ),
       ),

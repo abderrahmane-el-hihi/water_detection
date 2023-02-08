@@ -4,43 +4,34 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
-class ToggleButton extends StatefulWidget {
-  final double size;
-  final color;
-  //final Function() ontap;
-  //final Function onToggle;
-  const ToggleButton({
+class SwitchBtn extends StatefulWidget {
+  final activecolor;
+
+  const SwitchBtn({
     super.key,
-    required this.size,
-    required this.color,
-    //required this.ontap,
-    //required this.onToggle,
+    required this.activecolor,
   });
 
   @override
-  State<ToggleButton> createState() => _ToggleButtonState();
+  State<SwitchBtn> createState() => _SwitchBtnState();
 }
 
-class _ToggleButtonState extends State<ToggleButton> {
-  bool isOn = false;
-  bool isDark = false;
+class _SwitchBtnState extends State<SwitchBtn> {
+  bool isDark = true;
+  bool switchstate = true;
+  void onChanged(bool newstate) {
+    setState(() {
+      switchstate = newstate;
+      isDark = switchstate;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        setState(() {
-          isOn = !isOn;
-          isDark = !isDark;
-          //widget.onToggle(isOn);
-        });
-        //widget.ontap;
-      },
-      child: Icon(
-        isOn ? Icons.toggle_on : Icons.toggle_off,
-        size: widget.size,
-        color: widget.color,
-      ),
+    return Switch(
+      value: switchstate,
+      onChanged: ((bool newstate) => onChanged(newstate)),
+      activeColor: widget.activecolor,
     );
   }
 }

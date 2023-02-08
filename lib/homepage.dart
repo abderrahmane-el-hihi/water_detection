@@ -1,14 +1,25 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:waterdetection/productmenupage.dart';
 import 'package:waterdetection/settingspage.dart';
-
+import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'components/chart.dart';
 import 'components/icon_btn_state.dart';
 import 'historypage.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  void ToSettings() {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => SettingsPage()));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +58,7 @@ class HomePage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        //backgroundColor: Colors.white,
+        backgroundColor: Colors.white,
         leading: IconButton(
           onPressed: () {
             Navigator.push(
@@ -55,11 +66,18 @@ class HomePage extends StatelessWidget {
               MaterialPageRoute(builder: (context) => ProductMenuPage()),
             );
           },
-          icon: Icon(Icons.arrow_back_rounded,
-              //size: 32,
-              color: Color.fromARGB(255, 255, 255, 255)),
+          icon: Icon(
+            Icons.arrow_back_rounded,
+            //size: 32,
+            color: Color.fromRGBO(0, 78, 131, 10),
+          ),
         ),
-        title: Text('Bonjour.'),
+        title: Text(
+          'Bonjour.',
+          style: TextStyle(
+            color: Color.fromRGBO(0, 78, 131, 10),
+          ),
+        ),
         actions: [
           IconButton(
             onPressed: () {
@@ -71,82 +89,141 @@ class HomePage extends StatelessWidget {
             icon: Icon(
               Icons.calendar_month_rounded,
               //size: 32,
-              color: Color.fromARGB(255, 255, 255, 255),
+              color: Color.fromRGBO(0, 78, 131, 10),
             ),
           ),
           IconButton(
-            onPressed: (() {}),
+            onPressed: () {
+              showModalBottomSheet(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        //color: Colors.black,
+                      ),
+                      padding: EdgeInsets.all(10),
+                      child: Column(
+                        children: [
+                          Text('Notifications'),
+                          Divider(
+                            color: Color.fromARGB(255, 222, 228, 226),
+                            thickness: 1,
+                          ),
+                        ],
+                      ),
+                    );
+                  });
+            },
             icon: Icon(
               Icons.notifications_rounded,
               //size: 32,
-              color: Color.fromARGB(255, 255, 255, 255),
+              color: Color.fromRGBO(0, 78, 131, 10),
             ),
           ),
         ],
       ),
+      bottomNavigationBar: BottomNavigationBar(items: [
+        BottomNavigationBarItem(
+          icon: Icon(Icons.home_rounded),
+          label: 'Home',
+        ),
+        BottomNavigationBarItem(
+          icon: GestureDetector(
+              onTap: ToSettings, child: Icon(Icons.settings_rounded)),
+          label: 'Setings',
+          activeIcon: Icon(Icons.settings_rounded),
+        ),
+      ]),
       body: SafeArea(
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              SizedBox(
-                height: 100,
-              ),
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: Color.fromARGB(255, 187, 187, 187),
-                  /*boxShadow: [
-                    BoxShadow(
-                        color: Colors.black26,
-                        offset: Offset(3, 3),
-                        blurRadius: 3.0,
-                        spreadRadius: 0.5)
-                  ],*/
-                ),
-                width: 350,
-                child: Row(
-                  // mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    //home icon
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 60),
-                      child: IconButton(
-                          onPressed: () {},
-                          icon: Icon(
-                            Icons.home_rounded,
-                            size: 32,
-                            color: Colors.black,
-                          )),
-                    ),
-                    //settings button
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 60),
-                      child: IconButton(
-                        onPressed: (() {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => SettingsPage()),
-                          );
-                        }),
-                        icon: Icon(
-                          Icons.settings_rounded,
-                          size: 32,
+        child: SingleChildScrollView(
+          child: Center(
+            child: Column(
+              children: [
+                /*StreamBuilder(
+                  stream: FirebaseFirestore.instance
+                      .collection('Water-Detection')
+                      .doc('Water-Tank')
+                      .snapshots(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      //var progress = snapshot.data;
+                      var progress = snapshot.data!.data();
+                      //var progress = snapshot.data!['percentage'].toString();
+                      //var progress = snapshot.data!['percentage'];
+                      //var progress = snapshot.data?.data(/*'percentage'*/);
+                      //DocumentSnapshot<Map<String, dynamic>>? progress =snapshot.data;
+                      return CircularPercentIndicator(
+                        radius: 300,
+                        lineWidth: 20,
+                        progressColor: Color.fromRGBO(0, 78, 131, 10),
+                        backgroundColor: Color.fromARGB(255, 189, 189, 189),
+                        circularStrokeCap: CircularStrokeCap.round,
+                        percent: 0.7,
+                        center: Text(
+                          '$progress',
+                          style: TextStyle(
+                            fontSize: 10,
+                            color: Color.fromRGBO(0, 78, 131, 10),
+                          ),
                         ),
-                      ),
-                    ),
-                  ],
+                      );
+                    } else if (snapshot.hasError) {
+                      return Text("Error: ${snapshot.error}");
+                    }
+                    //else if (snapshot.data!.data()!.containsKey('percentage')) {return Text('rah makayn');
+                    else {
+                      return Text('no data');
+                    }
+                  },
+                ),*/
+
+                SizedBox(
+                  height: 100,
                 ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              /*Image(
-                image: AssetImage('assets/google.png'),
-                height: 24,
-              ),*/
-            ],
+                Text(
+                  'actual percentage :',
+                  style: TextStyle(
+                    fontSize: 30,
+                    color: Color.fromRGBO(0, 78, 131, 10),
+                  ),
+                ),
+                SizedBox(
+                  height: 50,
+                ),
+                CircularPercentIndicator(
+                  radius: 300,
+                  lineWidth: 20,
+                  progressColor: Color.fromRGBO(0, 78, 131, 10),
+                  backgroundColor: Color.fromARGB(255, 189, 189, 189),
+                  circularStrokeCap: CircularStrokeCap.round,
+                  percent: 0.7,
+                  center: Text(
+                    '70%',
+                    style: TextStyle(
+                      fontSize: 50,
+                      color: Color.fromRGBO(0, 78, 131, 10),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+                Text(
+                  'Details :',
+                  style: TextStyle(
+                    fontSize: 50,
+                    color: Color.fromRGBO(0, 78, 131, 10),
+                    fontFamily: 'Poppins',
+                  ),
+                ),
+                SizedBox(
+                  height: 50,
+                ),
+                Chart(),
+                //Image.asset('assets/iamges/google.png'),
+              ],
+            ),
           ),
         ),
       ),

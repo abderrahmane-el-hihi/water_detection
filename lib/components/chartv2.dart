@@ -1,20 +1,23 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
-class _BarChart extends StatelessWidget {
-  const _BarChart();
+class Chartv2 extends StatelessWidget {
+  const Chartv2();
 
   @override
   Widget build(BuildContext context) {
-    return BarChart(
-      BarChartData(
-        barTouchData: barTouchData,
-        titlesData: titlesData,
-        borderData: borderData,
-        barGroups: barGroups,
-        gridData: FlGridData(show: false),
-        alignment: BarChartAlignment.spaceAround,
-        maxY: 20,
+    return Container(
+      color: Color.fromARGB(255, 105, 105, 105),
+      child: BarChart(
+        BarChartData(
+          barTouchData: barTouchData,
+          titlesData: titlesData,
+          borderData: borderData,
+          barGroups: barGroups,
+          gridData: FlGridData(show: false),
+          alignment: BarChartAlignment.spaceAround,
+          maxY: 20,
+        ),
       ),
     );
   }
@@ -51,25 +54,25 @@ class _BarChart extends StatelessWidget {
     String text;
     switch (value.toInt()) {
       case 0:
-        text = 'Mn';
+        text = 'M';
         break;
       case 1:
-        text = 'Te';
+        text = 'T';
         break;
       case 2:
-        text = 'Wd';
+        text = 'W';
         break;
       case 3:
-        text = 'Tu';
+        text = 'T';
         break;
       case 4:
-        text = 'Fr';
+        text = 'F';
         break;
       case 5:
-        text = 'St';
+        text = 'S';
         break;
       case 6:
-        text = 'Sn';
+        text = 'S';
         break;
       default:
         text = '';
@@ -205,7 +208,7 @@ class BarChartSample3State extends State<BarChartSample3> {
         elevation: 0,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
         color: const Color(0xff2c4260),
-        child: const _BarChart(),
+        child: const Chartv2(),
       ),
     );
   }

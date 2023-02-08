@@ -23,6 +23,7 @@ class Text_Field extends StatelessWidget {
         obscureText: obsecureText,
         decoration: InputDecoration(
           prefixIcon: Icon(preicon),
+          prefixIconColor: Color.fromRGBO(0, 78, 131, 10),
           enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(color: Color.fromRGBO(179, 179, 179, 1))),
           focusedBorder: OutlineInputBorder(
