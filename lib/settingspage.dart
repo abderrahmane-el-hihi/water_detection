@@ -155,7 +155,7 @@ class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     return Theme(
-      data: isDark ? ThemeData.light() : ThemeData.dark(),
+      data: isDark ? ThemeData.light() : ThemeData.light(),
       child: Scaffold(
         //appBar: ,
 
