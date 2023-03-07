@@ -25,7 +25,6 @@ class _InfoPageState extends State<InfoPage> {
                 ),
                 onPressed: () {},
                 //splashColor: Color.fromARGB(248, 0, 34, 57),
-                //hoverColor: Color.fromARGB(248, 0, 34, 57),
                 child: Icon(Icons.arrow_forward_rounded),
               ),
             ),

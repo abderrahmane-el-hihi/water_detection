@@ -20,28 +20,33 @@ class Test extends StatefulWidget {
 
 class _TestState extends State<Test> {
   late Timer timer;
-  List<Map<String, dynamic>> _data = [];
+  List<Map<String, dynamic>> Data = [];
 
   @override
   void initState() {
     super.initState();
 
-    timer = Timer.periodic(Duration(seconds: 10), (Timer t) => getData());
+    timer = Timer.periodic(Duration(seconds: 1), (Timer t) => getData());
   }
-
-  // @override
-  // void dispose() {
-  //   timer.cancel();
-  //   super.dispose();
-  // }
 
   Future<void> getData() async {
-    final data = await MongodbConf.GetData();
+    final data = await MongodbConf.GetData("compt");
 
     setState(() {
-      _data = data;
+      Data = data;
     });
   }
+
+  Future<dynamic> InsertData(document) async {
+    //await MongodbConf.Insert();
+  }
+
+  var document = {
+    'email': 'John Doe',
+    'password': 'john.doe@example.com',
+  };
+
+  //final result = await collection.insert(document);
 
   @override
   Widget build(BuildContext context) {
@@ -50,11 +55,25 @@ class _TestState extends State<Test> {
         title: Text('My App'),
       ),
       body: Center(
-        child: Text(_data.toString()),
+        child: Text(Data.toString()),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          InsertData(document);
+        },
+        tooltip: 'insert to MongoDB',
+        child: Icon(Icons.cloud),
       ),
     );
   }
 }
+
+
+
+
+
+
+ 
 
 
 

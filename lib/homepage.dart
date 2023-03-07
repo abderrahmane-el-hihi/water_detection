@@ -22,6 +22,26 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  late Timer timer;
+  List<Map<String, dynamic>> Data = [];
+
+  @override
+  void initState() {
+    super.initState();
+
+    timer = Timer.periodic(Duration(seconds: 900), (Timer t) => getData());
+  }
+
+  Future<void> getData() async {
+    final data = await MongodbConf.GetData("water_tank");
+
+    setState(() {
+      Data = data;
+    });
+  }
+
+  final C = true;
+
   void ToSettings() {
     Navigator.push(
         context, MaterialPageRoute(builder: (context) => SettingsPage()));
@@ -141,7 +161,7 @@ class _HomePageState extends State<HomePage> {
       ]),
       body: SafeArea(
         child: FutureBuilder(
-            future: MongodbConf.GetData(),
+            future: MongodbConf.GetData("water_tank"),
             builder: (context, AsyncSnapshot snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return Center(
@@ -156,8 +176,10 @@ class _HomePageState extends State<HomePage> {
                   print("total data" + totaldata.toString());
                   //return Text("${snapshot.data}");
                   int p = snapshot.data![0]["percentage"];
+                  List l = Data.cast();
+                  print(l.toString());
+                  //int p = l[2];
 
-                  //return Text("${p / 100}");
                   return SingleChildScrollView(
                     child: Center(
                       child: Column(
@@ -181,7 +203,10 @@ class _HomePageState extends State<HomePage> {
                             child: LiquidCustomProgressIndicator(
                               value: p / 100,
                               valueColor: AlwaysStoppedAnimation(
-                                  Color.fromARGB(144, 155, 173, 219)),
+                                C
+                                    ? Color.fromARGB(144, 155, 173, 219)
+                                    : Color.fromARGB(144, 255, 57, 57),
+                              ),
                               backgroundColor:
                                   Color.fromRGBO(212, 224, 255, 0.565),
                               direction: Axis.vertical,
@@ -189,7 +214,8 @@ class _HomePageState extends State<HomePage> {
                               center: Text(
                                 "${p}%",
                                 style: TextStyle(
-                                    color: Colors.white, fontSize: 20),
+                                    color: Color.fromARGB(255, 170, 170, 170),
+                                    fontSize: 20),
                               ),
                             ),
                           ),
