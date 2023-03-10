@@ -1,37 +1,43 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class G_F_Button extends StatelessWidget {
   final Function()? onTap;
-  final String text;
-  //final String imgpath;
-  const G_F_Button({
-    super.key,
-    required this.onTap,
-    required this.text,
-    //required this.imgpath
-  });
+  //final String text;
+  final String svgpath;
+  const G_F_Button(
+      {super.key,
+      required this.onTap,
+      //required this.text,
+      required this.svgpath});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
+        //width: 130,
+        width: MediaQuery.of(context).size.width * 0.2,
+        //height: 58,
+        height: MediaQuery.of(context).size.height * 0.1,
+
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              text,
-              style:
-                  TextStyle(color: Color.fromARGB(255, 0, 0, 0), fontSize: 12),
+            SvgPicture.asset(
+              '${svgpath}',
+              height: 40,
+              width: 40,
             ),
-            //Image.asset('assets/lib/images/google.png'),
+            // Padding(
+            //   padding: const EdgeInsets.only(left: 10),
+            //   child: Text(text,style: TextStyle(color: Color.fromARGB(255, 0, 0, 0), fontSize: 12),),),
           ],
         ),
-        width: 130,
-        height: 58,
+
         //padding: EdgeInsets.all(25),
-        margin: EdgeInsets.symmetric(horizontal: 25),
-        padding: EdgeInsets.symmetric(horizontal: 30, vertical: 18),
+        margin: EdgeInsets.symmetric(horizontal: 30),
+        //padding: EdgeInsets.all(0),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
           color: Color.fromRGBO(255, 255, 255, 1),

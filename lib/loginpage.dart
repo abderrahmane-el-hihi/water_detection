@@ -85,7 +85,10 @@ class _LoginPageState extends State<LoginPage> {
 
                   Text(
                     'Sign In',
-                    style: TextStyle(color: Colors.grey[700], fontSize: 16),
+                    style: TextStyle(
+                        color: Colors.grey[700],
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600),
                   ),
                   SizedBox(height: 50),
 
@@ -156,8 +159,8 @@ class _LoginPageState extends State<LoginPage> {
                       //google
                       G_F_Button(
                         onTap: (() => AuthService().SignInWithG()),
-                        text: 'Google',
-                        //imgpath: 'lib/images/google.png'
+                        //text: 'Google',
+                        svgpath: 'assets/social_svg/google_svg.svg',
                       ),
 
                       //Padding(padding: const EdgeInsets.symmetric(horizontal: 15.0)),
@@ -165,8 +168,8 @@ class _LoginPageState extends State<LoginPage> {
                       //facebook
                       G_F_Button(
                         onTap: SignIn,
-                        text: 'Facebook',
-                        //imgpath: 'lib/images/facebook.png'
+                        //text: 'Facebook',
+                        svgpath: 'assets/social_svg/facebook-svgrepo-com.svg',
                       ),
                     ],
                   ),

@@ -1,16 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
-import 'package:local_auth/local_auth.dart';
+//import 'package:local_auth/local_auth.dart';
 
 class FingerprintAuth {
-  final LocalAuthentication localAuth = LocalAuthentication();
+  // final LocalAuthentication localAuth = LocalAuthentication();
 
   Future<bool> HasBiometrics() async {
-    try {
-      return await localAuth.canCheckBiometrics;
-    } on PlatformException catch (e) {
-      return false;
-    }
+    // try {
+    //   return await localAuth.canCheckBiometrics;
+    // } on PlatformException catch (e) {
+    //   return false;
+    // }
+    return false;
   }
 
   Future<bool> authenticate() async {
@@ -18,13 +19,14 @@ class FingerprintAuth {
     if (!biometric_avilable) return false;
 
     try {
-      final bool authenticated = await localAuth.authenticate(
-          localizedReason:
-              'Please scan your fingerprint to access your account.');
-      useErrorDialogs:
-      true;
-      stickyAuth:
-      true;
+      // final bool authenticated = await localAuth.authenticate(
+      //     localizedReason:
+      //         'Please scan your fingerprint to access your account.');
+      // useErrorDialogs:
+      // true;
+      // stickyAuth:
+      // true;
+      final bool authenticated = false;
 
       if (authenticated) {
         return true;

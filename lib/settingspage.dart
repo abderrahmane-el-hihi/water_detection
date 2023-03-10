@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:ui';
 
 import 'package:firebase_auth/firebase_auth.dart';
@@ -13,6 +14,7 @@ import 'package:waterdetection/homepage.dart';
 import 'package:waterdetection/services/biometrics_aut.dart';
 
 import 'components/icon_btn_state.dart';
+import 'mongodb_config/mongo.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -168,7 +170,7 @@ class _SettingsPageState extends State<SettingsPage> {
           BottomNavigationBarItem(
             icon: GestureDetector(
                 onTap: ToSettings, child: Icon(Icons.settings_rounded)),
-            label: 'Setings',
+            label: 'Settings',
             activeIcon: Icon(Icons.settings_rounded),
           ),
         ]),
@@ -224,19 +226,36 @@ class _SettingsPageState extends State<SettingsPage> {
                         color: Color.fromRGBO(0, 78, 131, 10),
                       ),
                     ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.account_circle,
-                          size: 32,
-                          color: Color.fromRGBO(217, 217, 217, 1),
-                        ),
-                        Padding(
-                            padding: EdgeInsets.only(left: 20),
-                            child: Text('User Name')),
-                      ],
-                    ),
+                    child: FutureBuilder(
+                        future: MongodbConf.GetData("compt"),
+                        builder: (context, AsyncSnapshot snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text("waiting"),
+                              ],
+                            );
+                          } else if (snapshot.hasData) {
+                            var username = snapshot.data![0]["username"];
+                            return Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.account_circle,
+                                  size: 32,
+                                  color: Color.fromRGBO(217, 217, 217, 1),
+                                ),
+                                Padding(
+                                    padding: EdgeInsets.only(left: 20),
+                                    child: Text("${username}")),
+                              ],
+                            );
+                          } else {
+                            return Text("there is no data");
+                          }
+                        }),
                   ),
                   SizedBox(
                     height: 15,

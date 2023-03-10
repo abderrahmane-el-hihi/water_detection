@@ -1,8 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:waterdetection/components/chart.dart';
 import 'package:waterdetection/components/l_button.dart';
 import 'package:waterdetection/homepage.dart';
+import 'package:waterdetection/loginpage.dart';
 import 'package:waterdetection/productmenupage.dart';
+
+import 'package:waterdetection/signuppage.dart';
 
 import 'components/text_field.dart';
 

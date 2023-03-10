@@ -16,8 +16,9 @@ class SignUpPage extends StatefulWidget {
 class _SignUpPageState extends State<SignUpPage> {
   //text editing controllers
   final emailcontroller = TextEditingController();
-
   final passwcontroller = TextEditingController();
+  final namecontroller = TextEditingController();
+  final lnamecontroller = TextEditingController();
 
   //sign up user method
   void SignUp() async {
@@ -46,12 +47,15 @@ class _SignUpPageState extends State<SignUpPage> {
 
                   Text(
                     'Sign Up',
-                    style: TextStyle(color: Colors.grey[700], fontSize: 16),
+                    style: TextStyle(
+                        color: Colors.grey[700],
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600),
                   ),
                   SizedBox(height: 75),
                   //name textfield
                   Text_Field(
-                    controller: emailcontroller,
+                    controller: namecontroller,
                     hinText: 'Name',
                     obsecureText: false,
                     preicon: Icons.person,
@@ -59,7 +63,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   SizedBox(height: 10),
                   //last name textfield
                   Text_Field(
-                    controller: emailcontroller,
+                    controller: lnamecontroller,
                     hinText: 'Last Name',
                     obsecureText: false,
                     preicon: Icons.person,
@@ -125,9 +129,8 @@ class _SignUpPageState extends State<SignUpPage> {
                       //google
                       G_F_Button(
                         onTap: SignIn,
-                        text: 'Google',
-
-                        //imgpath: 'lib/images/google.png'
+                        //text: 'Google',
+                        svgpath: 'assets/social_svg/google_svg.svg',
                       ),
 
                       //Padding(padding: const EdgeInsets.symmetric(horizontal: 15.0)),
@@ -135,8 +138,8 @@ class _SignUpPageState extends State<SignUpPage> {
                       //facebook
                       G_F_Button(
                         onTap: SignIn,
-                        text: 'Facebook',
-                        //imgpath: 'lib/images/facebook.png'
+                        //text: 'Facebook',
+                        svgpath: 'assets/social_svg/facebook-svgrepo-com.svg',
                       ),
                     ],
                   ),
@@ -146,7 +149,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     onTap: widget.ontap,
                     child: Text(
                       'already have account',
-                      style: TextStyle(color: Color.fromRGBO(121, 158, 255, 1)),
+                      style: TextStyle(color: Color.fromRGBO(0, 78, 131, 10)),
                     ),
                   )
                 ],
