@@ -161,6 +161,8 @@ class _LoginPageState extends State<LoginPage> {
                         onTap: (() => AuthService().SignInWithG()),
                         //text: 'Google',
                         svgpath: 'assets/social_svg/google_svg.svg',
+                        h: 40,
+                        w: 40,
                       ),
 
                       //Padding(padding: const EdgeInsets.symmetric(horizontal: 15.0)),
@@ -170,6 +172,8 @@ class _LoginPageState extends State<LoginPage> {
                         onTap: SignIn,
                         //text: 'Facebook',
                         svgpath: 'assets/social_svg/facebook-svgrepo-com.svg',
+                        h: 50,
+                        w: 50,
                       ),
                     ],
                   ),

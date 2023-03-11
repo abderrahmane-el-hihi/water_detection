@@ -131,6 +131,8 @@ class _SignUpPageState extends State<SignUpPage> {
                         onTap: SignIn,
                         //text: 'Google',
                         svgpath: 'assets/social_svg/google_svg.svg',
+                        h: 40,
+                        w: 40,
                       ),
 
                       //Padding(padding: const EdgeInsets.symmetric(horizontal: 15.0)),
@@ -140,6 +142,8 @@ class _SignUpPageState extends State<SignUpPage> {
                         onTap: SignIn,
                         //text: 'Facebook',
                         svgpath: 'assets/social_svg/facebook-svgrepo-com.svg',
+                        h: 50,
+                        w: 50,
                       ),
                     ],
                   ),

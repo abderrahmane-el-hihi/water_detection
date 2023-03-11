@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:waterdetection/homepage.dart';
 import 'package:waterdetection/serianumpage.dart';
 
@@ -46,7 +47,26 @@ class _ProductMenuPageState extends State<ProductMenuPage> {
                 builder: (context, AsyncSnapshot snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return Center(
-                      child: Text('loading'),
+                      child: Shimmer(
+                        gradient: LinearGradient(
+                          colors: [
+                            Colors.grey.shade200,
+                            Color.fromARGB(255, 143, 143, 143),
+                            Colors.grey.shade200,
+                          ],
+                          stops: [
+                            0.0,
+                            0.5,
+                            1.0,
+                          ],
+                          begin: Alignment.centerLeft,
+                          end: Alignment.centerRight,
+                        ),
+                        child: Text(
+                          'Loading',
+                          style: TextStyle(fontSize: 40.0),
+                        ),
+                      ),
                     );
                   } else {
                     if (snapshot.hasData) {

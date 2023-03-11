@@ -4,11 +4,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:waterdetection/components/chartv2.dart';
 
 //mongodb
 import 'package:mongo_dart/mongo_dart.dart' show Db;
 
+import 'components/graph_bar/graphbar.dart';
 import 'mongodb_config/mongo.dart';
 
 class Test extends StatefulWidget {
@@ -21,6 +21,7 @@ class Test extends StatefulWidget {
 class _TestState extends State<Test> {
   late Timer timer;
   List<Map<String, dynamic>> Data = [];
+  List<double> SummaryWater = [23, 64, 87, 9, 12, 55, 11];
 
   @override
   void initState() {
@@ -51,11 +52,16 @@ class _TestState extends State<Test> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('My App'),
-      ),
+      // body: Center(
+      //   child: Text(Data.toString()),
+      // ),
       body: Center(
-        child: Text(Data.toString()),
+        child: SizedBox(
+          height: 200,
+          child: GraphBar(
+            SummaryWater: SummaryWater,
+          ),
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {

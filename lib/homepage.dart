@@ -4,10 +4,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:liquid_progress_indicator/liquid_progress_indicator.dart';
+import 'package:shimmer/shimmer.dart';
+import 'package:waterdetection/components/graph_bar/graphbar.dart';
 import 'package:waterdetection/productmenupage.dart';
 import 'package:waterdetection/settingspage.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
-import 'components/chart.dart';
+
 import 'components/icon_btn_state.dart';
 import 'historypage.dart';
 import 'package:mongo_dart/mongo_dart.dart' show Db;
@@ -47,41 +49,11 @@ class _HomePageState extends State<HomePage> {
         context, MaterialPageRoute(builder: (context) => SettingsPage()));
   }
 
+  List<double> SummaryWaterDb = [];
+  List<Map<String, dynamic>> l = [];
+
   @override
   Widget build(BuildContext context) {
-    /*
-      return Scaffold(
-      /*appBar: AppBar(
-        actions: [
-          IconButton(onPressed: SignOut, icon: Icon(Icons.logout)),
-          Row(
-            //mainAxisAlignment: MainAxisAlignment.start,
-
-            children: [
-              IconButton(
-                  onPressed: PageBack, icon: Icon(Icons.arrow_back_rounded))
-            ],
-          ),
-        ],
-      ),*/
-      body: SafeArea(
-        child: Center(
-          child: Column(
-            children: [
-              SizedBox(
-                height: 15,
-              ),
-              //SizedBox(height: 32,),
-              //Icon(Icons.search_rounded,size: 32,),
-              //Icon(Icons.menu_rounded,size: 32,),
-              //Image.asset('images/codrops.png'),
-            ],
-          ),
-        ),
-      ),
-    );
-     */
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -160,100 +132,168 @@ class _HomePageState extends State<HomePage> {
         ),
       ]),
       body: SafeArea(
-        child: FutureBuilder(
-            future: MongodbConf.GetData("water_tank"),
-            builder: (context, AsyncSnapshot snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(
-                  child: Text('loading'),
-                );
-              } else {
-                if (snapshot.hasData) {
-                  var totaldata = snapshot.data.length;
-                  if (snapshot.data.length == 0) {
-                    return Text('connection set but there is no data');
-                  }
-                  print("total data" + totaldata.toString());
-                  //return Text("${snapshot.data}");
-                  int p = snapshot.data![0]["percentage"];
-                  List l = Data.cast();
-                  print(l.toString());
-                  //int p = l[2];
-
-                  return SingleChildScrollView(
-                    child: Center(
-                      child: Column(
-                        children: [
-                          SizedBox(
-                            height: 100,
-                          ),
-                          Text(
-                            'actual percentage :',
-                            style: TextStyle(
-                              fontSize: 30,
-                              color: Color.fromRGBO(0, 78, 131, 10),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 50,
-                          ),
-                          Container(
-                            height: 150.0,
-                            width: 150.0,
-                            child: LiquidCustomProgressIndicator(
-                              value: p / 100,
-                              valueColor: AlwaysStoppedAnimation(
-                                C
-                                    ? Color.fromARGB(144, 155, 173, 219)
-                                    : Color.fromARGB(144, 255, 57, 57),
-                              ),
-                              backgroundColor:
-                                  Color.fromRGBO(212, 224, 255, 0.565),
-                              direction: Axis.vertical,
-                              shapePath: CylinderPath(),
-                              center: Text(
-                                "${p}%",
-                                style: TextStyle(
-                                    color: Color.fromARGB(255, 170, 170, 170),
-                                    fontSize: 20),
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 30,
-                          ),
-                          Text(
-                            'Details :',
-                            style: TextStyle(
-                              fontSize: 50,
-                              color: Color.fromRGBO(0, 78, 131, 10),
-                              fontFamily: 'Poppins',
-                            ),
-                          ),
-                          SizedBox(
-                            height: 50,
-                          ),
-                          //Chart(),
-                        ],
+        child: Column(
+          children: [
+            FutureBuilder(
+                future: MongodbConf.GetData("water_tank"),
+                builder: (context, AsyncSnapshot snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Center(
+                      child: Shimmer(
+                        gradient: LinearGradient(
+                          colors: [
+                            Colors.grey.shade200,
+                            Color.fromARGB(255, 143, 143, 143),
+                            Colors.grey.shade200,
+                          ],
+                          stops: [
+                            0.0,
+                            0.5,
+                            1.0,
+                          ],
+                          begin: Alignment.centerLeft,
+                          end: Alignment.centerRight,
+                        ),
+                        child: Text(
+                          'Loading',
+                          style: TextStyle(fontSize: 40.0),
+                        ),
                       ),
-                    ),
-                  );
-                } else {
-                  return Center(
-                    child: Text('no data'),
-                  );
-                }
-              }
-              return Center(
-                child: Text('hdi rah return lakhira'),
-              );
-            }),
+                    );
+                  } else {
+                    if (snapshot.hasData) {
+                      var totaldata = snapshot.data.length;
+                      if (snapshot.data.length == 0) {
+                        return Text('connection set but there is no data');
+                      }
+                      print("total data" + totaldata.toString());
+                      //return Text("${snapshot.data}");
+                      int p = snapshot.data![0]["percentage"];
+                      l.clear();
+                      for (var i = 0; i < snapshot.data.length; i++) {
+                        l.add(snapshot.data![0]);
+                      }
+                      print(l.toString());
+
+                      return SingleChildScrollView(
+                        child: Center(
+                          child: Column(
+                            children: [
+                              SizedBox(
+                                height: 40,
+                              ),
+                              Text(
+                                'actual percentage :',
+                                style: TextStyle(
+                                  fontSize: 30,
+                                  color: Color.fromRGBO(0, 78, 131, 10),
+                                ),
+                              ),
+                              SizedBox(
+                                height: 50,
+                              ),
+                              Container(
+                                height: 150.0,
+                                width: 150.0,
+                                child: LiquidCustomProgressIndicator(
+                                  value: p / 100,
+                                  valueColor: AlwaysStoppedAnimation(
+                                    C
+                                        ? Color.fromARGB(144, 155, 173, 219)
+                                        : Color.fromARGB(144, 255, 57, 57),
+                                  ),
+                                  backgroundColor:
+                                      Color.fromRGBO(212, 224, 255, 0.565),
+                                  direction: Axis.vertical,
+                                  shapePath: CylinderPath(),
+                                  center: Text(
+                                    "${p}%",
+                                    style: TextStyle(
+                                        color:
+                                            Color.fromARGB(255, 170, 170, 170),
+                                        fontSize: 20),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                height: 30,
+                              ),
+                              Text(
+                                'Details :',
+                                style: TextStyle(
+                                  fontSize: 50,
+                                  color: Color.fromRGBO(0, 78, 131, 10),
+                                  fontFamily: 'Poppins',
+                                ),
+                              ),
+                              SizedBox(
+                                height: 50,
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    } else {
+                      return Center(
+                        child: Text('no data'),
+                      );
+                    }
+                  }
+                }),
+            FutureBuilder(
+                future: MongodbConf.GetData("historique"),
+                builder: (context, AsyncSnapshot snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Center(
+                      child: Shimmer(
+                        gradient: LinearGradient(
+                          colors: [
+                            Colors.grey.shade200,
+                            Color.fromARGB(255, 143, 143, 143),
+                            Colors.grey.shade200,
+                          ],
+                          stops: [
+                            0.0,
+                            0.5,
+                            1.0,
+                          ],
+                          begin: Alignment.centerLeft,
+                          end: Alignment.centerRight,
+                        ),
+                        child: Text(
+                          'Loading',
+                          style: TextStyle(fontSize: 40.0),
+                        ),
+                      ),
+                    );
+                  } else if (snapshot.hasData) {
+                    SummaryWaterDb.clear();
+                    for (var i = 0; i < snapshot.data.length; i++) {
+                      SummaryWaterDb.add(snapshot.data![i]["available_capa"]);
+                    }
+                    print(SummaryWaterDb);
+
+                    return Column(
+                      children: [
+                        Center(
+                          child: SizedBox(
+                            height: 200,
+                            child: GraphBar(
+                              SummaryWater: SummaryWaterDb,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                      ],
+                    );
+                  }
+                  return Text('error');
+                }),
+          ],
+        ),
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: Connect,
-      //   tooltip: 'Connect to MongoDB',
-      //   child: Icon(Icons.cloud),
-      // ),
     );
   }
 }

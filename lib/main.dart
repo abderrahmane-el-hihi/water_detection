@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:splashscreen/splashscreen.dart';
 import 'package:waterdetection/auth_page.dart';
 import 'package:waterdetection/loginpage.dart';
@@ -7,7 +8,6 @@ import 'package:waterdetection/productmenupage.dart';
 import 'package:waterdetection/serianumpage.dart';
 import 'package:waterdetection/signuppage.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:waterdetection/spalshscreen.dart';
 import 'package:waterdetection/test.dart';
 import 'package:waterdetection/testanimation.dart';
 import 'package:waterdetection/testpage.dart';
@@ -39,12 +39,14 @@ class MyApp extends StatelessWidget {
       home: SplashScreen(
         seconds: 3,
         navigateAfterSeconds: AuthPage(),
-        title: Text(
-          'Water Detection App',
-          style: TextStyle(
-            color: Color.fromRGBO(0, 78, 131, 10),
-          ),
-        ),
+        // title: Text(
+        //   'Water Detection App',
+        //   style: TextStyle(
+        //     color: Color.fromRGBO(0, 78, 131, 10),
+        //   ),
+        // ),
+        //image: Image.asset('assets/images/codrops.svg'),
+        photoSize: 100,
       ),
       //home: WaterDrop(),
 

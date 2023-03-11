@@ -5,11 +5,16 @@ class G_F_Button extends StatelessWidget {
   final Function()? onTap;
   //final String text;
   final String svgpath;
-  const G_F_Button(
-      {super.key,
-      required this.onTap,
-      //required this.text,
-      required this.svgpath});
+  final double w, h;
+
+  const G_F_Button({
+    super.key,
+    required this.onTap,
+    //required this.text,
+    required this.svgpath,
+    required this.w,
+    required this.h,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -26,8 +31,8 @@ class G_F_Button extends StatelessWidget {
           children: [
             SvgPicture.asset(
               '${svgpath}',
-              height: 40,
-              width: 40,
+              height: h,
+              width: w,
             ),
             // Padding(
             //   padding: const EdgeInsets.only(left: 10),
