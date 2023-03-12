@@ -4,6 +4,7 @@ import 'package:waterdetection/components/g_f_button.dart';
 import 'package:waterdetection/components/l_button.dart';
 import 'package:waterdetection/components/text_field.dart';
 import 'package:waterdetection/services/auth_services.dart';
+import 'package:flutter/services.dart';
 
 class LoginPage extends StatefulWidget {
   final Function()? ontap;
@@ -49,7 +50,10 @@ class _LoginPageState extends State<LoginPage> {
           context: context,
           builder: (context) {
             return AlertDialog(
-              title: Text('Incorrect E-mail'),
+              title: Text(
+                'Incorrect E-mail',
+                style: TextStyle(fontFamily: "Poppins"),
+              ),
             );
           },
         );
@@ -59,7 +63,10 @@ class _LoginPageState extends State<LoginPage> {
           context: context,
           builder: (context) {
             return AlertDialog(
-              title: Text('Incorrect Password'),
+              title: Text(
+                'Incorrect Password',
+                style: TextStyle(fontFamily: "Poppins"),
+              ),
             );
           },
         );
@@ -88,6 +95,7 @@ class _LoginPageState extends State<LoginPage> {
                     style: TextStyle(
                         color: Colors.grey[700],
                         fontSize: 16,
+                        fontFamily: "Poppins",
                         fontWeight: FontWeight.w600),
                   ),
                   SizedBox(height: 50),
@@ -121,7 +129,9 @@ class _LoginPageState extends State<LoginPage> {
                     onTap: widget.ontap,
                     child: Text(
                       'dont have account',
-                      style: TextStyle(color: Color.fromRGBO(0, 78, 131, 10)),
+                      style: TextStyle(
+                          color: Color.fromRGBO(0, 78, 131, 10),
+                          fontFamily: "Poppins"),
                     ),
                   ),
                   SizedBox(height: 25),
@@ -140,7 +150,8 @@ class _LoginPageState extends State<LoginPage> {
                           child: Text(
                             'OR',
                             style: TextStyle(
-                                color: Color.fromRGBO(179, 179, 179, 1)),
+                                color: Color.fromRGBO(179, 179, 179, 1),
+                                fontFamily: "Poppins"),
                           ),
                         ),
                         Expanded(

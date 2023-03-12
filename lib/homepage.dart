@@ -73,8 +73,7 @@ class _HomePageState extends State<HomePage> {
         title: Text(
           'Bonjour.',
           style: TextStyle(
-            color: Color.fromRGBO(0, 78, 131, 10),
-          ),
+              color: Color.fromRGBO(0, 78, 131, 10), fontFamily: "Poppins"),
         ),
         actions: [
           IconButton(
@@ -156,7 +155,8 @@ class _HomePageState extends State<HomePage> {
                         ),
                         child: Text(
                           'Loading',
-                          style: TextStyle(fontSize: 40.0),
+                          style:
+                              TextStyle(fontSize: 40.0, fontFamily: "Poppins"),
                         ),
                       ),
                     );
@@ -185,9 +185,9 @@ class _HomePageState extends State<HomePage> {
                               Text(
                                 'actual percentage :',
                                 style: TextStyle(
-                                  fontSize: 30,
-                                  color: Color.fromRGBO(0, 78, 131, 10),
-                                ),
+                                    fontSize: 30,
+                                    color: Color.fromRGBO(0, 78, 131, 10),
+                                    fontFamily: "Poppins"),
                               ),
                               SizedBox(
                                 height: 50,
@@ -216,15 +216,14 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ),
                               SizedBox(
-                                height: 30,
+                                height: 10,
                               ),
                               Text(
                                 'Details :',
                                 style: TextStyle(
-                                  fontSize: 50,
-                                  color: Color.fromRGBO(0, 78, 131, 10),
-                                  fontFamily: 'Poppins',
-                                ),
+                                    fontSize: 50,
+                                    color: Color.fromRGBO(0, 78, 131, 10),
+                                    fontFamily: "Poppins"),
                               ),
                               SizedBox(
                                 height: 50,
@@ -282,9 +281,6 @@ class _HomePageState extends State<HomePage> {
                               SummaryWater: SummaryWaterDb,
                             ),
                           ),
-                        ),
-                        SizedBox(
-                          height: 20,
                         ),
                       ],
                     );

@@ -106,12 +106,17 @@ class _SettingsPageState extends State<SettingsPage> {
       context: context,
       builder: (BuildContext context) {
         return CupertinoActionSheet(
-          title: Text('Select Language'),
+          title: Text(
+            'Select Language',
+            style: TextStyle(fontFamily: "Poppins"),
+          ),
           actions: <Widget>[
             CupertinoActionSheetAction(
               child: Text(
                 'Arabic',
-                style: TextStyle(color: Color.fromRGBO(121, 158, 255, 1)),
+                style: TextStyle(
+                    color: Color.fromRGBO(121, 158, 255, 1),
+                    fontFamily: "Poppins"),
               ),
               onPressed: () {
                 Navigator.pop(context, 'translate to arbic');
@@ -119,14 +124,18 @@ class _SettingsPageState extends State<SettingsPage> {
             ),
             CupertinoActionSheetAction(
               child: Text('French',
-                  style: TextStyle(color: Color.fromRGBO(121, 158, 255, 1))),
+                  style: TextStyle(
+                      color: Color.fromRGBO(121, 158, 255, 1),
+                      fontFamily: "Poppins")),
               onPressed: () {
                 Navigator.pop(context, 'translate to french');
               },
             ),
             CupertinoActionSheetAction(
               child: Text('English',
-                  style: TextStyle(color: Color.fromRGBO(121, 158, 255, 1))),
+                  style: TextStyle(
+                      color: Color.fromRGBO(121, 158, 255, 1),
+                      fontFamily: "Poppins")),
               onPressed: () {
                 Navigator.pop(context, 'translate to english');
               },
@@ -203,7 +212,9 @@ class _SettingsPageState extends State<SettingsPage> {
                           child: Text(
                             'Settings',
                             style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.bold),
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: "Poppins"),
                           ),
                         ),
                       ],

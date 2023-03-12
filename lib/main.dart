@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:splashscreen/splashscreen.dart';
 import 'package:waterdetection/auth_page.dart';
@@ -20,6 +21,10 @@ void main() async {
   );
   await MongodbConf.Connect();
   runApp(const MyApp());
+}
+
+Future<void> loadFont() async {
+  await rootBundle.load('assets/fonts/Poppins-Medium.ttf');
 }
 
 class MyApp extends StatelessWidget {
@@ -45,7 +50,7 @@ class MyApp extends StatelessWidget {
         //     color: Color.fromRGBO(0, 78, 131, 10),
         //   ),
         // ),
-        //image: Image.asset('assets/images/codrops.svg'),
+        //image: Image.asset('assets/social_svg/codrops.svg'),
         photoSize: 100,
       ),
       //home: WaterDrop(),

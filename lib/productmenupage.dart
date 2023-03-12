@@ -64,7 +64,8 @@ class _ProductMenuPageState extends State<ProductMenuPage> {
                         ),
                         child: Text(
                           'Loading',
-                          style: TextStyle(fontSize: 40.0),
+                          style:
+                              TextStyle(fontSize: 40.0, fontFamily: "Poppins"),
                         ),
                       ),
                     );
@@ -97,8 +98,9 @@ class _ProductMenuPageState extends State<ProductMenuPage> {
                                       title: Text(
                                         'ceterne ${quantite}',
                                         style: TextStyle(
-                                          color: Color.fromRGBO(0, 78, 131, 10),
-                                        ),
+                                            color:
+                                                Color.fromRGBO(0, 78, 131, 10),
+                                            fontFamily: "Poppins"),
                                       ),
                                       leading: Icon(
                                         Icons.abc,

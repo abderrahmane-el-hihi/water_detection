@@ -35,7 +35,8 @@ class _L_ButtonState extends State<L_Button> {
         child: Center(
           child: Text(
             _isPressed ? widget.text : widget.text,
-            style: TextStyle(color: Colors.white, fontSize: 16),
+            style: TextStyle(
+                color: Colors.white, fontSize: 16, fontFamily: "Poppins"),
           ),
         ),
       ),

@@ -135,8 +135,6 @@ class _SignUpPageState extends State<SignUpPage> {
                         w: 40,
                       ),
 
-                      //Padding(padding: const EdgeInsets.symmetric(horizontal: 15.0)),
-
                       //facebook
                       G_F_Button(
                         onTap: SignIn,

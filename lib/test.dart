@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
@@ -22,6 +23,9 @@ class _TestState extends State<Test> {
   late Timer timer;
   List<Map<String, dynamic>> Data = [];
   List<double> SummaryWater = [23, 64, 87, 9, 12, 55, 11];
+  Future<void> _loadFont() async {
+    await rootBundle.load('assets/fonts/Poppins-Medium.ttf');
+  }
 
   @override
   void initState() {
@@ -58,8 +62,20 @@ class _TestState extends State<Test> {
       body: Center(
         child: SizedBox(
           height: 200,
-          child: GraphBar(
-            SummaryWater: SummaryWater,
+          child: Column(
+            children: [
+              Text(
+                "hello test the new family font in the app",
+                style: TextStyle(fontFamily: "Poppins"),
+              ),
+              Text(
+                "hello test the new family font in the app",
+              ),
+
+              // GraphBar(
+              //   SummaryWater: SummaryWater,
+              // ),
+            ],
           ),
         ),
       ),
