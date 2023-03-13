@@ -382,14 +382,13 @@ class _SettingsPageState extends State<SettingsPage> {
                             ),
                             GestureDetector(
                               onTap: (() async {
-                                final isAuth =
-                                    await FingerprintAuth().authenticate();
-                                if (isAuth) {
-                                  Navigator.of(context).pushReplacement(
-                                      MaterialPageRoute(
-                                          builder: ((context) => HomePage())));
-                                }
-                                ;
+                                //final isAuth =     await FingerprintAuth().authenticate();
+                                // if (isAuth) {
+                                //   Navigator.of(context).pushReplacement(
+                                //       MaterialPageRoute(
+                                //           builder: ((context) => HomePage())));
+                                // }
+                                // ;
                               }),
                               child: Container(
                                 width: MediaQuery.of(context).size.width * 0.55,

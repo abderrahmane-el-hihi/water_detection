@@ -6,11 +6,10 @@ import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
-//mongodb
 import 'package:mongo_dart/mongo_dart.dart' show Db;
 
 import 'components/graph_bar/graphbar.dart';
-import 'mongodb_config/mongo.dart';
+import "mongodb_config/mongo.dart";
 
 class Test extends StatefulWidget {
   Test({super.key});
@@ -21,87 +20,45 @@ class Test extends StatefulWidget {
 
 class _TestState extends State<Test> {
   late Timer timer;
-  List<Map<String, dynamic>> Data = [];
-  List<double> SummaryWater = [23, 64, 87, 9, 12, 55, 11];
-  Future<void> _loadFont() async {
-    await rootBundle.load('assets/fonts/Poppins-Medium.ttf');
-  }
-
-  @override
-  void initState() {
-    super.initState();
-
-    timer = Timer.periodic(Duration(seconds: 1), (Timer t) => getData());
-  }
-
-  Future<void> getData() async {
-    final data = await MongodbConf.GetData("compt");
-
-    setState(() {
-      Data = data;
-    });
-  }
-
-  Future<dynamic> InsertData(document) async {
-    //await MongodbConf.Insert();
-  }
+  late Map<String, dynamic> data = {
+    'email': 'usertest@gmail.com',
+    'password': 'user123',
+    'username': 'usertest',
+    'id_compt': 2
+  };
 
   var document = {
     'email': 'John Doe',
     'password': 'john.doe@example.com',
   };
-
-  //final result = await collection.insert(document);
+  void M() {
+    Future<dynamic> Function() callback =
+        MongodbConf.WriteDataToMongo("compt", data);
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // body: Center(
-      //   child: Text(Data.toString()),
-      // ),
       body: Center(
         child: SizedBox(
           height: 200,
           child: Column(
             children: [
-              Text(
-                "hello test the new family font in the app",
-                style: TextStyle(fontFamily: "Poppins"),
-              ),
-              Text(
-                "hello test the new family font in the app",
-              ),
-
-              // GraphBar(
-              //   SummaryWater: SummaryWater,
-              // ),
+              ElevatedButton.icon(
+                onPressed: M,
+                icon: Icon(Icons.abc_rounded),
+                label: Text("send"),
+              )
             ],
           ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          InsertData(document);
-        },
-        tooltip: 'insert to MongoDB',
-        child: Icon(Icons.cloud),
       ),
     );
   }
 }
 
-
-
-
-
-
- 
-
-
-
-
 // use mongodb with flutter
-    /**
+/**
      * void Connection() async {
       var db = Db('mongodb://localhost:27017/mydb');
       await db.open();
@@ -118,36 +75,24 @@ class _TestState extends State<Test> {
     }
      */
 
-
-
-
 //var data = '';
 
-  // Future<void> connect() async {
-  //   var db = Db('mongodb://localhost:27017/water_detection');
-  //   await db.open();
-  //   var collection = db.collection('water_tank');
-  //   var result = await collection.findOne();
-  //   setState(() {
-  //     data = result.toString();
-  //   });
-  //   db.close();
-  // }
+// Future<void> connect() async {
+//   var db = Db('mongodb://localhost:27017/water_detection');
+//   await db.open();
+//   var collection = db.collection('water_tank');
+//   var result = await collection.findOne();
+//   setState(() {
+//     data = result.toString();
+//   });
+//   db.close();
+// }
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   connect();
-  // }
-
-
-
-
-
-
-
-
-
+// @override
+// void initState() {
+//   super.initState();
+//   connect();
+// }
 
 // FutureBuilder(
 //             future: MongodbConf.GetData(),

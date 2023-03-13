@@ -9,6 +9,7 @@ import 'package:waterdetection/productmenupage.dart';
 import 'package:waterdetection/signuppage.dart';
 
 import 'components/text_field.dart';
+import 'mongodb_config/mongo.dart';
 
 class SerialPage extends StatefulWidget {
   SerialPage({super.key});
@@ -43,14 +44,6 @@ class _SerialPageState extends State<SerialPage> {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    /*Container(
-                        width: 100,
-                        height: 100,
-                        decoration: BoxDecoration(
-                          color: Color.fromRGBO(217, 217, 217, 1),
-                          borderRadius:
-                              BorderRadius.all(Radius.elliptical(100, 100)),
-                        )),*/
                     Icon(
                       Icons.account_circle,
                       size: 128,
@@ -59,7 +52,30 @@ class _SerialPageState extends State<SerialPage> {
                     SizedBox(
                       height: 50,
                     ),
-                    Text('User Name'),
+                    FutureBuilder(
+                        future: MongodbConf.GetData("compt"),
+                        builder: (context, AsyncSnapshot snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "waiting",
+                                  style: TextStyle(fontFamily: "Poppins"),
+                                ),
+                              ],
+                            );
+                          } else if (snapshot.hasData) {
+                            var username = snapshot.data![0]["username"];
+                            return Text(
+                              "${username}",
+                              style: TextStyle(fontFamily: "Poppins"),
+                            );
+                          } else {
+                            return Text("there is no data");
+                          }
+                        }),
                     SizedBox(
                       height: 50,
                     ),

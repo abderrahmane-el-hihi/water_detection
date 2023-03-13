@@ -66,7 +66,6 @@ class _HomePageState extends State<HomePage> {
           },
           icon: Icon(
             Icons.arrow_back_rounded,
-            //size: 32,
             color: Color.fromRGBO(0, 78, 131, 10),
           ),
         ),
@@ -96,7 +95,6 @@ class _HomePageState extends State<HomePage> {
                     return Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
-                        //color: Colors.black,
                       ),
                       padding: EdgeInsets.all(10),
                       child: Column(

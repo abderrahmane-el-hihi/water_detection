@@ -28,14 +28,9 @@ class MongodbConf {
     return arrdata;
   }
 
-  // InsertData(document) async {
-  //   final result = await collec.insert(document);
-  // }
-  // static Future<void> Insert() async {
-  //   try {
-  //     var result = await collec.insertOne(document);
-  //   } catch (e) {
-  //     print(e.toString());
-  //   }
-  // }
+  static WriteDataToMongo(
+      String collectionName, Map<String, dynamic> data) async {
+    final collection = db.collection(collectionName);
+    await collection.insertOne(data);
+  }
 }
