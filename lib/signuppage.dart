@@ -4,6 +4,7 @@ import 'package:waterdetection/components/l_button.dart';
 import 'package:waterdetection/components/text_field.dart';
 import 'package:waterdetection/loginpage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:waterdetection/mongodb_config/mongo.dart';
 
 class SignUpPage extends StatefulWidget {
   final Function()? ontap;
@@ -28,11 +29,21 @@ class _SignUpPageState extends State<SignUpPage> {
     });
     await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: emailcontroller.text, password: passwcontroller.text);
+    MongodbConf.WriteDataToMongo("compt", data);
+    i++;
   }
 
   bool _isPressed = false;
 
   void SignIn() {}
+  int i = 0;
+
+  late Map<String, dynamic> data = {
+    'email': emailcontroller.text,
+    'password': passwcontroller.text,
+    'username': namecontroller.text,
+    'id_compt': i,
+  };
 
   @override
   Widget build(BuildContext context) {

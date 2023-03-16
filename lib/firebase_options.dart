@@ -44,43 +44,39 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyBybXta-dFMDOM-hDdNYbFOpdMKAfI11bM',
-    appId: '1:507590100946:web:aa939b9be91e06a41aea0b',
-    messagingSenderId: '507590100946',
-    projectId: 'pfeapp-830f3',
-    authDomain: 'pfeapp-830f3.firebaseapp.com',
-    databaseURL: 'https://pfeapp-830f3-default-rtdb.firebaseio.com',
-    storageBucket: 'pfeapp-830f3.appspot.com',
+    apiKey: 'AIzaSyCLOnrV370DMjyqz406PJS924bsUYMZt1Q',
+    appId: '1:706464015138:web:633f517b8d8cc48b83fb7b',
+    messagingSenderId: '706464015138',
+    projectId: 'water-detection-2',
+    authDomain: 'water-detection-2.firebaseapp.com',
+    storageBucket: 'water-detection-2.appspot.com',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDnDRaSDNz6kOTE_EKxzd0xAlvyYeNsqow',
-    appId: '1:507590100946:android:40ac6b267429aa5a1aea0b',
-    messagingSenderId: '507590100946',
-    projectId: 'pfeapp-830f3',
-    databaseURL: 'https://pfeapp-830f3-default-rtdb.firebaseio.com',
-    storageBucket: 'pfeapp-830f3.appspot.com',
+    apiKey: 'AIzaSyBFA6p8gkJ3yWdU9sODFRQ9r44b5TZnooQ',
+    appId: '1:706464015138:android:0653decc76b9765883fb7b',
+    messagingSenderId: '706464015138',
+    projectId: 'water-detection-2',
+    storageBucket: 'water-detection-2.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyBN77ws4LHqMBkZvjotULOln0iGdsxFBds',
-    appId: '1:507590100946:ios:2443c93de3a515551aea0b',
-    messagingSenderId: '507590100946',
-    projectId: 'pfeapp-830f3',
-    databaseURL: 'https://pfeapp-830f3-default-rtdb.firebaseio.com',
-    storageBucket: 'pfeapp-830f3.appspot.com',
-    iosClientId: '507590100946-7f5f4ibjoif4iurqcqn0k93ja9nm35of.apps.googleusercontent.com',
-    iosBundleId: 'com.example.projj',
+    apiKey: 'AIzaSyAxYGl3qhr-pc_jWiTA5J53RHYe-S_FrnA',
+    appId: '1:706464015138:ios:d3d5a371d1cd765583fb7b',
+    messagingSenderId: '706464015138',
+    projectId: 'water-detection-2',
+    storageBucket: 'water-detection-2.appspot.com',
+    iosClientId: '706464015138-81clmkcdf9v6183j0j3sr8mfgqvo5ktk.apps.googleusercontent.com',
+    iosBundleId: 'com.example.waterdetection',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyBN77ws4LHqMBkZvjotULOln0iGdsxFBds',
-    appId: '1:507590100946:ios:2443c93de3a515551aea0b',
-    messagingSenderId: '507590100946',
-    projectId: 'pfeapp-830f3',
-    databaseURL: 'https://pfeapp-830f3-default-rtdb.firebaseio.com',
-    storageBucket: 'pfeapp-830f3.appspot.com',
-    iosClientId: '507590100946-7f5f4ibjoif4iurqcqn0k93ja9nm35of.apps.googleusercontent.com',
-    iosBundleId: 'com.example.projj',
+    apiKey: 'AIzaSyAxYGl3qhr-pc_jWiTA5J53RHYe-S_FrnA',
+    appId: '1:706464015138:ios:d3d5a371d1cd765583fb7b',
+    messagingSenderId: '706464015138',
+    projectId: 'water-detection-2',
+    storageBucket: 'water-detection-2.appspot.com',
+    iosClientId: '706464015138-81clmkcdf9v6183j0j3sr8mfgqvo5ktk.apps.googleusercontent.com',
+    iosBundleId: 'com.example.waterdetection',
   );
 }

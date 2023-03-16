@@ -14,7 +14,8 @@ import 'package:waterdetection/testanimation.dart';
 import 'package:waterdetection/testpage.dart';
 import 'firebase_options.dart';
 import 'services/biometrics_aut.dart';
-//import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,20 +25,24 @@ void main() async {
 
   await MongodbConf.Connect();
   //if not work delete from here
-
-  // FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-  //   print('Got a message whilst in the foreground!');
-  //   print('Message data: ${message.data}');
-
-  //   if (message.notification != null) {
-  //     print('Message also contained a notification: ${message.notification}');
-  //   }
-  // });
-
-  // FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-  //   print('A new onMessageOpenedApp event was published!');
-  //   print('Message data: ${message.data}');
-  // });
+  FirebaseMessaging messaging = FirebaseMessaging.instance;
+  NotificationSettings settings = await messaging.requestPermission(
+    alert: true,
+    announcement: false,
+    badge: true,
+    carPlay: false,
+    criticalAlert: false,
+    provisional: false,
+    sound: true,
+  );
+  print('User granted permission: ${settings.authorizationStatus}');
+  FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+    print('Got a message whilst in the foreground!');
+    print('Message data: ${message.data}');
+    if (message.notification != null) {
+      print('Message also contained a notification: ${message.notification}');
+    }
+  });
 
   //to here
   runApp(const MyApp());
@@ -59,7 +64,7 @@ class MyApp extends StatelessWidget {
       //home: SerialPage(),
       //home: ProductMenuPage(),
       //home: MyWidget(),
-      // home: Test(),
+      //home: Test(),
       //splash screen
       home: SplashScreen(
         seconds: 3,

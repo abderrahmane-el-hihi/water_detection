@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:liquid_progress_indicator/liquid_progress_indicator.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:waterdetection/components/graph_bar/graphbar.dart';
@@ -15,6 +16,7 @@ import 'historypage.dart';
 import 'package:mongo_dart/mongo_dart.dart' show Db;
 
 import 'mongodb_config/mongo.dart';
+import 'services/local_notif_service.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({super.key});
@@ -26,11 +28,13 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   late Timer timer;
   List<Map<String, dynamic>> Data = [];
+  final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+      FlutterLocalNotificationsPlugin();
 
   @override
   void initState() {
     super.initState();
-
+    Notif.initialize(flutterLocalNotificationsPlugin);
     timer = Timer.periodic(Duration(seconds: 900), (Timer t) => getData());
   }
 
@@ -165,14 +169,18 @@ class _HomePageState extends State<HomePage> {
                         return Text('connection set but there is no data');
                       }
                       print("total data" + totaldata.toString());
-                      //return Text("${snapshot.data}");
                       int p = snapshot.data![0]["percentage"];
                       l.clear();
                       for (var i = 0; i < snapshot.data.length; i++) {
                         l.add(snapshot.data![0]);
                       }
                       print(l.toString());
-
+                      if (snapshot.data![0]["percentage"] <= 20) {
+                        Notif.showBigTextNotification(
+                            title: "Water detetction",
+                            body: "your water tank percentage is about $p%",
+                            fln: flutterLocalNotificationsPlugin);
+                      }
                       return SingleChildScrollView(
                         child: Center(
                           child: Column(

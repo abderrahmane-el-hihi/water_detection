@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "706464015138",
+    "project_id": "water-detection-2",
+    "storage_bucket": "water-detection-2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:706464015138:android:0653decc76b9765883fb7b",
+        "android_client_info": {
+          "package_name": "com.example.waterdetection"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "706464015138-jj4ksf4jopo4m4fhbf1qtcij4r56hnl8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBFA6p8gkJ3yWdU9sODFRQ9r44b5TZnooQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "706464015138-jj4ksf4jopo4m4fhbf1qtcij4r56hnl8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
