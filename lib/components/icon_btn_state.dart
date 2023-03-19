@@ -17,12 +17,10 @@ class SwitchBtn extends StatefulWidget {
 }
 
 class _SwitchBtnState extends State<SwitchBtn> {
-  bool isDark = true;
   bool switchstate = true;
   void onChanged(bool newstate) {
     setState(() {
       switchstate = newstate;
-      isDark = switchstate;
     });
   }
 
@@ -30,7 +28,9 @@ class _SwitchBtnState extends State<SwitchBtn> {
   Widget build(BuildContext context) {
     return Switch(
       value: switchstate,
-      onChanged: ((bool newstate) => onChanged(newstate)),
+      onChanged: ((value) {
+        (bool newstate) => onChanged(newstate);
+      }),
       activeColor: widget.activecolor,
     );
   }

@@ -1,0 +1,6 @@
+{
+    "@@locale": "fr",
+    "hello": "Bonjour",
+    "world": "Monde",
+    "greeting": "{hello} {world} !"
+}

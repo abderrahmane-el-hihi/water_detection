@@ -7,14 +7,26 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:waterdetection/services/biometrics_aut.dart';
-//import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'package:waterdetection/homepage.dart';
-import 'package:waterdetection/services/biometrics_aut.dart';
-
+import 'package:flutter_localization/flutter_localization.dart';
 import 'components/icon_btn_state.dart';
 import 'mongodb_config/mongo.dart';
+//listen to the _isdark variable state
+import 'package:flutter/foundation.dart';
+
+class ThemeNotifier extends ChangeNotifier {
+  bool _isDark = true;
+
+  bool get isDark => _isDark;
+
+  set isDark(bool value) {
+    _isDark = value;
+    notifyListeners();
+  }
+}
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -24,6 +36,8 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
+  //initalization flutter_localizzation
+  final FlutterLocalization _localization = FlutterLocalization.instance;
   //bool isdark initialazed on false
   bool isDark = false;
   //signout method
@@ -34,22 +48,13 @@ class _SettingsPageState extends State<SettingsPage> {
   //go to web site method
   void GoToSite() async {
     const url = 'googlechrome:https://www.google.com';
-    /*
-       if (await canLaunch(url)) {
+
+    if (await canLaunch(url)) {
       await launch(url);
     } else {
       throw 'Could not launch $url';
     }
-     */
   }
-
-  //ToDArk
-  // void ToDark() {
-  //   //SwicthTheme
-  //   setState(() {
-  //     isDark = !isDark;
-  //   });
-  // }
 
   //control push notifications method
   void Notifications() {
@@ -58,12 +63,6 @@ class _SettingsPageState extends State<SettingsPage> {
     //if toggle btn on
 
     //if toggle btn off
-  }
-
-  void Fingerprint() {
-    //using local_auth package
-    //if biometrics on
-    //if biometrics off
   }
 
   void SelectLanguage() {
@@ -119,7 +118,8 @@ class _SettingsPageState extends State<SettingsPage> {
                     fontFamily: "Poppins"),
               ),
               onPressed: () {
-                Navigator.pop(context, 'translate to arbic');
+                Navigator.pop(context, 'translate to arabic');
+                _localization.translate('ar');
               },
             ),
             CupertinoActionSheetAction(
@@ -129,6 +129,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       fontFamily: "Poppins")),
               onPressed: () {
                 Navigator.pop(context, 'translate to french');
+                _localization.translate('fr');
               },
             ),
             CupertinoActionSheetAction(
@@ -138,6 +139,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       fontFamily: "Poppins")),
               onPressed: () {
                 Navigator.pop(context, 'translate to english');
+                _localization.translate('en');
               },
             ),
             /*CupertinoActionSheetAction(
@@ -210,7 +212,8 @@ class _SettingsPageState extends State<SettingsPage> {
                           //padding: EdgeInsets.only(left: 30, right: 30),
                           padding: EdgeInsets.symmetric(horizontal: 85),
                           child: Text(
-                            'Settings',
+                            //Settings Text
+                            '${AppLocale.words[0].getString(context)}',
                             style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
@@ -370,47 +373,6 @@ class _SettingsPageState extends State<SettingsPage> {
                             ),
                           ],
                         ),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Icon(
-                              Icons.fingerprint_rounded,
-                              color: Color.fromRGBO(0, 78, 131, 10),
-                            ),
-                            GestureDetector(
-                              onTap: (() async {
-                                //final isAuth =     await FingerprintAuth().authenticate();
-                                // if (isAuth) {
-                                //   Navigator.of(context).pushReplacement(
-                                //       MaterialPageRoute(
-                                //           builder: ((context) => HomePage())));
-                                // }
-                                // ;
-                              }),
-                              child: Container(
-                                width: MediaQuery.of(context).size.width * 0.55,
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      'Biometric sensor',
-                                      style: TextStyle(fontSize: 16),
-                                    ),
-                                    //Icon(Icons.toggle_off_rounded),
-                                    SwitchBtn(
-                                      activecolor:
-                                          Color.fromRGBO(121, 158, 255, 1),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
                       ],
                     ),
                   ),
@@ -469,8 +431,15 @@ class _SettingsPageState extends State<SettingsPage> {
                                   'Dark mode',
                                   style: TextStyle(fontSize: 16),
                                 ),
-                                SwitchBtn(
-                                  activecolor: Color.fromRGBO(121, 158, 255, 1),
+                                Switch(
+                                  activeColor: Color.fromRGBO(121, 158, 255, 1),
+                                  value: Provider.of<ThemeNotifier>(context)
+                                      ._isDark,
+                                  onChanged: (value) {
+                                    Provider.of<ThemeNotifier>(context,
+                                            listen: false)
+                                        .isDark = value;
+                                  },
                                 ),
                               ],
                             ),
@@ -589,4 +558,67 @@ class _SettingsPageState extends State<SettingsPage> {
       ),
     );
   }
+}
+
+mixin AppLocale {
+  static const String title = '';
+  static List<String> words = [
+    'Settings',
+    'Manage Account',
+    'Password',
+    'Privacy',
+    'Notifications',
+    'Dark mode',
+    'Language',
+    'Help',
+    'Sign Out',
+    'Home',
+    'Bonjour.',
+    'Actual Percentage',
+    'Details',
+    'Products',
+    'Submit',
+    'Serial Number',
+    'History',
+  ];
+
+  static Map<String, dynamic> EN = {
+    title: 'Localization',
+    words[0]: 'Settings',
+    words[1]: 'Manage Account',
+    words[2]: 'Password',
+    words[3]: 'Notifications',
+    words[4]: 'Dark mode',
+    words[5]: 'Language',
+    words[6]: 'Help',
+    words[7]: 'Sign Out',
+    words[8]: 'Home',
+    words[9]: 'Hi.',
+    words[10]: 'Actual Percentage',
+    words[11]: 'Details',
+    words[12]: 'Products',
+    words[13]: 'Submit',
+    words[14]: 'Serial Number',
+    words[15]: 'History',
+  };
+  static Map<String, dynamic> FR = {
+    title: 'Localisation',
+    words[0]: 'Paramètres',
+    words[1]: 'Gérer le compte',
+    words[2]: 'Mot de passe',
+    words[3]: 'Notifications',
+    words[4]: 'Mode sombre',
+    words[5]: 'Langue',
+    words[6]: 'Aide',
+    words[7]: 'Se déconnecter',
+    words[8]: 'Accueil',
+    words[9]: 'Bonjour.',
+    words[10]: 'Pourcentage réel',
+    words[11]: 'Détails',
+    words[12]: 'Produits',
+    words[13]: 'Envoyer',
+    words[14]: 'référence',
+    words[15]: 'Historique',
+  };
+  static const Map<String, dynamic> AR = {title: 'الترجمه'};
 }
