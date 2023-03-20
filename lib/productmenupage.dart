@@ -1,9 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localization/flutter_localization.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:waterdetection/homepage.dart';
 import 'package:waterdetection/serianumpage.dart';
+import 'package:waterdetection/settingspage.dart';
 
 import 'mongodb_config/mongo.dart';
 
@@ -55,7 +57,7 @@ class _ProductMenuPageState extends State<ProductMenuPage> {
           ),
         ),
         title: Text(
-          'Products',
+          '${AppLocale.words[12].getString(context)}',
           style: TextStyle(
               color: Color.fromRGBO(0, 78, 131, 10), fontFamily: "Poppins"),
         ),

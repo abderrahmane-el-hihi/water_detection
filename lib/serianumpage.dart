@@ -1,10 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localization/flutter_localization.dart';
 
 import 'package:waterdetection/components/l_button.dart';
 import 'package:waterdetection/homepage.dart';
 import 'package:waterdetection/loginpage.dart';
 import 'package:waterdetection/productmenupage.dart';
+import 'package:waterdetection/settingspage.dart';
 
 import 'package:waterdetection/signuppage.dart';
 
@@ -94,7 +96,7 @@ class _SerialPageState extends State<SerialPage> {
                                   BorderSide(color: Colors.grey.shade400)),
                           fillColor: Color.fromARGB(255, 255, 255, 255),
                           filled: true,
-                          hintText: 'Serial Number',
+                          hintText: '${AppLocale.words[14].getString(context)}',
                           hintStyle: TextStyle(
                               color: Color.fromRGBO(179, 179, 179, 1)),
                         ),
@@ -105,7 +107,7 @@ class _SerialPageState extends State<SerialPage> {
                     ),
                     L_Button(
                       onTap: Submit,
-                      text: 'Submit',
+                      text: '${AppLocale.words[13].getString(context)}',
                     )
                   ],
                 ),

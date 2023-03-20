@@ -12,6 +12,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import 'package:waterdetection/homepage.dart';
 import 'package:flutter_localization/flutter_localization.dart';
+import 'components/gnavbar.dart';
 import 'components/icon_btn_state.dart';
 import 'mongodb_config/mongo.dart';
 //listen to the _isdark variable state
@@ -47,19 +48,15 @@ class _SettingsPageState extends State<SettingsPage> {
 
   //go to web site method
   void GoToSite() async {
-    const url = 'googlechrome:https://www.google.com';
-
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
+    final Uri _url = Uri.parse('googlechrome:https://www.google.com');
+    await launchUrl(_url);
+    if (!await launchUrl(_url)) {
+      throw Exception('Could not launch $_url');
     }
   }
 
   //control push notifications method
   void Notifications() {
-    //using loflutter_local_notif package
-
     //if toggle btn on
 
     //if toggle btn off
@@ -170,21 +167,20 @@ class _SettingsPageState extends State<SettingsPage> {
     return Theme(
       data: isDark ? ThemeData.light() : ThemeData.light(),
       child: Scaffold(
-        //appBar: ,
-
-        bottomNavigationBar: BottomNavigationBar(items: [
-          BottomNavigationBarItem(
-            icon:
-                GestureDetector(onTap: ToHome, child: Icon(Icons.home_rounded)),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: GestureDetector(
-                onTap: ToSettings, child: Icon(Icons.settings_rounded)),
-            label: 'Settings',
-            activeIcon: Icon(Icons.settings_rounded),
-          ),
-        ]),
+        // bottomNavigationBar: BottomNavigationBar(items: [
+        //   BottomNavigationBarItem(
+        //     icon:
+        //         GestureDetector(onTap: ToHome, child: Icon(Icons.home_rounded)),
+        //     label: 'Home',
+        //   ),
+        //   BottomNavigationBarItem(
+        //     icon: GestureDetector(
+        //         onTap: ToSettings, child: Icon(Icons.settings_rounded)),
+        //     label: 'Settings',
+        //     activeIcon: Icon(Icons.settings_rounded),
+        //   ),
+        // ]),
+        bottomNavigationBar: GNavBar(),
         body: SingleChildScrollView(
           child: SafeArea(
             child: Center(
@@ -214,6 +210,7 @@ class _SettingsPageState extends State<SettingsPage> {
                           child: Text(
                             //Settings Text
                             '${AppLocale.words[0].getString(context)}',
+
                             style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
@@ -300,7 +297,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    'Manage Account',
+                                    '${AppLocale.words[1].getString(context)}',
                                     style: TextStyle(fontSize: 16),
                                   ),
                                   Icon(
@@ -329,7 +326,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    'Password',
+                                    '${AppLocale.words[2].getString(context)}',
                                     style: TextStyle(fontSize: 16),
                                   ),
                                   Icon(
@@ -360,7 +357,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      'Privacy',
+                                      '${AppLocale.words[16].getString(context)}',
                                       style: TextStyle(fontSize: 16),
                                     ),
                                     Icon(
@@ -403,7 +400,7 @@ class _SettingsPageState extends State<SettingsPage> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  'Notifications',
+                                  '${AppLocale.words[3].getString(context)}',
                                   style: TextStyle(fontSize: 16),
                                 ),
                                 SwitchBtn(
@@ -428,7 +425,7 @@ class _SettingsPageState extends State<SettingsPage> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  'Dark mode',
+                                  '${AppLocale.words[4].getString(context)}',
                                   style: TextStyle(fontSize: 16),
                                 ),
                                 Switch(
@@ -466,7 +463,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    'Language',
+                                    '${AppLocale.words[5].getString(context)}',
                                     style: TextStyle(fontSize: 16),
                                   ),
                                   Icon(
@@ -509,7 +506,7 @@ class _SettingsPageState extends State<SettingsPage> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  'Help',
+                                  '${AppLocale.words[6].getString(context)}',
                                   style: TextStyle(fontSize: 16),
                                 ),
                                 Icon(
@@ -541,7 +538,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       ),
                       child: Center(
                         child: Text(
-                          'Sign Out',
+                          '${AppLocale.words[7].getString(context)}',
                           style: TextStyle(
                             color: Color.fromRGBO(0, 78, 131, 10),
                           ),
@@ -580,6 +577,9 @@ mixin AppLocale {
     'Submit',
     'Serial Number',
     'History',
+    'Privacy',
+    'Sign Up',
+    'Sign In'
   ];
 
   static Map<String, dynamic> EN = {
@@ -600,6 +600,9 @@ mixin AppLocale {
     words[13]: 'Submit',
     words[14]: 'Serial Number',
     words[15]: 'History',
+    words[16]: 'Privacy',
+    words[17]: 'Sign Up',
+    words[18]: 'Sign In',
   };
   static Map<String, dynamic> FR = {
     title: 'Localisation',
@@ -619,6 +622,9 @@ mixin AppLocale {
     words[13]: 'Envoyer',
     words[14]: 'référence',
     words[15]: 'Historique',
+    words[16]: 'Vie privée',
+    words[17]: 'S\'inscrire',
+    words[18]: 'Connexion',
   };
   static const Map<String, dynamic> AR = {title: 'الترجمه'};
 }

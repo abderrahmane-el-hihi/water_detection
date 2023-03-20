@@ -1,10 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localization/flutter_localization.dart';
 import 'package:waterdetection/components/g_f_button.dart';
 import 'package:waterdetection/components/l_button.dart';
 import 'package:waterdetection/components/text_field.dart';
 import 'package:waterdetection/services/auth_services.dart';
 import 'package:flutter/services.dart';
+import 'package:waterdetection/settingspage.dart';
 
 class LoginPage extends StatefulWidget {
   final Function()? ontap;
@@ -90,7 +92,7 @@ class _LoginPageState extends State<LoginPage> {
                   SizedBox(height: 50),
 
                   Text(
-                    'Sign In',
+                    '${AppLocale.words[18].getString(context)}',
                     style: TextStyle(
                         color: Colors.grey[700],
                         fontSize: 16,
@@ -119,7 +121,7 @@ class _LoginPageState extends State<LoginPage> {
                   //signin buuton
                   L_Button(
                     onTap: SignIn,
-                    text: 'Sign In',
+                    text: '${AppLocale.words[18].getString(context)}',
                   ),
 
                   SizedBox(height: 25),
@@ -127,7 +129,7 @@ class _LoginPageState extends State<LoginPage> {
                   GestureDetector(
                     onTap: widget.ontap,
                     child: Text(
-                      'dont have account',
+                      'don\'t have account',
                       style: TextStyle(
                           color: Color.fromRGBO(0, 78, 131, 10),
                           fontFamily: "Poppins"),

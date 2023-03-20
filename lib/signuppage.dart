@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localization/flutter_localization.dart';
 import 'package:waterdetection/components/g_f_button.dart';
 import 'package:waterdetection/components/l_button.dart';
 import 'package:waterdetection/components/text_field.dart';
 import 'package:waterdetection/loginpage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:waterdetection/mongodb_config/mongo.dart';
+import 'package:waterdetection/settingspage.dart';
 
 class SignUpPage extends StatefulWidget {
   final Function()? ontap;
@@ -57,7 +59,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   SizedBox(height: 50),
 
                   Text(
-                    'Sign Up',
+                    '${AppLocale.words[17].getString(context)}',
                     style: TextStyle(
                         color: Colors.grey[700],
                         fontSize: 16,
@@ -100,7 +102,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   //sign up buton
                   L_Button(
                     onTap: SignUp,
-                    text: 'Sign Up',
+                    text: '${AppLocale.words[17].getString(context)}',
                   ),
 
                   //SizedBox(height: 25),

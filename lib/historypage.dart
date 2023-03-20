@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/basic.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_localization/flutter_localization.dart';
 import 'package:waterdetection/settingspage.dart';
 
 import 'components/graph_bar/graphbar.dart';
@@ -49,7 +50,7 @@ class _DetailsPageState extends State<DetailsPage> {
           ),
         ),
         title: Text(
-          'History',
+          '${AppLocale.words[5].getString(context)}',
           style: TextStyle(
             color: Color.fromRGBO(0, 78, 131, 10),
           ),

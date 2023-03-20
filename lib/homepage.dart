@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:flutter_localization/flutter_localization.dart';
 import 'package:liquid_progress_indicator/liquid_progress_indicator.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:waterdetection/components/graph_bar/graphbar.dart';
@@ -11,6 +12,7 @@ import 'package:waterdetection/productmenupage.dart';
 import 'package:waterdetection/settingspage.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
+import 'components/gnavbar.dart';
 import 'components/icon_btn_state.dart';
 import 'historypage.dart';
 import 'package:mongo_dart/mongo_dart.dart' show Db;
@@ -74,7 +76,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         title: Text(
-          'Bonjour.',
+          '${AppLocale.words[9].getString(context)}',
           style: TextStyle(
               color: Color.fromRGBO(0, 78, 131, 10), fontFamily: "Poppins"),
         ),
@@ -103,7 +105,7 @@ class _HomePageState extends State<HomePage> {
                       padding: EdgeInsets.all(10),
                       child: Column(
                         children: [
-                          Text('Notifications'),
+                          Text('${AppLocale.words[3].getString(context)}'),
                           Divider(
                             color: Color.fromARGB(255, 222, 228, 226),
                             thickness: 1,
@@ -120,18 +122,19 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      bottomNavigationBar: BottomNavigationBar(items: [
-        BottomNavigationBarItem(
-          icon: Icon(Icons.home_rounded),
-          label: 'Home',
-        ),
-        BottomNavigationBarItem(
-          icon: GestureDetector(
-              onTap: ToSettings, child: Icon(Icons.settings_rounded)),
-          label: 'Setings',
-          activeIcon: Icon(Icons.settings_rounded),
-        ),
-      ]),
+      // bottomNavigationBar: BottomNavigationBar(items: [
+      //   BottomNavigationBarItem(
+      //     icon: Icon(Icons.home_rounded),
+      //     label: '${AppLocale.words[8].getString(context)}',
+      //   ),
+      //   BottomNavigationBarItem(
+      //     icon: GestureDetector(
+      //         onTap: ToSettings, child: Icon(Icons.settings_rounded)),
+      //     label: '${AppLocale.words[0].getString(context)}',
+      //     activeIcon: Icon(Icons.settings_rounded),
+      //   ),
+      // ]),
+      bottomNavigationBar: GNavBar(),
       body: SafeArea(
         child: Column(
           children: [
@@ -189,7 +192,7 @@ class _HomePageState extends State<HomePage> {
                                 height: 40,
                               ),
                               Text(
-                                'actual percentage :',
+                                '${AppLocale.words[10].getString(context)} :',
                                 style: TextStyle(
                                     fontSize: 30,
                                     color: Color.fromRGBO(0, 78, 131, 10),
@@ -225,7 +228,7 @@ class _HomePageState extends State<HomePage> {
                                 height: 10,
                               ),
                               Text(
-                                'Details :',
+                                '${AppLocale.words[11].getString(context)} :',
                                 style: TextStyle(
                                     fontSize: 50,
                                     color: Color.fromRGBO(0, 78, 131, 10),

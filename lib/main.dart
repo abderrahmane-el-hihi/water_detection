@@ -24,7 +24,6 @@ import 'auth_provider.dart';
 
 import 'package:intl/intl.dart';
 import 'package:intl/message_lookup_by_library.dart';
-import 'l10n/intl.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
