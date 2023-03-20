@@ -19,7 +19,7 @@ import 'mongodb_config/mongo.dart';
 import 'package:flutter/foundation.dart';
 
 class ThemeNotifier extends ChangeNotifier {
-  bool _isDark = true;
+  bool _isDark = false;
 
   bool get isDark => _isDark;
 
@@ -152,16 +152,6 @@ class _SettingsPageState extends State<SettingsPage> {
     );
   }
 
-  void ToSettings() {
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => SettingsPage()));
-  }
-
-  void ToHome() {
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => HomePage()));
-  }
-
   @override
   Widget build(BuildContext context) {
     return Theme(
@@ -180,7 +170,7 @@ class _SettingsPageState extends State<SettingsPage> {
         //     activeIcon: Icon(Icons.settings_rounded),
         //   ),
         // ]),
-        bottomNavigationBar: GNavBar(),
+        //bottomNavigationBar: GNavBar(),
         body: SingleChildScrollView(
           child: SafeArea(
             child: Center(

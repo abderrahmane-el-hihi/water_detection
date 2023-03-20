@@ -99,7 +99,7 @@ class _TestState extends State<Test> {
           title: Text('Dark Mode Switch'),
           elevation: 0,
         ),
-        bottomNavigationBar: GNavBar(),
+        //bottomNavigationBar: GNavBar(),
         body: Center(
           child: ElevatedButton(
             child: const Text('English'),

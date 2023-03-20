@@ -2,16 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localization/flutter_localization.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:waterdetection/settingspage.dart';
+import '../Home2page.dart';
+import '../homepage.dart';
 
-class GNavBar extends StatefulWidget {
-  const GNavBar({super.key});
+class GNavBar extends StatelessWidget {
+  void Function(int)? onTabChange;
+  GNavBar({super.key, this.onTabChange});
 
-  @override
-  State<GNavBar> createState() => _GNavBarState();
-}
-
-class _GNavBarState extends State<GNavBar> {
-  int _selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
     return GNav(
@@ -26,6 +23,8 @@ class _GNavBarState extends State<GNavBar> {
       tabBackgroundColor: Color.fromRGBO(0, 79, 131, 0.164),
       color: Color.fromARGB(255, 143, 143, 143),
       mainAxisAlignment: MainAxisAlignment.spaceAround,
+      // selectedIndex: _selectedIndex,
+      onTabChange: (value) => onTabChange!(value),
       tabs: [
         GButton(
           icon: Icons.home_rounded,
@@ -38,12 +37,6 @@ class _GNavBarState extends State<GNavBar> {
           text: 'Settings',
         ),
       ],
-      selectedIndex: _selectedIndex,
-      onTabChange: (index) {
-        setState(() {
-          _selectedIndex = index;
-        });
-      },
     );
   }
 }

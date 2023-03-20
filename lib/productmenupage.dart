@@ -3,6 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localization/flutter_localization.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:waterdetection/components/gnavbar.dart';
+import 'package:waterdetection/home2page.dart';
 import 'package:waterdetection/homepage.dart';
 import 'package:waterdetection/serianumpage.dart';
 import 'package:waterdetection/settingspage.dart';
@@ -35,7 +37,7 @@ class _ProductMenuPageState extends State<ProductMenuPage> {
   void ToHome() {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => HomePage()),
+      MaterialPageRoute(builder: (context) => SwitchPages()),
     );
   }
 
@@ -43,6 +45,7 @@ class _ProductMenuPageState extends State<ProductMenuPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
         backgroundColor: Colors.white,
         leading: IconButton(
           onPressed: () {

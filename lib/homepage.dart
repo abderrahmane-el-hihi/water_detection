@@ -63,6 +63,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
+        elevation: 0,
         leading: IconButton(
           onPressed: () {
             Navigator.push(
@@ -134,7 +135,7 @@ class _HomePageState extends State<HomePage> {
       //     activeIcon: Icon(Icons.settings_rounded),
       //   ),
       // ]),
-      bottomNavigationBar: GNavBar(),
+      //bottomNavigationBar: GNavBar(),
       body: SafeArea(
         child: Column(
           children: [

@@ -4,6 +4,7 @@ import 'package:flutter/src/widgets/basic.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_localization/flutter_localization.dart';
+import 'package:waterdetection/components/gnavbar.dart';
 import 'package:waterdetection/settingspage.dart';
 
 import 'components/graph_bar/graphbar.dart';
@@ -35,6 +36,7 @@ class _DetailsPageState extends State<DetailsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
         backgroundColor: Colors.white,
         leading: IconButton(
           onPressed: () {
@@ -98,18 +100,6 @@ class _DetailsPageState extends State<DetailsPage> {
           ),
         ],
       ),
-      bottomNavigationBar: BottomNavigationBar(items: [
-        BottomNavigationBarItem(
-          icon: GestureDetector(onTap: ToHome, child: Icon(Icons.home_rounded)),
-          label: 'Home',
-        ),
-        BottomNavigationBarItem(
-          icon: GestureDetector(
-              onTap: ToSettings, child: Icon(Icons.settings_rounded)),
-          label: 'Setings',
-          activeIcon: Icon(Icons.settings_rounded),
-        ),
-      ]),
       body: SafeArea(
         child: Column(
           children: [
