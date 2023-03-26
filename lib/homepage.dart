@@ -123,19 +123,6 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      // bottomNavigationBar: BottomNavigationBar(items: [
-      //   BottomNavigationBarItem(
-      //     icon: Icon(Icons.home_rounded),
-      //     label: '${AppLocale.words[8].getString(context)}',
-      //   ),
-      //   BottomNavigationBarItem(
-      //     icon: GestureDetector(
-      //         onTap: ToSettings, child: Icon(Icons.settings_rounded)),
-      //     label: '${AppLocale.words[0].getString(context)}',
-      //     activeIcon: Icon(Icons.settings_rounded),
-      //   ),
-      // ]),
-      //bottomNavigationBar: GNavBar(),
       body: SafeArea(
         child: Column(
           children: [
@@ -190,7 +177,7 @@ class _HomePageState extends State<HomePage> {
                           child: Column(
                             children: [
                               SizedBox(
-                                height: 40,
+                                height: 10,
                               ),
                               Text(
                                 '${AppLocale.words[10].getString(context)} :',

@@ -4,6 +4,7 @@ import 'package:flutter/src/widgets/basic.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_localization/flutter_localization.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:waterdetection/components/gnavbar.dart';
 import 'package:waterdetection/settingspage.dart';
 
@@ -100,6 +101,7 @@ class _DetailsPageState extends State<DetailsPage> {
           ),
         ],
       ),
+      bottomNavigationBar: GNavBar(),
       body: SafeArea(
         child: Column(
           children: [
