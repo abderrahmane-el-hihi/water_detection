@@ -157,20 +157,15 @@ class _SettingsPageState extends State<SettingsPage> {
     return Theme(
       data: isDark ? ThemeData.light() : ThemeData.light(),
       child: Scaffold(
-        // bottomNavigationBar: BottomNavigationBar(items: [
-        //   BottomNavigationBarItem(
-        //     icon:
-        //         GestureDetector(onTap: ToHome, child: Icon(Icons.home_rounded)),
-        //     label: 'Home',
-        //   ),
-        //   BottomNavigationBarItem(
-        //     icon: GestureDetector(
-        //         onTap: ToSettings, child: Icon(Icons.settings_rounded)),
-        //     label: 'Settings',
-        //     activeIcon: Icon(Icons.settings_rounded),
-        //   ),
-        // ]),
-        //bottomNavigationBar: GNavBar(),
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          elevation: 0,
+          title: Text(
+            '${AppLocale.words[0].getString(context)}',
+            style: TextStyle(
+                color: Color.fromRGBO(0, 78, 131, 10), fontFamily: "Poppins"),
+          ),
+        ),
         body: SingleChildScrollView(
           child: SafeArea(
             child: Center(
@@ -180,43 +175,11 @@ class _SettingsPageState extends State<SettingsPage> {
                     height: 10,
                   ),
                   Container(
-                    margin: EdgeInsets.symmetric(horizontal: 40),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        IconButton(
-                          //button pour retourner au home page
-                          onPressed: (() {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => HomePage()));
-                          }),
-                          icon: Icon(Icons.arrow_back_rounded), iconSize: 32,
-                        ),
-                        Padding(
-                          //padding: EdgeInsets.only(left: 30, right: 30),
-                          padding: EdgeInsets.symmetric(horizontal: 85),
-                          child: Text(
-                            //Settings Text
-                            '${AppLocale.words[0].getString(context)}',
-
-                            style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: "Poppins"),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Container(
                     //padding: EdgeInsets.only(right: 150),
                     height: 70,
-                    width: 290,
+                    //width: 240,
+                    width: MediaQuery.of(context).size.width * 0.7,
+
                     //color: Colors.black,
 
                     decoration: BoxDecoration(
@@ -516,7 +479,9 @@ class _SettingsPageState extends State<SettingsPage> {
                   GestureDetector(
                     onTap: SignOut,
                     child: Container(
-                      width: 120,
+                      //width: 120,
+                      width: MediaQuery.of(context).size.width * 0.5,
+
                       height: 50,
                       decoration: BoxDecoration(
                         color: Color.fromARGB(0, 255, 255, 255),
@@ -532,7 +497,6 @@ class _SettingsPageState extends State<SettingsPage> {
                           style: TextStyle(
                             color: Color.fromRGBO(0, 78, 131, 10),
                           ),
-                          //GoogleFonts.poppins(color: Color.fromRGBO(121, 158, 255, 1),),
                         ),
                       ),
                     ),

@@ -114,6 +114,8 @@ class _ProductMenuPageState extends State<ProductMenuPage> {
                               return Column(
                                 children: [
                                   Container(
+                                    margin:
+                                        EdgeInsets.symmetric(horizontal: 10),
                                     decoration: BoxDecoration(
                                       color: Color.fromARGB(255, 255, 255, 255),
                                       border: Border.all(

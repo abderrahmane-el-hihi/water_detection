@@ -20,6 +20,7 @@ class GNavBar extends StatelessWidget {
 
       duration: Duration(milliseconds: 400),
       //tabBackgroundColor: Colors.grey[100]!,
+      curve: Curves.easeInOut,
       tabBackgroundColor: Color.fromRGBO(0, 79, 131, 0.164),
       color: Color.fromARGB(255, 143, 143, 143),
       mainAxisAlignment: MainAxisAlignment.spaceAround,
