@@ -106,7 +106,6 @@ class _ProductMenuPageState extends State<ProductMenuPage> {
                       }
 
                       int quantite = snapshot.data![0]["quantite"];
-
                       return Expanded(
                         child: ListView.builder(
                             itemCount: quantite,
