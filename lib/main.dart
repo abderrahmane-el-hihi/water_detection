@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+//import 'package:hive/hive.dart';
+//import 'package:hive_flutter/hive_flutter.dart';
 import 'package:splashscreen/splashscreen.dart';
 import 'package:waterdetection/auth_page.dart';
 import 'package:waterdetection/homepage.dart';
@@ -57,6 +59,7 @@ void main() async {
   // });
 
   //to here
+  //await Hive.initFlutter();
   runApp(const MyApp());
 }
 
