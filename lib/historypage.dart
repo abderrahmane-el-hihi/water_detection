@@ -6,6 +6,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_localization/flutter_localization.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:waterdetection/components/gnavbar.dart';
+import 'package:waterdetection/home2page.dart';
 import 'package:waterdetection/settingspage.dart';
 
 import 'components/graph_bar/graphbar.dart';
@@ -21,16 +22,6 @@ class DetailsPage extends StatefulWidget {
 }
 
 class _DetailsPageState extends State<DetailsPage> {
-  void ToSettings() {
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => SettingsPage()));
-  }
-
-  void ToHome() {
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => HomePage()));
-  }
-
   List<double> SummaryWaterDb = [];
 
   @override
@@ -43,7 +34,7 @@ class _DetailsPageState extends State<DetailsPage> {
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => HomePage()),
+              MaterialPageRoute(builder: (context) => SwitchPages()),
             );
           },
           icon: Icon(
@@ -53,24 +44,12 @@ class _DetailsPageState extends State<DetailsPage> {
           ),
         ),
         title: Text(
-          '${AppLocale.words[5].getString(context)}',
+          '${AppLocale.words[15].getString(context)}',
           style: TextStyle(
             color: Color.fromRGBO(0, 78, 131, 10),
           ),
         ),
         actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => DetailsPage()),
-              );
-            },
-            icon: Icon(
-              Icons.calendar_month_rounded,
-              color: Color.fromRGBO(0, 78, 131, 10),
-            ),
-          ),
           IconButton(
             onPressed: () {
               showModalBottomSheet(
@@ -101,7 +80,6 @@ class _DetailsPageState extends State<DetailsPage> {
           ),
         ],
       ),
-      bottomNavigationBar: GNavBar(),
       body: SafeArea(
         child: Column(
           children: [
