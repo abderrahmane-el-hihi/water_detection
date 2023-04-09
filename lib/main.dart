@@ -1,5 +1,8 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 //import 'package:hive/hive.dart';
 //import 'package:hive_flutter/hive_flutter.dart';
@@ -18,7 +21,7 @@ import 'package:waterdetection/testanimation.dart';
 import 'package:waterdetection/testpage.dart';
 import 'components/customtheme.dart';
 import 'firebase_options.dart';
-//import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_localization/flutter_localization.dart';
 import 'package:provider/provider.dart';
@@ -35,28 +38,28 @@ void main() async {
 
   await MongodbConf.Connect();
   //if not work delete from here
-  // FirebaseMessaging messaging = FirebaseMessaging.instance;
-  // NotificationSettings settings = await messaging.requestPermission(
-  //   alert: true,
-  //   announcement: false,
-  //   badge: true,
-  //   carPlay: false,
-  //   criticalAlert: false,
-  //   provisional: false,
-  //   sound: true,
-  // );
-  // print('User granted permission: ${settings.authorizationStatus}');
-  // FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-  //   print('Got a message whilst in the foreground!');
-  //   print('Message data: ${message.data}');
-  //   if (message.notification != null) {
-  //     print('Message also contained a notification: ${message.notification}');
-  //   }
-  // });
-  // await FirebaseAnalytics.instance.setUserProperty({
-  //   name: 'favorite_food',
-  //   value: favoriteFood,
-  // });
+  FirebaseMessaging messaging = FirebaseMessaging.instance;
+  NotificationSettings settings = await messaging.requestPermission(
+    alert: true,
+    announcement: false,
+    badge: true,
+    carPlay: false,
+    criticalAlert: false,
+    provisional: false,
+    sound: false,
+  );
+  print('User granted permission: ${settings.authorizationStatus}');
+  FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+    print('Got a message whilst in the foreground!');
+    print('Message data: ${message.data}');
+    if (message.notification != null) {
+      print('Message also contained a notification: ${message.notification}');
+    }
+  });
+  await FirebaseAnalytics.instance.setUserProperty(
+    name: 'favorite_food',
+    value: 'favoriteFood',
+  );
 
   //to here
   //await Hive.initFlutter();
@@ -123,20 +126,20 @@ class _MyAppState extends State<MyApp> {
           //home: SerialPage(),
           //home: ProductMenuPage(),
           //home: MyWidget(),
-          home: Test(),
+          // home: Test(),
           //splash screen
-          // home: SplashScreen(
-          //   seconds: 3,
-          //   navigateAfterSeconds: AuthPage(),
-          //   // title: Text(
-          //   //   'Water Detection App',
-          //   //   style: TextStyle(
-          //   //     color: Color.fromRGBO(0, 78, 131, 10),
-          //   //   ),
-          //   // ),
-          //   //image: Image.asset('assets/social_svg/codrops.svg'),
-          //   photoSize: 100,
-          // ),
+          home: SplashScreen(
+            seconds: 3,
+            navigateAfterSeconds: AuthPage(),
+            // title: Text(
+            //   'Water Detection App',
+            //   style: TextStyle(
+            //     color: Color.fromRGBO(0, 78, 131, 10),
+            //   ),
+            // ),
+            //image: Image.asset('assets/social_svg/codrops.svg'),
+            photoSize: 100,
+          ),
           //home: WaterDrop(),
           //home: FingerprintSwitch(),
           //home: StartScreen(),

@@ -14,7 +14,15 @@
       },
       "oauth_client": [
         {
-          "client_id": "706464015138-jj4ksf4jopo4m4fhbf1qtcij4r56hnl8.apps.googleusercontent.com",
+          "client_id": "706464015138-gm2nl9hel6r3vh2tbnesf44td3g0rnve.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.waterdetection",
+            "certificate_hash": "4cf5e8dddba747e86c5a4f41b71ec629519e4f92"
+          }
+        },
+        {
+          "client_id": "706464015138-7ir15snrk241pb9hcfodaca8m9mnp54m.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -27,8 +35,15 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "706464015138-jj4ksf4jopo4m4fhbf1qtcij4r56hnl8.apps.googleusercontent.com",
+              "client_id": "706464015138-7ir15snrk241pb9hcfodaca8m9mnp54m.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "706464015138-81clmkcdf9v6183j0j3sr8mfgqvo5ktk.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.waterdetection"
+              }
             }
           ]
         }

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">WaterDetection</string>
+
+    <string name="facebook_name">WaterDetection</string>
+    <string name="facebook_app_id">1716254932101640</string>
+    <string name="fb_login_protocol_scheme">fb9637f71caea2c058692b9c13cdcb0699</string>
+
+</resources>

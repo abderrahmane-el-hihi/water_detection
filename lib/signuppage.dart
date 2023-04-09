@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_localization/flutter_localization.dart';
 import 'package:waterdetection/components/g_f_button.dart';
 import 'package:waterdetection/components/l_button.dart';
@@ -38,6 +39,19 @@ class _SignUpPageState extends State<SignUpPage> {
   bool _isPressed = false;
 
   void SignIn() {}
+
+  Future<UserCredential> signInWithFacebook() async {
+    // Trigger the sign-in flow
+    final LoginResult loginResult = await FacebookAuth.instance.login();
+
+    // Create a credential from the access token
+    final OAuthCredential facebookAuthCredential =
+        FacebookAuthProvider.credential(loginResult.accessToken!.token);
+
+    // Once signed in, return the UserCredential
+    return FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
+  }
+
   int i = 0;
 
   late Map<String, dynamic> data = {
@@ -150,7 +164,9 @@ class _SignUpPageState extends State<SignUpPage> {
 
                       //facebook
                       G_F_Button(
-                        onTap: SignIn,
+                        onTap: () async {
+                          await signInWithFacebook();
+                        },
                         //text: 'Facebook',
                         svgpath: 'assets/social_svg/facebook-svgrepo-com.svg',
                         h: 50,
