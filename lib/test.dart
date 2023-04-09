@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -8,6 +10,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 import 'package:mongo_dart/mongo_dart.dart' show Db;
+import 'package:provider/provider.dart';
 import 'package:waterdetection/components/text_field.dart';
 import 'package:waterdetection/services/local_notif_service.dart';
 import 'package:flutter_localization/flutter_localization.dart';
@@ -43,6 +46,18 @@ class _TestState extends State<Test> {
 
   bool isDarkMode = false;
   final FlutterLocalization localization = FlutterLocalization.instance;
+
+  GetProfileImage() {
+    if (FirebaseAuth.instance.currentUser?.photoURL == null) {
+      return Image.network(
+        FirebaseAuth.instance.currentUser!.photoURL!,
+        height: 100,
+        width: 100,
+      );
+    } else {
+      return Icon(Icons.account_circle_rounded);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -101,11 +116,20 @@ class _TestState extends State<Test> {
         ),
         //bottomNavigationBar: GNavBar(),
         body: Center(
-          child: ElevatedButton(
-            child: const Text('English'),
-            onPressed: () {
-              localization.translate('en');
-            },
+          child: Column(
+            children: [
+              // Padding(
+              //   padding: EdgeInsets.all(10),
+              //   child: Provider.of(context).Test.GetProfileImage(),
+              // ),
+              ElevatedButton(onPressed: (() {}), child: Text("hello")),
+              ElevatedButton(
+                child: const Text('English'),
+                onPressed: () {
+                  localization.translate('en');
+                },
+              ),
+            ],
           ),
         ),
       ),

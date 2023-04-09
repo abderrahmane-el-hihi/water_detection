@@ -123,20 +123,20 @@ class _MyAppState extends State<MyApp> {
           //home: SerialPage(),
           //home: ProductMenuPage(),
           //home: MyWidget(),
-          //home: Test(),
+          home: Test(),
           //splash screen
-          home: SplashScreen(
-            seconds: 3,
-            navigateAfterSeconds: AuthPage(),
-            // title: Text(
-            //   'Water Detection App',
-            //   style: TextStyle(
-            //     color: Color.fromRGBO(0, 78, 131, 10),
-            //   ),
-            // ),
-            //image: Image.asset('assets/social_svg/codrops.svg'),
-            photoSize: 100,
-          ),
+          // home: SplashScreen(
+          //   seconds: 3,
+          //   navigateAfterSeconds: AuthPage(),
+          //   // title: Text(
+          //   //   'Water Detection App',
+          //   //   style: TextStyle(
+          //   //     color: Color.fromRGBO(0, 78, 131, 10),
+          //   //   ),
+          //   // ),
+          //   //image: Image.asset('assets/social_svg/codrops.svg'),
+          //   photoSize: 100,
+          // ),
           //home: WaterDrop(),
           //home: FingerprintSwitch(),
           //home: StartScreen(),

@@ -8,7 +8,6 @@ import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:waterdetection/components/gnavbar.dart';
 import 'package:waterdetection/home2page.dart';
 import 'package:waterdetection/settingspage.dart';
-
 import 'components/graph_bar/graphbar.dart';
 import 'homepage.dart';
 import 'mongodb_config/mongo.dart';
@@ -39,7 +38,6 @@ class _DetailsPageState extends State<DetailsPage> {
           },
           icon: Icon(
             Icons.arrow_back_rounded,
-            //size: 32,
             color: Color.fromRGBO(0, 78, 131, 10),
           ),
         ),
