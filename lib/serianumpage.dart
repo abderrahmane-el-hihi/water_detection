@@ -46,11 +46,20 @@ class _SerialPageState extends State<SerialPage> {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    Icon(
-                      Icons.account_circle,
-                      size: 128,
-                      color: Color.fromRGBO(217, 217, 217, 1),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(100),
+                      child: Image.network(
+                        FirebaseAuth.instance.currentUser!.photoURL!,
+                        fit: BoxFit.cover,
+                        height: 128,
+                        width: 128,
+                      ),
                     ),
+                    // Icon(
+                    //   Icons.account_circle,
+                    //   size: 128,
+                    //   color: Color.fromRGBO(217, 217, 217, 1),
+                    // ),
                     SizedBox(
                       height: 50,
                     ),

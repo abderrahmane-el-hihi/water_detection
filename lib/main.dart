@@ -1,34 +1,17 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 //import 'package:hive/hive.dart';
 //import 'package:hive_flutter/hive_flutter.dart';
 import 'package:splashscreen/splashscreen.dart';
 import 'package:waterdetection/auth_page.dart';
-import 'package:waterdetection/homepage.dart';
-import 'package:waterdetection/loginpage.dart';
 import 'package:waterdetection/mongodb_config/mongo.dart';
-import 'package:waterdetection/productmenupage.dart';
-import 'package:waterdetection/serianumpage.dart';
 import 'package:waterdetection/settingspage.dart';
-import 'package:waterdetection/signuppage.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:waterdetection/test.dart';
-import 'package:waterdetection/testanimation.dart';
-import 'package:waterdetection/testpage.dart';
-import 'components/customtheme.dart';
 import 'firebase_options.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_localization/flutter_localization.dart';
 import 'package:provider/provider.dart';
-import 'auth_provider.dart';
-
-import 'package:intl/intl.dart';
-import 'package:intl/message_lookup_by_library.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

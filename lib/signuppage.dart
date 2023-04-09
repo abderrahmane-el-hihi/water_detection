@@ -165,7 +165,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       //facebook
                       G_F_Button(
                         onTap: () async {
-                          await signInWithFacebook();
+                          //await signInWithFacebook();
                         },
                         //text: 'Facebook',
                         svgpath: 'assets/social_svg/facebook-svgrepo-com.svg',
