@@ -8,6 +8,7 @@ import 'package:waterdetection/auth_page.dart';
 import 'package:waterdetection/mongodb_config/mongo.dart';
 import 'package:waterdetection/settingspage.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:waterdetection/test.dart';
 import 'firebase_options.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_localization/flutter_localization.dart';

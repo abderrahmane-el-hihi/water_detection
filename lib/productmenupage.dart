@@ -6,6 +6,7 @@ import 'package:shimmer/shimmer.dart';
 import 'package:waterdetection/components/gnavbar.dart';
 import 'package:waterdetection/home2page.dart';
 import 'package:waterdetection/homepage.dart';
+import 'package:waterdetection/mongodb_config/firebase_db.dart';
 import 'package:waterdetection/serianumpage.dart';
 import 'package:waterdetection/settingspage.dart';
 
@@ -72,40 +73,17 @@ class _ProductMenuPageState extends State<ProductMenuPage> {
               height: 20,
             ),
             FutureBuilder(
-                future: MongodbConf.GetData("product"),
-                //future: FirebaseFirestore.instance.collection('products').get(),
+                // future: MongodbConf.GetData("product"),
+                // future: Firebase_db().Get_data_Collection_firestore('detector'),
+                future: FirebaseFirestore.instance.collection('detector').get(),
                 builder: (context, AsyncSnapshot snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return Center(
-                      child: Shimmer(
-                        gradient: LinearGradient(
-                          colors: [
-                            Colors.grey.shade200,
-                            Color.fromARGB(255, 143, 143, 143),
-                            Colors.grey.shade200,
-                          ],
-                          stops: [
-                            0.0,
-                            0.5,
-                            1.0,
-                          ],
-                          begin: Alignment.centerLeft,
-                          end: Alignment.centerRight,
-                        ),
-                        child: Text(
-                          'Loading',
-                          style: TextStyle(fontFamily: "Poppins"),
-                        ),
-                      ),
+                      child: CircularProgressIndicator(),
                     );
                   } else {
                     if (snapshot.hasData) {
-                      var totaldata = snapshot.data.length;
-                      if (snapshot.data.length == 0) {
-                        return Text('connection set but there is no data');
-                      }
-
-                      int quantite = snapshot.data![0]["quantite"];
+                      int quantite = snapshot.data.size as int;
                       return Expanded(
                         child: ListView.builder(
                             itemCount: quantite,

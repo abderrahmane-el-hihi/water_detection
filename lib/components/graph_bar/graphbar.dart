@@ -44,7 +44,7 @@ class GraphBar extends StatelessWidget {
                   x: data.x,
                   barRods: [
                     BarChartRodData(
-                      toY: data.y,
+                      toY: data.y.toDouble(),
                       color: Color.fromRGBO(0, 78, 131, 10),
                       width: 20,
                       borderRadius: BorderRadius.circular(4),

@@ -1,22 +1,20 @@
 import 'dart:async';
 import 'dart:ui';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import 'package:waterdetection/homepage.dart';
 import 'package:flutter_localization/flutter_localization.dart';
-import 'components/gnavbar.dart';
+import 'package:waterdetection/mongodb_config/firebase_db.dart';
+
 import 'components/icon_btn_state.dart';
-import 'mongodb_config/mongo.dart';
+
 //listen to the _isdark variable state
-import 'package:flutter/foundation.dart';
 
 class ThemeNotifier extends ChangeNotifier {
   bool _isDark = false;
@@ -108,18 +106,6 @@ class _SettingsPageState extends State<SettingsPage> {
           ),
           actions: <Widget>[
             CupertinoActionSheetAction(
-              child: Text(
-                'Arabic',
-                style: TextStyle(
-                    color: Color.fromRGBO(121, 158, 255, 1),
-                    fontFamily: "Poppins"),
-              ),
-              onPressed: () {
-                Navigator.pop(context, 'translate to arabic');
-                _localization.translate('ar');
-              },
-            ),
-            CupertinoActionSheetAction(
               child: Text('French',
                   style: TextStyle(
                       color: Color.fromRGBO(121, 158, 255, 1),
@@ -151,6 +137,8 @@ class _SettingsPageState extends State<SettingsPage> {
       },
     );
   }
+
+  User? user = FirebaseAuth.instance.currentUser;
 
   @override
   Widget build(BuildContext context) {
@@ -190,36 +178,30 @@ class _SettingsPageState extends State<SettingsPage> {
                         color: Color.fromRGBO(0, 78, 131, 10),
                       ),
                     ),
-                    child: FutureBuilder(
-                        future: MongodbConf.GetData("compt"),
-                        builder: (context, AsyncSnapshot snapshot) {
-                          if (snapshot.connectionState ==
-                              ConnectionState.waiting) {
-                            return Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text("waiting"),
-                              ],
-                            );
-                          } else if (snapshot.hasData) {
-                            var username = snapshot.data![0]["username"];
-                            return Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  Icons.account_circle,
-                                  size: 32,
-                                  color: Color.fromRGBO(217, 217, 217, 1),
-                                ),
-                                Padding(
-                                    padding: EdgeInsets.only(left: 20),
-                                    child: Text("${username}")),
-                              ],
-                            );
-                          } else {
-                            return Text("there is no data");
-                          }
-                        }),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(100),
+                          child: Image.network(
+                            FirebaseAuth.instance.currentUser!.photoURL!,
+                            fit: BoxFit.cover,
+                            height: 32,
+                            width: 32,
+                          ),
+                        ),
+                        // Icon(
+                        //   Icons.account_circle,
+                        //   size: 32,
+                        //   color: Color.fromRGBO(217, 217, 217, 1),
+                        // ),
+                        Padding(
+                            padding: EdgeInsets.only(left: 20),
+                            child: Text(
+                              "${user?.displayName}",
+                            )),
+                      ],
+                    ),
                   ),
                   SizedBox(
                     height: 15,

@@ -8,6 +8,7 @@ import 'package:flutter_localization/flutter_localization.dart';
 import 'package:liquid_progress_indicator/liquid_progress_indicator.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:waterdetection/components/graph_bar/graphbar.dart';
+import 'package:waterdetection/mongodb_config/firebase_db.dart';
 import 'package:waterdetection/productmenupage.dart';
 import 'package:waterdetection/settingspage.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
@@ -55,7 +56,7 @@ class _HomePageState extends State<HomePage> {
         context, MaterialPageRoute(builder: (context) => SettingsPage()));
   }
 
-  List<double> SummaryWaterDb = [];
+  List SummaryWaterDb = [];
   List<Map<String, dynamic>> l = [];
 
   @override
@@ -127,46 +128,21 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           children: [
             FutureBuilder(
-                future: MongodbConf.GetData("water_tank"),
+                future: FirebaseFirestore.instance
+                    .collection('water_tank')
+                    .doc('tank1')
+                    .get(),
                 builder: (context, AsyncSnapshot snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return Center(
-                      child: Shimmer(
-                        gradient: LinearGradient(
-                          colors: [
-                            Colors.grey.shade200,
-                            Color.fromARGB(255, 143, 143, 143),
-                            Colors.grey.shade200,
-                          ],
-                          stops: [
-                            0.0,
-                            0.5,
-                            1.0,
-                          ],
-                          begin: Alignment.centerLeft,
-                          end: Alignment.centerRight,
-                        ),
-                        child: Text(
-                          'Loading',
-                          style:
-                              TextStyle(fontSize: 40.0, fontFamily: "Poppins"),
-                        ),
-                      ),
+                      //child: Text('Loading',style: TextStyle(fontSize: 40.0, fontFamily: "Poppins"),),
+                      child: CircularProgressIndicator(),
                     );
                   } else {
                     if (snapshot.hasData) {
-                      var totaldata = snapshot.data.length;
-                      if (snapshot.data.length == 0) {
-                        return Text('connection set but there is no data');
-                      }
-                      print("total data" + totaldata.toString());
-                      int p = snapshot.data![0]["percentage"];
-                      l.clear();
-                      for (var i = 0; i < snapshot.data.length; i++) {
-                        l.add(snapshot.data![0]);
-                      }
-                      print(l.toString());
-                      if (snapshot.data![0]["percentage"] <= 20) {
+                      int p = snapshot.data!["percentage"];
+                      print(p);
+                      if (snapshot.data!["percentage"] <= 20) {
                         Notif.showBigTextNotification(
                             title: "Water detetction",
                             body: "your water tank percentage is about $p%",
@@ -237,38 +213,24 @@ class _HomePageState extends State<HomePage> {
                   }
                 }),
             FutureBuilder(
-                future: MongodbConf.GetData("historique"),
-                builder: (context, AsyncSnapshot snapshot) {
+                //future: Firebase_db().Get_data_2Collection_firestore('history'),
+                future: FirebaseFirestore.instance.collection('history').get(),
+                builder: (context,
+                    AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>>
+                        snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return Center(
-                      child: Shimmer(
-                        gradient: LinearGradient(
-                          colors: [
-                            Colors.grey.shade200,
-                            Color.fromARGB(255, 143, 143, 143),
-                            Colors.grey.shade200,
-                          ],
-                          stops: [
-                            0.0,
-                            0.5,
-                            1.0,
-                          ],
-                          begin: Alignment.centerLeft,
-                          end: Alignment.centerRight,
-                        ),
-                        child: Text(
-                          'Loading',
-                          style: TextStyle(fontSize: 40.0),
-                        ),
-                      ),
+                      child: CircularProgressIndicator(),
+                      //child: Text('Loading',style: TextStyle(fontSize: 40.0),),
                     );
                   } else if (snapshot.hasData) {
                     SummaryWaterDb.clear();
-                    for (var i = 0; i < snapshot.data.length; i++) {
-                      SummaryWaterDb.add(snapshot.data![i]["available_capa"]);
+                    List<QueryDocumentSnapshot<Map<String, dynamic>>>
+                        documents = snapshot.data!.docs;
+                    for (var i = 0; i < snapshot.data!.size; i++) {
+                      SummaryWaterDb.add(documents[i].data()['available_capa']);
                     }
                     print(SummaryWaterDb);
-
                     return Column(
                       children: [
                         Center(
@@ -310,19 +272,18 @@ Path CylinderPath() {
   return path;
 }
 
-
 // CircularPercentIndicator(
-                //   radius: 300,
-                //   lineWidth: 20,
-                //   progressColor: Color.fromRGBO(0, 78, 131, 10),
-                //   backgroundColor: Color.fromARGB(255, 189, 189, 189),
-                //   circularStrokeCap: CircularStrokeCap.round,
-                //   percent: 0.7,
-                //   center: Text(
-                //     '70%',
-                //     style: TextStyle(
-                //       fontSize: 50,
-                //       color: Color.fromRGBO(0, 78, 131, 10),
-                //     ),
-                //   ),
-                // ),
+//   radius: 300,
+//   lineWidth: 20,
+//   progressColor: Color.fromRGBO(0, 78, 131, 10),
+//   backgroundColor: Color.fromARGB(255, 189, 189, 189),
+//   circularStrokeCap: CircularStrokeCap.round,
+//   percent: 0.7,
+//   center: Text(
+//     '70%',
+//     style: TextStyle(
+//       fontSize: 50,
+//       color: Color.fromRGBO(0, 78, 131, 10),
+//     ),
+//   ),
+// ),

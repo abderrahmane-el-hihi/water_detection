@@ -1,13 +1,13 @@
 import 'package:waterdetection/components/graph_bar/indiv_bar.dart';
 
 class BarData {
-  final double MonWater;
-  final double TueWater;
-  final double WedWater;
-  final double ThuWater;
-  final double FriWater;
-  final double SatWater;
-  final double SunWater;
+  final int MonWater;
+  final int TueWater;
+  final int WedWater;
+  final int ThuWater;
+  final int FriWater;
+  final int SatWater;
+  final int SunWater;
   BarData(
       {required this.MonWater,
       required this.TueWater,

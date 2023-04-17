@@ -35,6 +35,8 @@ class _SerialPageState extends State<SerialPage> {
     );
   }
 
+  User? user = FirebaseAuth.instance.currentUser;
+
   //////////////////////// ========== the page should be dynamic bsed on firestore db  ========== \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
   @override
   Widget build(BuildContext context) {
@@ -63,30 +65,11 @@ class _SerialPageState extends State<SerialPage> {
                     SizedBox(
                       height: 50,
                     ),
-                    FutureBuilder(
-                        future: MongodbConf.GetData("compt"),
-                        builder: (context, AsyncSnapshot snapshot) {
-                          if (snapshot.connectionState ==
-                              ConnectionState.waiting) {
-                            return Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  "waiting",
-                                  style: TextStyle(fontFamily: "Poppins"),
-                                ),
-                              ],
-                            );
-                          } else if (snapshot.hasData) {
-                            var username = snapshot.data![0]["username"];
-                            return Text(
-                              "${username}",
-                              style: TextStyle(fontFamily: "Poppins"),
-                            );
-                          } else {
-                            return Text("there is no data");
-                          }
-                        }),
+
+                    Text(
+                      '${user?.displayName}',
+                      style: TextStyle(fontFamily: "Poppins"),
+                    ),
                     SizedBox(
                       height: 50,
                     ),

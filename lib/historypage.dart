@@ -1,17 +1,10 @@
-import 'package:flutter/cupertino.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/basic.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_localization/flutter_localization.dart';
-import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:waterdetection/components/gnavbar.dart';
+
 import 'package:waterdetection/home2page.dart';
 import 'package:waterdetection/settingspage.dart';
 import 'components/graph_bar/graphbar.dart';
-import 'homepage.dart';
-import 'mongodb_config/mongo.dart';
-import 'package:shimmer/shimmer.dart';
 
 class DetailsPage extends StatefulWidget {
   const DetailsPage({super.key});
@@ -21,7 +14,7 @@ class DetailsPage extends StatefulWidget {
 }
 
 class _DetailsPageState extends State<DetailsPage> {
-  List<double> SummaryWaterDb = [];
+  List SummaryWaterDb = [];
 
   @override
   Widget build(BuildContext context) {
@@ -86,33 +79,20 @@ class _DetailsPageState extends State<DetailsPage> {
             ),
             Center(
               child: FutureBuilder(
-                  future: MongodbConf.GetData("historique"),
-                  builder: (context, AsyncSnapshot snapshot) {
+                  future:
+                      FirebaseFirestore.instance.collection('history').get(),
+                  builder: (context,
+                      AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>>
+                          snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
-                      return Shimmer(
-                        gradient: LinearGradient(
-                          colors: [
-                            Colors.grey.shade200,
-                            Color.fromARGB(255, 143, 143, 143),
-                            Colors.grey.shade200,
-                          ],
-                          stops: [
-                            0.0,
-                            0.5,
-                            1.0,
-                          ],
-                          begin: Alignment.centerLeft,
-                          end: Alignment.centerRight,
-                        ),
-                        child: Text(
-                          'Loading',
-                          style: TextStyle(fontSize: 40.0),
-                        ),
-                      );
+                      return CircularProgressIndicator();
                     } else if (snapshot.hasData) {
                       SummaryWaterDb.clear();
-                      for (var i = 0; i < snapshot.data.length; i++) {
-                        SummaryWaterDb.add(snapshot.data![i]["available_capa"]);
+                      List<QueryDocumentSnapshot<Map<String, dynamic>>>
+                          documents = snapshot.data!.docs;
+                      for (var i = 0; i < snapshot.data!.size; i++) {
+                        SummaryWaterDb.add(
+                            documents[i].data()['available_capa']);
                       }
                       print(SummaryWaterDb);
 
