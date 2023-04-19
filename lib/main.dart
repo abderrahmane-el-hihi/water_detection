@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 //import 'package:hive_flutter/hive_flutter.dart';
 import 'package:splashscreen/splashscreen.dart';
 import 'package:waterdetection/auth_page.dart';
-import 'package:waterdetection/mongodb_config/mongo.dart';
+
 import 'package:waterdetection/settingspage.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:waterdetection/test.dart';

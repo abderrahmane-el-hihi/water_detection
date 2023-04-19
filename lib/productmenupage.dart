@@ -10,8 +10,6 @@ import 'package:waterdetection/mongodb_config/firebase_db.dart';
 import 'package:waterdetection/serianumpage.dart';
 import 'package:waterdetection/settingspage.dart';
 
-import 'mongodb_config/mongo.dart';
-
 class ProductMenuPage extends StatefulWidget {
   ProductMenuPage({super.key});
 

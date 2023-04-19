@@ -8,11 +8,6 @@ import 'package:waterdetection/loginpage.dart';
 import 'package:waterdetection/productmenupage.dart';
 import 'package:waterdetection/settingspage.dart';
 
-import 'package:waterdetection/signuppage.dart';
-
-import 'components/text_field.dart';
-import 'mongodb_config/mongo.dart';
-
 class SerialPage extends StatefulWidget {
   SerialPage({super.key});
 

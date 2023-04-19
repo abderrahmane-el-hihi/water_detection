@@ -7,7 +7,7 @@ import 'package:waterdetection/components/text_field.dart';
 import 'package:waterdetection/loginpage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:waterdetection/mongodb_config/firebase_db.dart';
-import 'package:waterdetection/mongodb_config/mongo.dart';
+
 import 'package:waterdetection/settingspage.dart';
 
 class SignUpPage extends StatefulWidget {

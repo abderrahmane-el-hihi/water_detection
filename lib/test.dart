@@ -2,21 +2,14 @@ import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
-import 'package:mongo_dart/mongo_dart.dart' show Db;
-import 'package:provider/provider.dart';
-import 'package:waterdetection/components/text_field.dart';
 import 'package:waterdetection/mongodb_config/firebase_db.dart';
 import 'package:waterdetection/services/local_notif_service.dart';
 import 'package:flutter_localization/flutter_localization.dart';
-import 'components/gnavbar.dart';
-import "mongodb_config/mongo.dart";
 
 class Test extends StatefulWidget {
   Test({super.key});
