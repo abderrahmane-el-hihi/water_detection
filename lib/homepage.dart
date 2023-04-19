@@ -18,7 +18,6 @@ import 'components/icon_btn_state.dart';
 import 'historypage.dart';
 import 'package:mongo_dart/mongo_dart.dart' show Db;
 
-import 'mongodb_config/mongo.dart';
 import 'services/local_notif_service.dart';
 
 class HomePage extends StatefulWidget {

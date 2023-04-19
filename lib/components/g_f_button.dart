@@ -40,7 +40,9 @@ class G_F_Button extends StatelessWidget {
                 child: Text(
                   text,
                   style: TextStyle(
-                      color: Color.fromARGB(255, 0, 0, 0), fontSize: 12),
+                      color: Color.fromRGBO(179, 179, 179, 1),
+                      fontSize: 16,
+                      fontFamily: "Poppins"),
                 ),
               ),
             ],
