@@ -27,14 +27,6 @@ class _ProductMenuPageState extends State<ProductMenuPage> {
 
   List<Map<String, dynamic>> Data = [];
 
-  Future<void> getData() async {
-    final data = await MongodbConf.GetData("product");
-
-    setState(() {
-      Data = data;
-    });
-  }
-
   void ToHome() {
     Navigator.push(
       context,

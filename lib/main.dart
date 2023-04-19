@@ -20,7 +20,6 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  await MongodbConf.Connect();
   //if not work delete from here
   FirebaseMessaging messaging = FirebaseMessaging.instance;
   NotificationSettings settings = await messaging.requestPermission(

@@ -138,10 +138,19 @@ class _SettingsPageState extends State<SettingsPage> {
     );
   }
 
-  User? user = FirebaseAuth.instance.currentUser;
+  bool isUsingGmail(User user) {
+    List<UserInfo> providerData = user.providerData;
+    for (UserInfo userInfo in providerData) {
+      if (userInfo.providerId.contains('google.com')) {
+        return true;
+      }
+    }
+    return false;
+  }
 
   @override
   Widget build(BuildContext context) {
+    User? user = FirebaseAuth.instance.currentUser;
     return Theme(
       data: isDark ? ThemeData.light() : ThemeData.light(),
       child: Scaffold(
@@ -180,21 +189,23 @@ class _SettingsPageState extends State<SettingsPage> {
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(100),
-                          child: Image.network(
-                            FirebaseAuth.instance.currentUser!.photoURL!,
-                            fit: BoxFit.cover,
-                            height: 32,
-                            width: 32,
-                          ),
-                        ),
-                        // Icon(
-                        //   Icons.account_circle,
-                        //   size: 32,
-                        //   color: Color.fromRGBO(217, 217, 217, 1),
-                        // ),
+                      children: <Widget>[
+                        if (user != null)
+                          !isUsingGmail(user)
+                              ? Icon(
+                                  Icons.account_circle,
+                                  size: 32,
+                                  color: Color.fromRGBO(217, 217, 217, 1),
+                                )
+                              : ClipRRect(
+                                  borderRadius: BorderRadius.circular(100),
+                                  child: Image.network(
+                                    user!.photoURL!,
+                                    fit: BoxFit.cover,
+                                    height: 32,
+                                    width: 32,
+                                  ),
+                                ),
                         Padding(
                             padding: EdgeInsets.only(left: 20),
                             child: Text(

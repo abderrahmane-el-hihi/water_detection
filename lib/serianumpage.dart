@@ -21,10 +21,9 @@ class SerialPage extends StatefulWidget {
 }
 
 class _SerialPageState extends State<SerialPage> {
-  //serial number controller
   final serialcontroller = TextEditingController();
   bool _isPressed = false;
-  //submit method
+
   void Submit() {
     setState(() {
       _isPressed = !_isPressed;
@@ -35,11 +34,21 @@ class _SerialPageState extends State<SerialPage> {
     );
   }
 
-  User? user = FirebaseAuth.instance.currentUser;
+  bool isUsingGmail(User user) {
+    List<UserInfo> providerData = user.providerData;
+    for (UserInfo userInfo in providerData) {
+      if (userInfo.providerId.contains('google.com')) {
+        print('${user!.displayName} is using gmail');
+        return true;
+      }
+    }
+    return false;
+  }
 
   //////////////////////// ========== the page should be dynamic bsed on firestore db  ========== \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
   @override
   Widget build(BuildContext context) {
+    User? user = FirebaseAuth.instance.currentUser;
     return Scaffold(
       body: Scaffold(
         body: Stack(
@@ -47,25 +56,26 @@ class _SerialPageState extends State<SerialPage> {
             Center(
               child: SingleChildScrollView(
                 child: Column(
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(100),
-                      child: Image.network(
-                        FirebaseAuth.instance.currentUser!.photoURL!,
-                        fit: BoxFit.cover,
-                        height: 128,
-                        width: 128,
-                      ),
-                    ),
-                    // Icon(
-                    //   Icons.account_circle,
-                    //   size: 128,
-                    //   color: Color.fromRGBO(217, 217, 217, 1),
-                    // ),
+                  children: <Widget>[
+                    if (user != null)
+                      !isUsingGmail(user)
+                          ? Icon(
+                              Icons.account_circle,
+                              size: 128,
+                              color: Color.fromRGBO(217, 217, 217, 1),
+                            )
+                          : ClipRRect(
+                              borderRadius: BorderRadius.circular(100),
+                              child: Image.network(
+                                user!.photoURL!,
+                                fit: BoxFit.cover,
+                                height: 128,
+                                width: 128,
+                              ),
+                            ),
                     SizedBox(
                       height: 50,
                     ),
-
                     Text(
                       '${user?.displayName}',
                       style: TextStyle(fontFamily: "Poppins"),
@@ -81,9 +91,11 @@ class _SerialPageState extends State<SerialPage> {
                         decoration: InputDecoration(
                           suffixIcon: Icon(Icons.qr_code_scanner_rounded),
                           enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15),
                               borderSide: BorderSide(
                                   color: Color.fromRGBO(179, 179, 179, 1))),
                           focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15),
                               borderSide:
                                   BorderSide(color: Colors.grey.shade400)),
                           fillColor: Color.fromARGB(255, 255, 255, 255),

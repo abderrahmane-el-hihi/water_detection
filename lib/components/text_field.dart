@@ -25,8 +25,10 @@ class Text_Field extends StatelessWidget {
           prefixIcon: Icon(preicon),
           prefixIconColor: Color.fromRGBO(0, 78, 131, 10),
           enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(15),
               borderSide: BorderSide(color: Color.fromRGBO(179, 179, 179, 1))),
           focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(15),
               borderSide: BorderSide(color: Colors.grey.shade400)),
           fillColor: Color.fromARGB(255, 255, 255, 255),
           filled: true,

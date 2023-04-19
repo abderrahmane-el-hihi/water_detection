@@ -33,20 +33,14 @@ class _HomePageState extends State<HomePage> {
   List<Map<String, dynamic>> Data = [];
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
+  late String message = '';
 
   @override
   void initState() {
     super.initState();
     Notif.initialize(flutterLocalNotificationsPlugin);
-    timer = Timer.periodic(Duration(seconds: 900), (Timer t) => getData());
-  }
-
-  Future<void> getData() async {
-    final data = await MongodbConf.GetData("water_tank");
-
-    setState(() {
-      Data = data;
-    });
+    // timer = Timer.periodic(Duration(seconds: 900), (Timer t) => getData());
+    addNotification(message);
   }
 
   final C = true;
@@ -54,6 +48,27 @@ class _HomePageState extends State<HomePage> {
   void ToSettings() {
     Navigator.push(
         context, MaterialPageRoute(builder: (context) => SettingsPage()));
+  }
+
+  List<String> notifications = []; // List to store notifications
+
+  // Method to add a notification to the list and schedule a local notification
+  Future<void> addNotification(String notification) async {
+    setState(() {
+      notifications.add(notification);
+    });
+  }
+
+  // Method to remove a notification from the list
+  void removeNotification(String notification) {
+    setState(() {
+      notifications.remove(notification);
+    });
+  }
+
+  Future<void> onSelectNotification(String? payload) async {
+    // Handle notification tap event here
+    print('Notification tapped: $payload');
   }
 
   List SummaryWaterDb = [];
@@ -106,11 +121,28 @@ class _HomePageState extends State<HomePage> {
                       ),
                       padding: EdgeInsets.all(10),
                       child: Column(
-                        children: [
+                        children: <Widget>[
                           Text('${AppLocale.words[3].getString(context)}'),
                           Divider(
                             color: Color.fromARGB(255, 222, 228, 226),
                             thickness: 1,
+                          ),
+                          Expanded(
+                            child: ListView.builder(
+                              itemCount: notifications.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                return ListTile(
+                                  title: Text(notifications[index]),
+                                  trailing: IconButton(
+                                    icon: Icon(Icons.delete),
+                                    onPressed: () {
+                                      // Remove notification when delete button is pressed
+                                      removeNotification(notifications[index]);
+                                    },
+                                  ),
+                                );
+                              },
+                            ),
                           ),
                         ],
                       ),
@@ -147,6 +179,7 @@ class _HomePageState extends State<HomePage> {
                             title: "Water detetction",
                             body: "your water tank percentage is about $p%",
                             fln: flutterLocalNotificationsPlugin);
+                        message = 'your water tank percentage is about $p%';
                       }
                       return SingleChildScrollView(
                         child: Center(

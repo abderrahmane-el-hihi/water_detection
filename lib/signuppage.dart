@@ -6,6 +6,7 @@ import 'package:waterdetection/components/l_button.dart';
 import 'package:waterdetection/components/text_field.dart';
 import 'package:waterdetection/loginpage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:waterdetection/mongodb_config/firebase_db.dart';
 import 'package:waterdetection/mongodb_config/mongo.dart';
 import 'package:waterdetection/settingspage.dart';
 
@@ -23,7 +24,7 @@ class _SignUpPageState extends State<SignUpPage> {
   final passwcontroller = TextEditingController();
   final namecontroller = TextEditingController();
   final lnamecontroller = TextEditingController();
-
+  int i = 0;
   //sign up user method
   void SignUp() async {
     //setstate method
@@ -32,7 +33,8 @@ class _SignUpPageState extends State<SignUpPage> {
     });
     await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: emailcontroller.text, password: passwcontroller.text);
-    MongodbConf.WriteDataToMongo("compt", data);
+    // MongodbConf.WriteDataToMongo("compt", data);
+    Firebase_db().Write_Data("compt", data);
     i++;
   }
 
@@ -51,8 +53,6 @@ class _SignUpPageState extends State<SignUpPage> {
     // Once signed in, return the UserCredential
     return FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
   }
-
-  int i = 0;
 
   late Map<String, dynamic> data = {
     'email': emailcontroller.text,
@@ -155,6 +155,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     children: [
                       //google
                       G_F_Button(
+                        text: 'Google',
                         onTap: SignIn,
                         //text: 'Google',
                         svgpath: 'assets/social_svg/google_svg.svg',
@@ -163,15 +164,15 @@ class _SignUpPageState extends State<SignUpPage> {
                       ),
 
                       //facebook
-                      G_F_Button(
-                        onTap: () async {
-                          //await signInWithFacebook();
-                        },
-                        //text: 'Facebook',
-                        svgpath: 'assets/social_svg/facebook-svgrepo-com.svg',
-                        h: 50,
-                        w: 50,
-                      ),
+                      // G_F_Button(
+                      //   onTap: () async {
+                      //     //await signInWithFacebook();
+                      //   },
+                      //   //text: 'Facebook',
+                      //   svgpath: 'assets/social_svg/facebook-svgrepo-com.svg',
+                      //   h: 50,
+                      //   w: 50,
+                      // ),
                     ],
                   ),
                   SizedBox(height: 25),
