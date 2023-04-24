@@ -33,7 +33,6 @@ class _SerialPageState extends State<SerialPage> {
     List<UserInfo> providerData = user.providerData;
     for (UserInfo userInfo in providerData) {
       if (userInfo.providerId.contains('google.com')) {
-        print('${user!.displayName} is using gmail');
         return true;
       }
     }
@@ -62,7 +61,7 @@ class _SerialPageState extends State<SerialPage> {
                           : ClipRRect(
                               borderRadius: BorderRadius.circular(100),
                               child: Image.network(
-                                user!.photoURL!,
+                                user.photoURL!,
                                 fit: BoxFit.cover,
                                 height: 128,
                                 width: 128,

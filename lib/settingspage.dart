@@ -200,7 +200,7 @@ class _SettingsPageState extends State<SettingsPage> {
                               : ClipRRect(
                                   borderRadius: BorderRadius.circular(100),
                                   child: Image.network(
-                                    user!.photoURL!,
+                                    user.photoURL!,
                                     fit: BoxFit.cover,
                                     height: 32,
                                     width: 32,
