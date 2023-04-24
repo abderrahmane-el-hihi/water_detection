@@ -22,14 +22,16 @@ class Text_Field extends StatelessWidget {
         controller: controller,
         obscureText: obsecureText,
         decoration: InputDecoration(
-          prefixIcon: Icon(preicon),
-          prefixIconColor: Color.fromRGBO(0, 78, 131, 10),
+          prefixIcon: Icon(
+            preicon,
+          ),
           enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(15),
               borderSide: BorderSide(color: Color.fromRGBO(179, 179, 179, 1))),
           focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(15),
-              borderSide: BorderSide(color: Colors.grey.shade400)),
+            borderRadius: BorderRadius.circular(15),
+            borderSide: BorderSide(color: Color.fromRGBO(0, 78, 131, 10)),
+          ),
           fillColor: Color.fromARGB(255, 255, 255, 255),
           filled: true,
           hintText: hinText,

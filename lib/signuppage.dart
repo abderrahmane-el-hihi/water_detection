@@ -20,6 +20,7 @@ class SignUpPage extends StatefulWidget {
 
 class _SignUpPageState extends State<SignUpPage> {
   //text editing controllers
+
   final emailcontroller = TextEditingController();
   final passwcontroller = TextEditingController();
   final namecontroller = TextEditingController();
@@ -67,7 +68,6 @@ class _SignUpPageState extends State<SignUpPage> {
               child: Column(
                 children: [
                   SizedBox(height: 50),
-
                   Text(
                     '${AppLocale.words[17].getString(context)}',
                     style: TextStyle(

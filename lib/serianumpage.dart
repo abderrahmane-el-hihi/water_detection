@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localization/flutter_localization.dart';
@@ -7,6 +8,7 @@ import 'package:waterdetection/homepage.dart';
 import 'package:waterdetection/loginpage.dart';
 import 'package:waterdetection/productmenupage.dart';
 import 'package:waterdetection/settingspage.dart';
+import 'signuppage.dart';
 
 class SerialPage extends StatefulWidget {
   SerialPage({super.key});
@@ -39,7 +41,20 @@ class _SerialPageState extends State<SerialPage> {
     return false;
   }
 
-  //////////////////////// ========== the page should be dynamic bsed on firestore db  ========== \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+  Future<String?> getDocumentNameByEmail(String email) async {
+    QuerySnapshot snapshot = await FirebaseFirestore.instance
+        .collection('compt')
+        .where('email', isEqualTo: email)
+        .get();
+
+    if (snapshot.docs.length > 0) {
+      print(snapshot.docs[0].get('username'));
+      return snapshot.docs[0].get('username');
+    } else {
+      return null;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     User? user = FirebaseAuth.instance.currentUser;
@@ -70,10 +85,15 @@ class _SerialPageState extends State<SerialPage> {
                     SizedBox(
                       height: 50,
                     ),
-                    Text(
-                      '${user?.displayName}',
-                      style: TextStyle(fontFamily: "Poppins"),
-                    ),
+                    isUsingGmail(user!)
+                        ? Text(
+                            '${user.displayName}',
+                            style: TextStyle(fontFamily: "Poppins"),
+                          )
+                        : Text(
+                            '${getDocumentNameByEmail('ahys@test.com')}',
+                            style: TextStyle(fontFamily: "Poppins"),
+                          ),
                     SizedBox(
                       height: 50,
                     ),
