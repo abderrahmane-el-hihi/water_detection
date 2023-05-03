@@ -6,7 +6,7 @@ import 'package:shimmer/shimmer.dart';
 import 'package:waterdetection/components/gnavbar.dart';
 import 'package:waterdetection/home2page.dart';
 import 'package:waterdetection/homepage.dart';
-import 'package:waterdetection/mongodb_config/firebase_db.dart';
+import 'package:waterdetection/Firebasedb_config/firebase_db.dart';
 import 'package:waterdetection/serianumpage.dart';
 import 'package:waterdetection/settingspage.dart';
 

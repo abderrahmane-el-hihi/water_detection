@@ -10,7 +10,7 @@ import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'package:flutter_localization/flutter_localization.dart';
-import 'package:waterdetection/mongodb_config/firebase_db.dart';
+import 'package:waterdetection/Firebasedb_config/firebase_db.dart';
 
 import 'components/icon_btn_state.dart';
 

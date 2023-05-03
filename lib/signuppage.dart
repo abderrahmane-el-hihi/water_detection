@@ -6,7 +6,7 @@ import 'package:waterdetection/components/l_button.dart';
 import 'package:waterdetection/components/text_field.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:waterdetection/mongodb_config/firebase_db.dart';
+import 'package:waterdetection/Firebasedb_config/firebase_db.dart';
 
 import 'package:waterdetection/settingspage.dart';
 

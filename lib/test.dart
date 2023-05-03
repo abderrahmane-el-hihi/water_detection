@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
-import 'package:waterdetection/mongodb_config/firebase_db.dart';
+import 'package:waterdetection/Firebasedb_config/firebase_db.dart';
 import 'package:waterdetection/services/local_notif_service.dart';
 import 'package:flutter_localization/flutter_localization.dart';
 
