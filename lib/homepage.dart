@@ -8,7 +8,7 @@ import 'package:flutter_localization/flutter_localization.dart';
 import 'package:liquid_progress_indicator/liquid_progress_indicator.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:waterdetection/components/graph_bar/graphbar.dart';
-import 'package:waterdetection/mongodb_config/firebase_db.dart';
+import 'package:waterdetection/Firebasedb_config/firebase_db.dart';
 import 'package:waterdetection/productmenupage.dart';
 import 'package:waterdetection/settingspage.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
@@ -17,7 +17,6 @@ import 'components/gnavbar.dart';
 import 'components/icon_btn_state.dart';
 import 'historypage.dart';
 import 'package:mongo_dart/mongo_dart.dart' show Db;
-
 import 'services/local_notif_service.dart';
 
 class HomePage extends StatefulWidget {
