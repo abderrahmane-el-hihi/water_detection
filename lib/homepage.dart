@@ -110,42 +110,68 @@ class _HomePageState extends State<HomePage> {
           ),
           IconButton(
             onPressed: () {
+              // showModalBottomSheet(
+              //   context: context,
+              //   builder: (BuildContext context) {
+              //     return Container(
+              //       decoration: BoxDecoration(
+              //         borderRadius: BorderRadius.circular(10),
+              //       ),
+              //       padding: EdgeInsets.all(10),
+              //       child: Column(
+              //         children: <Widget>[
+              //           Text('${AppLocale.words[3].getString(context)}'),
+              //           Divider(
+              //             color: Color.fromARGB(255, 222, 228, 226),
+              //             thickness: 1,
+              //           ),
+              //           Expanded(
+              //             child: ListView.builder(
+              //               itemCount: notifications.length,
+              //               itemBuilder: (BuildContext context, int index) {
+              //                 return ListTile(
+              //                   title: Text(notifications[index]),
+              //                   trailing: IconButton(
+              //                     icon: Icon(Icons.delete),
+              //                     onPressed: () {
+              //                       // Remove notification when delete button is pressed
+              //                       removeNotification(notifications[index]);
+              //                     },
+              //                   ),
+              //                 );
+              //               },
+              //             ),
+              //           ),
+              //         ],
+              //       ),
+              //     );
+              //   },
+              // );
               showModalBottomSheet(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      padding: EdgeInsets.all(10),
-                      child: Column(
-                        children: <Widget>[
-                          Text('${AppLocale.words[3].getString(context)}'),
-                          Divider(
-                            color: Color.fromARGB(255, 222, 228, 226),
-                            thickness: 1,
+                context: context,
+                builder: (BuildContext context) {
+                  return Container(
+                    height: 200,
+                    child: ListView.builder(
+                      itemCount: notifications.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return ListTile(
+                          title: Text(notifications[index]),
+                          trailing: IconButton(
+                            icon: Icon(Icons.delete),
+                            onPressed: () {
+                              // Delete the notification.
+                              setState(() {
+                                notifications.removeAt(index);
+                              });
+                            },
                           ),
-                          Expanded(
-                            child: ListView.builder(
-                              itemCount: notifications.length,
-                              itemBuilder: (BuildContext context, int index) {
-                                return ListTile(
-                                  title: Text(notifications[index]),
-                                  trailing: IconButton(
-                                    icon: Icon(Icons.delete),
-                                    onPressed: () {
-                                      // Remove notification when delete button is pressed
-                                      removeNotification(notifications[index]);
-                                    },
-                                  ),
-                                );
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
-                    );
-                  });
+                        );
+                      },
+                    ),
+                  );
+                },
+              );
             },
             icon: Icon(
               Icons.notifications_rounded,
