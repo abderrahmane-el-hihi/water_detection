@@ -4,10 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localization/flutter_localization.dart';
 
 import 'package:waterdetection/components/l_button.dart';
+import 'package:waterdetection/components/text_field.dart';
 import 'package:waterdetection/homepage.dart';
 import 'package:waterdetection/loginpage.dart';
 import 'package:waterdetection/productmenupage.dart';
 import 'package:waterdetection/settingspage.dart';
+import 'services/qr_scan.dart';
 import 'signuppage.dart';
 
 class SerialPage extends StatefulWidget {
@@ -55,6 +57,15 @@ class _SerialPageState extends State<SerialPage> {
     }
   }
 
+  void OpenQRCodeScanner() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => QRScan(),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     User? user = FirebaseAuth.instance.currentUser;
@@ -98,27 +109,61 @@ class _SerialPageState extends State<SerialPage> {
                       height: 50,
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(25.0),
-                      child: TextField(
-                        controller: serialcontroller,
-                        obscureText: false,
-                        decoration: InputDecoration(
-                          suffixIcon: Icon(Icons.qr_code_scanner_rounded),
-                          enabledBorder: OutlineInputBorder(
+                      padding: const EdgeInsets.all(25),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Text_Field(
+                                controller: serialcontroller,
+                                hinText: 'Serial Number',
+                                obsecureText: false,
+                                preicon: null),
+                          ),
+                          SizedBox(
+                            width: 1,
+                          ),
+                          Container(
+                            height: 60,
+                            width: 60,
+                            decoration: BoxDecoration(
+                              color: Color.fromARGB(0, 255, 255, 255),
                               borderRadius: BorderRadius.circular(15),
-                              borderSide: BorderSide(
-                                  color: Color.fromRGBO(179, 179, 179, 1))),
-                          focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15),
-                              borderSide:
-                                  BorderSide(color: Colors.grey.shade400)),
-                          fillColor: Color.fromARGB(255, 255, 255, 255),
-                          filled: true,
-                          hintText: '${AppLocale.words[14].getString(context)}',
-                          hintStyle: TextStyle(
-                              color: Color.fromRGBO(179, 179, 179, 1)),
-                        ),
+                              border: Border.all(
+                                width: 1,
+                                color: Color.fromRGBO(0, 78, 131, 10),
+                              ),
+                            ),
+                            child: IconButton(
+                              icon: Icon(
+                                Icons.qr_code_scanner_rounded,
+                                color: Color.fromRGBO(0, 78, 131, 10),
+                              ),
+                              onPressed: OpenQRCodeScanner,
+                            ),
+                          ),
+                        ],
                       ),
+
+                      // child: TextField(
+                      //   controller: serialcontroller,
+                      //   obscureText: false,
+                      //   decoration: InputDecoration(
+                      //     suffixIcon: Icon(Icons.qr_code_scanner_rounded),
+                      //     enabledBorder: OutlineInputBorder(
+                      //         borderRadius: BorderRadius.circular(15),
+                      //         borderSide: BorderSide(
+                      //             color: Color.fromRGBO(179, 179, 179, 1))),
+                      //     focusedBorder: OutlineInputBorder(
+                      //         borderRadius: BorderRadius.circular(15),
+                      //         borderSide:
+                      //             BorderSide(color: Colors.grey.shade400)),
+                      //     fillColor: Color.fromARGB(255, 255, 255, 255),
+                      //     filled: true,
+                      //     hintText: '${AppLocale.words[14].getString(context)}',
+                      //     hintStyle: TextStyle(
+                      //         color: Color.fromRGBO(179, 179, 179, 1)),
+                      //   ),
+                      // ),
                     ),
                     SizedBox(
                       height: 5,
