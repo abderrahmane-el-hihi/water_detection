@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_localization/flutter_localization.dart';
+//import 'package:flutter_localization/flutter_localization.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:waterdetection/settingspage.dart';
-import '../Home2page.dart';
-import '../homepage.dart';
+//import 'package:waterdetection/settingspage.dart';
+//import '../Home2page.dart';
+//import '../homepage.dart';
 
 class GNavBar extends StatelessWidget {
   void Function(int)? onTabChange;

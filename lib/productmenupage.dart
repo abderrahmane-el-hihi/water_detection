@@ -1,12 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+//import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localization/flutter_localization.dart';
-import 'package:shimmer/shimmer.dart';
-import 'package:waterdetection/components/gnavbar.dart';
+//import 'package:shimmer/shimmer.dart';
+//import 'package:waterdetection/components/gnavbar.dart';
 import 'package:waterdetection/home2page.dart';
-import 'package:waterdetection/homepage.dart';
-import 'package:waterdetection/Firebasedb_config/firebase_db.dart';
+//import 'package:waterdetection/homepage.dart';
+//import 'package:waterdetection/Firebasedb_config/firebase_db.dart';
 import 'package:waterdetection/serianumpage.dart';
 import 'package:waterdetection/settingspage.dart';
 

@@ -2,9 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:waterdetection/serianumpage.dart';
 import 'SigninorUp.dart';
-import 'package:waterdetection/homepage.dart';
-import 'package:waterdetection/loginpage.dart';
-import 'package:waterdetection/signuppage.dart';
+//import 'package:waterdetection/homepage.dart';
+//import 'package:waterdetection/loginpage.dart';
+//import 'package:waterdetection/signuppage.dart';
 
 class AuthPage extends StatelessWidget {
   const AuthPage({super.key});

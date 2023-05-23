@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:liquid_progress_indicator/liquid_progress_indicator.dart';
+//import 'package:liquid_progress_indicator/liquid_progress_indicator.dart';
 
 class WaterDrop extends StatelessWidget {
   const WaterDrop({super.key});
@@ -30,13 +30,14 @@ class WaterDrop extends StatelessWidget {
         child: Container(
           height: 150.0,
           width: 150.0,
-          child: LiquidCustomProgressIndicator(
-            value: 0.5,
-            direction: Axis.vertical,
-            shapePath: _buildCylinderPath(),
-            //shapePath: _buildTearPath(),
-            center: Text('50%'),
-          ),
+          //lequid custom progress for test
+          // child: LiquidCustomProgressIndicator(
+          //   value: 0.5,
+          //   direction: Axis.vertical,
+          //   shapePath: _buildCylinderPath(),
+          //   //shapePath: _buildTearPath(),
+          //   center: Text('50%'),
+          // ),
         ),
       ),
     );

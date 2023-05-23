@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 //import 'package:hive/hive.dart';
 //import 'package:hive_flutter/hive_flutter.dart';
-import 'package:splashscreen/splashscreen.dart';
+//import 'package:splashscreen/splashscreen.dart';
 import 'package:waterdetection/auth_page.dart';
 
 import 'package:waterdetection/settingspage.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:waterdetection/test.dart';
+//import 'package:waterdetection/test.dart';
 import 'firebase_options.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_localization/flutter_localization.dart';
@@ -105,24 +105,24 @@ class _MyAppState extends State<MyApp> {
           //     }
           //   },
           // ),
-          //home: AuthPage(),
+          home: AuthPage(),
           //home: SerialPage(),
           //home: ProductMenuPage(),
           //home: MyWidget(),
           //home: Test(),
           //splash screen
-          home: SplashScreen(
-            seconds: 3,
-            navigateAfterSeconds: AuthPage(),
-            // title: Text(
-            //   'Water Detection App',
-            //   style: TextStyle(
-            //     color: Color.fromRGBO(0, 78, 131, 10),
-            //   ),
-            // ),
-            //image: Image.asset('assets/social_svg/codrops.svg'),
-            photoSize: 100,
-          ),
+          // home: SplashScreen(
+          //   seconds: 3,
+          //   navigateAfterSeconds: AuthPage(),
+          //   // title: Text(
+          //   //   'Water Detection App',
+          //   //   style: TextStyle(
+          //   //     color: Color.fromRGBO(0, 78, 131, 10),
+          //   //   ),
+          //   // ),
+          //   //image: Image.asset('assets/social_svg/codrops.svg'),
+          //   photoSize: 100,
+          // ),
           //home: WaterDrop(),
           //home: FingerprintSwitch(),
           //home: StartScreen(),

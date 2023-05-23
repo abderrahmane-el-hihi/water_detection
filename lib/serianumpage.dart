@@ -5,12 +5,12 @@ import 'package:flutter_localization/flutter_localization.dart';
 
 import 'package:waterdetection/components/l_button.dart';
 import 'package:waterdetection/components/text_field.dart';
-import 'package:waterdetection/homepage.dart';
-import 'package:waterdetection/loginpage.dart';
+//import 'package:waterdetection/homepage.dart';
+//import 'package:waterdetection/loginpage.dart';
 import 'package:waterdetection/productmenupage.dart';
 import 'package:waterdetection/settingspage.dart';
 import 'services/qr_scan.dart';
-import 'signuppage.dart';
+//import 'signuppage.dart';
 
 class SerialPage extends StatefulWidget {
   SerialPage({super.key});
@@ -27,6 +27,17 @@ class _SerialPageState extends State<SerialPage> {
     setState(() {
       _isPressed = !_isPressed;
     });
+    DocumentReference? userRef = FirebaseAuth.instance.currentUser?.uid != null
+        ? FirebaseFirestore.instance
+            .collection('compt')
+            .doc(FirebaseAuth.instance.currentUser!.uid)
+        : null;
+    if (userRef != null) {
+      FirebaseFirestore.instance.collection('detector').add({
+        'ref': serialcontroller.text,
+        'userRef': userRef,
+      });
+    }
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => ProductMenuPage()),
@@ -108,19 +119,17 @@ class _SerialPageState extends State<SerialPage> {
                     SizedBox(
                       height: 50,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(25),
+                    Container(
+                      padding: const EdgeInsets.only(right: 25),
                       child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Expanded(
+                          Flexible(
                             child: Text_Field(
                                 controller: serialcontroller,
                                 hinText: 'Serial Number',
                                 obsecureText: false,
                                 preicon: null),
-                          ),
-                          SizedBox(
-                            width: 1,
                           ),
                           Container(
                             height: 60,
@@ -129,7 +138,7 @@ class _SerialPageState extends State<SerialPage> {
                               color: Color.fromARGB(0, 255, 255, 255),
                               borderRadius: BorderRadius.circular(15),
                               border: Border.all(
-                                width: 1,
+                                width: 2,
                                 color: Color.fromRGBO(0, 78, 131, 10),
                               ),
                             ),
@@ -166,12 +175,12 @@ class _SerialPageState extends State<SerialPage> {
                       // ),
                     ),
                     SizedBox(
-                      height: 5,
+                      height: 20,
                     ),
                     L_Button(
                       onTap: Submit,
                       text: '${AppLocale.words[13].getString(context)}',
-                    )
+                    ),
                   ],
                 ),
               ),

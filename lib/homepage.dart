@@ -1,22 +1,22 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+//import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_localization/flutter_localization.dart';
-import 'package:liquid_progress_indicator/liquid_progress_indicator.dart';
-import 'package:shimmer/shimmer.dart';
+import 'package:percent_indicator/percent_indicator.dart';
+
+//import 'package:shimmer/shimmer.dart';
 import 'package:waterdetection/components/graph_bar/graphbar.dart';
-import 'package:waterdetection/Firebasedb_config/firebase_db.dart';
+//import 'package:waterdetection/Firebasedb_config/firebase_db.dart';
 import 'package:waterdetection/productmenupage.dart';
 import 'package:waterdetection/settingspage.dart';
-import 'package:percent_indicator/circular_percent_indicator.dart';
-
-import 'components/gnavbar.dart';
-import 'components/icon_btn_state.dart';
+//import 'package:percent_indicator/circular_percent_indicator.dart';
+//import 'components/gnavbar.dart';
+//import 'components/icon_btn_state.dart';
 import 'historypage.dart';
-import 'package:mongo_dart/mongo_dart.dart' show Db;
+//import 'package:mongo_dart/mongo_dart.dart' show Db;
 import 'services/local_notif_service.dart';
 
 class HomePage extends StatefulWidget {
@@ -40,8 +40,6 @@ class _HomePageState extends State<HomePage> {
     // timer = Timer.periodic(Duration(seconds: 900), (Timer t) => getData());
     addNotification(message);
   }
-
-  final C = true;
 
   void ToSettings() {
     Navigator.push(
@@ -71,7 +69,6 @@ class _HomePageState extends State<HomePage> {
 
   List SummaryWaterDb = [];
   List<Map<String, dynamic>> l = [];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -205,6 +202,13 @@ class _HomePageState extends State<HomePage> {
                             fln: flutterLocalNotificationsPlugin);
                         message = 'your water tank percentage is about $p%';
                       }
+                      bool t() {
+                        if (p < 20) {
+                          return true;
+                        }
+                        return false;
+                      }
+
                       return SingleChildScrollView(
                         child: Center(
                           child: Column(
@@ -220,22 +224,35 @@ class _HomePageState extends State<HomePage> {
                                     fontFamily: "Poppins"),
                               ),
                               SizedBox(
-                                height: 50,
+                                height: 30,
                               ),
                               Container(
                                 height: 150.0,
                                 width: 150.0,
-                                child: LiquidCustomProgressIndicator(
-                                  value: p / 100,
-                                  valueColor: AlwaysStoppedAnimation(
-                                    C
-                                        ? Color.fromARGB(144, 155, 173, 219)
-                                        : Color.fromARGB(144, 255, 57, 57),
-                                  ),
-                                  backgroundColor:
-                                      Color.fromRGBO(212, 224, 255, 0.565),
-                                  direction: Axis.vertical,
-                                  shapePath: CylinderPath(),
+                                //lequid custom progress form home page
+                                // child: LiquidCustomProgressIndicator(
+                                //   value: p / 100,
+                                //   valueColor: AlwaysStoppedAnimation(
+                                //     C
+                                //         ? Color.fromARGB(144, 155, 173, 219)
+                                //         : Color.fromARGB(144, 255, 57, 57),
+                                //   ),
+                                //   backgroundColor:
+                                //       Color.fromRGBO(212, 224, 255, 0.565),
+                                //   direction: Axis.vertical,
+                                //   shapePath: CylinderPath(),
+                                //   center: Text(
+                                //     "${p}%",
+                                //     style: TextStyle(
+                                //         color:
+                                //             Color.fromARGB(255, 170, 170, 170),
+                                //         fontSize: 20),
+                                //   ),
+                                // ),
+                                child: CircularPercentIndicator(
+                                  radius: 70.0,
+                                  lineWidth: 15.0,
+                                  percent: p / 100,
                                   center: Text(
                                     "${p}%",
                                     style: TextStyle(
@@ -243,10 +260,13 @@ class _HomePageState extends State<HomePage> {
                                             Color.fromARGB(255, 170, 170, 170),
                                         fontSize: 20),
                                   ),
+                                  progressColor: t()
+                                      ? Color.fromARGB(144, 255, 57, 57)
+                                      : Color.fromRGBO(0, 78, 131, 10),
                                 ),
                               ),
                               SizedBox(
-                                height: 10,
+                                height: 20,
                               ),
                               Text(
                                 '${AppLocale.words[11].getString(context)} :',
@@ -311,23 +331,23 @@ class _HomePageState extends State<HomePage> {
 }
 
 //path type for LiquidCustomProgressIndicator shapepath parameter
-Path CylinderPath() {
-  final Path path = Path();
-  path.moveTo(20, 0);
-  path.lineTo(20, 100);
-  path.arcToPoint(
-    Offset(130, 100),
-    radius: Radius.circular(20.0),
-    clockwise: false,
-  );
-  path.lineTo(130, 0);
-  path.arcToPoint(
-    Offset(20, 0),
-    radius: Radius.circular(20.0),
-    clockwise: false,
-  );
-  return path;
-}
+// Path CylinderPath() {
+//   final Path path = Path();
+//   path.moveTo(20, 0);
+//   path.lineTo(20, 100);
+//   path.arcToPoint(
+//     Offset(130, 100),
+//     radius: Radius.circular(20.0),
+//     clockwise: false,
+//   );
+//   path.lineTo(130, 0);
+//   path.arcToPoint(
+//     Offset(20, 0),
+//     radius: Radius.circular(20.0),
+//     clockwise: false,
+//   );
+//   return path;
+// }
 
 // CircularPercentIndicator(
 //   radius: 300,

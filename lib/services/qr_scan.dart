@@ -1,7 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'dart:async';
+
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:flutter/material.dart';
+
+import '../productmenupage.dart';
 
 class QRScan extends StatefulWidget {
   @override
@@ -11,6 +15,8 @@ class QRScan extends StatefulWidget {
 class _QRScanState extends State<QRScan> {
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
   QRViewController? controller;
+
+  bool isScanning = false;
 
   @override
   void dispose() {
@@ -29,6 +35,7 @@ class _QRScanState extends State<QRScan> {
       body: Column(
         children: [
           Expanded(
+            flex: 4,
             child: QRView(
               key: qrKey,
               onQRViewCreated: _onQRViewCreated,
@@ -43,22 +50,38 @@ class _QRScanState extends State<QRScan> {
     setState(() {
       this.controller = controller;
     });
-    controller.scannedDataStream.listen((scanData) {
-      // Process the scanned QR code data
-      _processQRCodeData(scanData.code as String);
+
+    StreamSubscription<Barcode>? scanSubscription;
+
+    scanSubscription = controller.scannedDataStream.listen((scanData) {
+      if (scanData.code!.isNotEmpty) {
+        _processQRCodeData(scanData.code as String);
+        controller.stopCamera();
+        scanSubscription?.cancel();
+      }
     });
+
+    controller.resumeCamera();
   }
 
   void _processQRCodeData(String qrCodeData) {
-    final productsCollection =
-        FirebaseFirestore.instance.collection('products');
-
-    final userId = FirebaseAuth.instance.currentUser?.uid;
-
-    productsCollection.doc(qrCodeData).update({'userId': userId}).then((_) {
-      print('User connected with the product.');
-    }).catchError((error) {
-      print('Failed to connect user with the product: $error');
-    });
+    print('Scanned QR Code: $qrCodeData');
+    DocumentReference? userRef = FirebaseAuth.instance.currentUser?.uid != null
+        ? FirebaseFirestore.instance
+            .collection('compt')
+            .doc(FirebaseAuth.instance.currentUser!.uid)
+        : null;
+    // Create a new product document and set the user reference field
+    if (userRef != null) {
+      FirebaseFirestore.instance.collection('detector').add({
+        'ref': '$qrCodeData',
+        'userRef': userRef,
+        // other product fields
+      });
+    }
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => ProductMenuPage()),
+    );
   }
 }
