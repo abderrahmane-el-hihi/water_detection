@@ -154,8 +154,9 @@ class _SettingsPageState extends State<SettingsPage> {
     return Theme(
       data: isDark ? ThemeData.light() : ThemeData.light(),
       child: Scaffold(
+        backgroundColor: Theme.of(context).colorScheme.background,
         appBar: AppBar(
-          backgroundColor: Colors.white,
+          backgroundColor: Theme.of(context).colorScheme.primary,
           elevation: 0,
           title: Text(
             '${AppLocale.words[0].getString(context)}',

@@ -73,7 +73,8 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        //backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).colorScheme.background,
         elevation: 0,
         leading: IconButton(
           onPressed: () {
@@ -189,7 +190,9 @@ class _HomePageState extends State<HomePage> {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return Center(
                       //child: Text('Loading',style: TextStyle(fontSize: 40.0, fontFamily: "Poppins"),),
-                      child: CircularProgressIndicator(),
+                      child: CircularProgressIndicator(
+                        color: Color.fromRGBO(0, 78, 131, 10),
+                      ),
                     );
                   } else {
                     if (snapshot.hasData) {
@@ -297,7 +300,8 @@ class _HomePageState extends State<HomePage> {
                         snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return Center(
-                      child: CircularProgressIndicator(),
+                      child: CircularProgressIndicator(
+                          color: Color.fromRGBO(0, 78, 131, 10)),
                       //child: Text('Loading',style: TextStyle(fontSize: 40.0),),
                     );
                   } else if (snapshot.hasData) {

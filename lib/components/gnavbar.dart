@@ -12,6 +12,7 @@ class GNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GNav(
+      backgroundColor: Theme.of(context).colorScheme.primary,
       hoverColor: Colors.grey[100]!,
       gap: 8,
       activeColor: Color.fromRGBO(0, 78, 131, 10),

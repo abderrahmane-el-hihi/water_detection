@@ -5,10 +5,12 @@ import 'package:flutter/services.dart';
 //import 'package:hive_flutter/hive_flutter.dart';
 //import 'package:splashscreen/splashscreen.dart';
 import 'package:waterdetection/auth_page.dart';
+import 'package:waterdetection/components/darkTheme.dart';
 
 import 'package:waterdetection/settingspage.dart';
 import 'package:firebase_core/firebase_core.dart';
 //import 'package:waterdetection/test.dart';
+import 'components/lightTheme.dart';
 import 'firebase_options.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_localization/flutter_localization.dart';
@@ -93,7 +95,9 @@ class _MyAppState extends State<MyApp> {
         return MaterialApp(
           supportedLocales: _localization.supportedLocales,
           localizationsDelegates: _localization.localizationsDelegates,
-          theme: notifier.isDark ? ThemeData.dark() : ThemeData.light(),
+          //theme: notifier.isDark ? ThemeData.dark() : ThemeData.light(),
+          theme: lightTheme,
+          darkTheme: darkTheme,
           debugShowCheckedModeBanner: false,
 
           // home: Consumer<AuthProvider>(

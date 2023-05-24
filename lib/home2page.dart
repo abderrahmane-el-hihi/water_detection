@@ -25,7 +25,7 @@ class _SwitchPAgesState extends State<SwitchPages> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).colorScheme.primary,
       bottomNavigationBar: GNavBar(onTabChange: (index) => Change(index)),
       body: pages[_selectedIndex],
     );

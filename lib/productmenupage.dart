@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
 //import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localization/flutter_localization.dart';
@@ -66,6 +68,9 @@ class _ProductMenuPageState extends State<ProductMenuPage> {
                 // future: MongodbConf.GetData("product"),
                 // future: Firebase_db().Get_data_Collection_firestore('detector'),
                 future: FirebaseFirestore.instance.collection('detector').get(),
+                // .where('userRef',
+                //     isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+                // .get(),
                 builder: (context, AsyncSnapshot snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return Center(
