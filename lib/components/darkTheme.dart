@@ -5,8 +5,10 @@ ThemeData darkTheme = ThemeData(
   appBarTheme: AppBarTheme(
     backgroundColor: Colors.black,
   ),
+  cardTheme: CardTheme(color: Colors.transparent),
   colorScheme: ColorScheme.dark(
-      background: Colors.black,
-      primary: Colors.grey[900]!,
-      secondary: Colors.grey[800]!),
+    background: Colors.black,
+    primary: Colors.grey[900]!,
+    secondary: Colors.grey[800]!,
+  ),
 );

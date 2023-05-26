@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+//import 'package:firebase_auth/firebase_auth.dart';
 
 //import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -39,7 +39,7 @@ class _ProductMenuPageState extends State<ProductMenuPage> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
         leading: IconButton(
           onPressed: () {
             Navigator.push(
@@ -89,7 +89,7 @@ class _ProductMenuPageState extends State<ProductMenuPage> {
                                     margin:
                                         EdgeInsets.symmetric(horizontal: 10),
                                     decoration: BoxDecoration(
-                                      color: Color.fromARGB(255, 255, 255, 255),
+                                      color: Theme.of(context).cardTheme.color,
                                       border: Border.all(
                                         color: Color.fromRGBO(0, 78, 131, 10),
                                         width: 1,

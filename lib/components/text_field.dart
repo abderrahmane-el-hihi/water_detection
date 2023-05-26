@@ -24,6 +24,7 @@ class Text_Field extends StatelessWidget {
         decoration: InputDecoration(
           prefixIcon: Icon(
             preicon,
+            color: Colors.grey.shade500,
           ),
           enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(15),
@@ -32,7 +33,7 @@ class Text_Field extends StatelessWidget {
             borderRadius: BorderRadius.circular(15),
             borderSide: BorderSide(color: Color.fromRGBO(0, 78, 131, 10)),
           ),
-          fillColor: Color.fromARGB(255, 255, 255, 255),
+          fillColor: Theme.of(context).colorScheme.background,
           filled: true,
           hintText: hinText,
           hintStyle: TextStyle(color: Color.fromRGBO(179, 179, 179, 1)),
