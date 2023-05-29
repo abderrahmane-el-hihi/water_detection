@@ -10,6 +10,7 @@ import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'package:flutter_localization/flutter_localization.dart';
+import 'package:waterdetection/serianumpage.dart';
 //import 'package:waterdetection/Firebasedb_config/firebase_db.dart';
 
 import 'components/icon_btn_state.dart';
@@ -154,7 +155,7 @@ class _SettingsPageState extends State<SettingsPage> {
     return Theme(
       data: isDark ? ThemeData.light() : ThemeData.light(),
       child: Scaffold(
-        backgroundColor: Theme.of(context).colorScheme.background,
+        backgroundColor: Theme.of(context).colorScheme.primary,
         appBar: AppBar(
           backgroundColor: Theme.of(context).colorScheme.primary,
           elevation: 0,
@@ -163,6 +164,17 @@ class _SettingsPageState extends State<SettingsPage> {
             style: TextStyle(
                 color: Color.fromRGBO(0, 78, 131, 10), fontFamily: "Poppins"),
           ),
+          leading: IconButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SerialPage()),
+                );
+              },
+              icon: Icon(
+                Icons.arrow_back_rounded,
+                color: Color.fromRGBO(0, 78, 131, 10),
+              )),
         ),
         body: SingleChildScrollView(
           child: SafeArea(

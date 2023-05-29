@@ -72,9 +72,10 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.primary,
       appBar: AppBar(
         //backgroundColor: Colors.white,
-        backgroundColor: Theme.of(context).colorScheme.background,
+        backgroundColor: Theme.of(context).colorScheme.primary,
         elevation: 0,
         leading: IconButton(
           onPressed: () {
@@ -150,22 +151,33 @@ class _HomePageState extends State<HomePage> {
                 builder: (BuildContext context) {
                   return Container(
                     height: 200,
-                    child: ListView.builder(
-                      itemCount: notifications.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return ListTile(
-                          title: Text(notifications[index]),
-                          trailing: IconButton(
-                            icon: Icon(Icons.delete),
-                            onPressed: () {
-                              // Delete the notification.
-                              setState(() {
-                                notifications.removeAt(index);
-                              });
+                    child: Column(
+                      children: [
+                        Text('Notifications'),
+                        Divider(
+                          color: Color.fromARGB(255, 222, 228, 226),
+                          thickness: 1,
+                        ),
+                        Expanded(
+                          child: ListView.builder(
+                            itemCount: notifications.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return ListTile(
+                                title: Text(notifications[index]),
+                                trailing: IconButton(
+                                  icon: Icon(Icons.delete),
+                                  onPressed: () {
+                                    // Delete the notification.
+                                    setState(() {
+                                      notifications.removeAt(index);
+                                    });
+                                  },
+                                ),
+                              );
                             },
                           ),
-                        );
-                      },
+                        ),
+                      ],
                     ),
                   );
                 },

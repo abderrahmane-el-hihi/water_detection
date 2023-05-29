@@ -24,24 +24,39 @@ class _SerialPageState extends State<SerialPage> {
   bool _isPressed = false;
 
   void Submit() {
-    setState(() {
-      _isPressed = !_isPressed;
-    });
-    DocumentReference? userRef = FirebaseAuth.instance.currentUser?.uid != null
-        ? FirebaseFirestore.instance
-            .collection('compt')
-            .doc(FirebaseAuth.instance.currentUser!.uid)
-        : null;
-    if (userRef != null) {
-      FirebaseFirestore.instance.collection('detector').add({
-        'ref': serialcontroller.text,
-        'userRef': userRef,
+    if (serialcontroller.text.isNotEmpty) {
+      setState(() {
+        _isPressed = !_isPressed;
       });
+      DocumentReference? userRef =
+          FirebaseAuth.instance.currentUser?.uid != null
+              ? FirebaseFirestore.instance
+                  .collection('compt')
+                  .doc(FirebaseAuth.instance.currentUser!.uid)
+              : null;
+      if (userRef != null) {
+        FirebaseFirestore.instance.collection('detector').add({
+          'ref': serialcontroller.text,
+          'userRef': userRef,
+        });
+      }
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => ProductMenuPage()),
+      );
+    } else {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text(
+              'Enter product ref or scan QR code',
+              style: TextStyle(fontFamily: "Poppins"),
+            ),
+          );
+        },
+      );
     }
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => ProductMenuPage()),
-    );
   }
 
   bool isUsingGmail(User user) {

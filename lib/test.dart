@@ -90,6 +90,7 @@
 //   }
 // }
 import 'package:flutter/material.dart';
+import 'package:table_calendar/table_calendar.dart';
 
 class Test extends StatefulWidget {
   @override
@@ -102,6 +103,37 @@ class _TestState extends State<Test> {
     'This is another notification',
     'This is a third notification',
   ];
+  void showDate() {
+    showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2030),
+    );
+  }
+
+  CalendarFormat _calendarFormat = CalendarFormat.month;
+  DateTime _focusedDay = DateTime.now();
+  DateTime? _selectedDay;
+  void _onDayLongPressed(DateTime selectedDay, DateTime focusedDay) {
+    // Perform custom logic when a day is long-pressed
+    // You can display a dialog, show additional information, etc.
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text('Selected Day'),
+          content: Text(selectedDay.toString()),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text('Close'),
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -113,30 +145,50 @@ class _TestState extends State<Test> {
         body: Center(
           child: ElevatedButton(
             onPressed: () {
-              showModalBottomSheet(
-                context: context,
-                builder: (BuildContext context) {
-                  return Container(
-                    height: 200,
-                    child: ListView.builder(
-                      itemCount: notifications.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return ListTile(
-                          title: Text(notifications[index]),
-                          trailing: IconButton(
-                            icon: Icon(Icons.delete),
-                            onPressed: () {
-                              // Delete the notification.
-                              setState(() {
-                                notifications.removeAt(index);
-                              });
-                            },
-                          ),
-                        );
-                      },
-                    ),
-                  );
+              // showModalBottomSheet(
+              //   context: context,
+              //   builder: (BuildContext context) {
+              //     return Container(
+              //       height: 200,
+              //       child: ListView.builder(
+              //         itemCount: notifications.length,
+              //         itemBuilder: (BuildContext context, int index) {
+              //           return ListTile(
+              //             title: Text(notifications[index]),
+              //             trailing: IconButton(
+              //               icon: Icon(Icons.delete),
+              //               onPressed: () {
+              //                 // Delete the notification.
+              //                 setState(() {
+              //                   notifications.removeAt(index);
+              //                 });
+              //               },
+              //             ),
+              //           );
+              //         },
+              //       ),
+              //     );
+              //   },
+              // );
+              // showDate();
+              TableCalendar(
+                firstDay: DateTime.utc(2022, 1, 1),
+                lastDay: DateTime.utc(2022, 12, 31),
+                focusedDay: _focusedDay,
+                calendarFormat: _calendarFormat,
+                selectedDayPredicate: (day) => isSameDay(_selectedDay, day),
+                onDaySelected: (selectedDay, focusedDay) {
+                  setState(() {
+                    _selectedDay = selectedDay;
+                    _focusedDay = focusedDay;
+                  });
                 },
+                onFormatChanged: (format) {
+                  setState(() {
+                    _calendarFormat = format;
+                  });
+                },
+                onDayLongPressed: _onDayLongPressed,
               );
             },
             child: Text('Show Notifications'),

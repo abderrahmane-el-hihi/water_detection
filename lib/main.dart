@@ -6,10 +6,8 @@ import 'package:flutter/services.dart';
 //import 'package:splashscreen/splashscreen.dart';
 import 'package:waterdetection/auth_page.dart';
 import 'package:waterdetection/components/darkTheme.dart';
-
 import 'package:waterdetection/settingspage.dart';
 import 'package:firebase_core/firebase_core.dart';
-//import 'package:waterdetection/test.dart';
 import 'components/lightTheme.dart';
 import 'firebase_options.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -45,7 +43,6 @@ void main() async {
     name: 'favorite_food',
     value: 'favoriteFood',
   );
-
   //to here
   //await Hive.initFlutter();
   runApp(const MyApp());
@@ -113,7 +110,7 @@ class _MyAppState extends State<MyApp> {
           //home: SerialPage(),
           //home: ProductMenuPage(),
           //home: MyWidget(),
-          //home: Test(),
+          // home: Test(),
           //splash screen
           // home: SplashScreen(
           //   seconds: 3,

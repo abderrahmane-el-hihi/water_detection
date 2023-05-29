@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localization/flutter_localization.dart';
-
 import 'package:waterdetection/home2page.dart';
 import 'package:waterdetection/settingspage.dart';
 import 'components/graph_bar/graphbar.dart';
@@ -19,9 +18,10 @@ class _DetailsPageState extends State<DetailsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.primary,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).colorScheme.primary,
         leading: IconButton(
           onPressed: () {
             Navigator.push(
@@ -72,50 +72,52 @@ class _DetailsPageState extends State<DetailsPage> {
         ],
       ),
       body: SafeArea(
-        child: Column(
-          children: [
-            SizedBox(
-              height: 100,
-            ),
-            Center(
-              child: FutureBuilder(
-                  future:
-                      FirebaseFirestore.instance.collection('history').get(),
-                  builder: (context,
-                      AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>>
-                          snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return CircularProgressIndicator();
-                    } else if (snapshot.hasData) {
-                      SummaryWaterDb.clear();
-                      List<QueryDocumentSnapshot<Map<String, dynamic>>>
-                          documents = snapshot.data!.docs;
-                      for (var i = 0; i < snapshot.data!.size; i++) {
-                        SummaryWaterDb.add(
-                            documents[i].data()['available_capa']);
-                      }
-                      print(SummaryWaterDb);
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(
+                height: 100,
+              ),
+              Center(
+                child: FutureBuilder(
+                    future:
+                        FirebaseFirestore.instance.collection('history').get(),
+                    builder: (context,
+                        AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>>
+                            snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return CircularProgressIndicator();
+                      } else if (snapshot.hasData) {
+                        SummaryWaterDb.clear();
+                        List<QueryDocumentSnapshot<Map<String, dynamic>>>
+                            documents = snapshot.data!.docs;
+                        for (var i = 0; i < snapshot.data!.size; i++) {
+                          SummaryWaterDb.add(
+                              documents[i].data()['available_capa']);
+                        }
+                        print(SummaryWaterDb);
 
-                      return Column(
-                        children: [
-                          Center(
-                            child: SizedBox(
-                              height: 200,
-                              child: GraphBar(
-                                SummaryWater: SummaryWaterDb,
+                        return Column(
+                          children: [
+                            Center(
+                              child: SizedBox(
+                                height: 200,
+                                child: GraphBar(
+                                  SummaryWater: SummaryWaterDb,
+                                ),
                               ),
                             ),
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                        ],
-                      );
-                    }
-                    return Text('error');
-                  }),
-            ),
-          ],
+                            SizedBox(
+                              height: 20,
+                            ),
+                          ],
+                        );
+                      }
+                      return Text('error');
+                    }),
+              ),
+            ],
+          ),
         ),
       ),
     );

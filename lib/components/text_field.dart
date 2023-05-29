@@ -33,7 +33,7 @@ class Text_Field extends StatelessWidget {
             borderRadius: BorderRadius.circular(15),
             borderSide: BorderSide(color: Color.fromRGBO(0, 78, 131, 10)),
           ),
-          fillColor: Theme.of(context).colorScheme.background,
+          fillColor: Theme.of(context).colorScheme.secondary,
           filled: true,
           hintText: hinText,
           hintStyle: TextStyle(color: Color.fromRGBO(179, 179, 179, 1)),

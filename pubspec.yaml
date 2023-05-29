@@ -63,6 +63,8 @@ dependencies:
   flutter_facebook_auth: ^5.0.8
   firebase_analytics: ^10.2.0
   qr_code_scanner: ^1.0.1
+  table_calendar: ^3.0.3
+  flutter_background: ^1.2.0
   #hive: ^2.2.3
   #hive_flutter: ^1.1.0
 

@@ -37,9 +37,10 @@ class _ProductMenuPageState extends State<ProductMenuPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.primary,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
+        backgroundColor: Theme.of(context).colorScheme.primary,
         leading: IconButton(
           onPressed: () {
             Navigator.push(
@@ -89,7 +90,8 @@ class _ProductMenuPageState extends State<ProductMenuPage> {
                                     margin:
                                         EdgeInsets.symmetric(horizontal: 10),
                                     decoration: BoxDecoration(
-                                      color: Theme.of(context).cardTheme.color,
+                                      //color: Theme.of(context).cardTheme.color,
+                                      color: Colors.transparent,
                                       border: Border.all(
                                         color: Color.fromRGBO(0, 78, 131, 10),
                                         width: 1,
