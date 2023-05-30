@@ -1,17 +1,16 @@
 import 'dart:async';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 //import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_localization/flutter_localization.dart';
 import 'package:percent_indicator/percent_indicator.dart';
-
 //import 'package:shimmer/shimmer.dart';
 import 'package:waterdetection/components/graph_bar/graphbar.dart';
 //import 'package:waterdetection/Firebasedb_config/firebase_db.dart';
 import 'package:waterdetection/productmenupage.dart';
 import 'package:waterdetection/settingspage.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 //import 'package:percent_indicator/circular_percent_indicator.dart';
 //import 'components/gnavbar.dart';
 //import 'components/icon_btn_state.dart';
@@ -69,6 +68,21 @@ class _HomePageState extends State<HomePage> {
 
   List SummaryWaterDb = [];
   List<Map<String, dynamic>> l = [];
+
+  RefreshController refreshController =
+      RefreshController(initialRefresh: false);
+  void OnRefresh() async {
+    DocumentSnapshot snapshot = await FirebaseFirestore.instance
+        .collection('water_tank')
+        .doc('tank1')
+        .get();
+
+    setState(() {
+      int p = snapshot.data() as int;
+    });
+    refreshController.refreshCompleted();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -190,156 +204,166 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      body: SafeArea(
-        child: Column(
-          children: [
-            FutureBuilder(
-                future: FirebaseFirestore.instance
-                    .collection('water_tank')
-                    .doc('tank1')
-                    .get(),
-                builder: (context, AsyncSnapshot snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return Center(
-                      //child: Text('Loading',style: TextStyle(fontSize: 40.0, fontFamily: "Poppins"),),
-                      child: CircularProgressIndicator(
-                        color: Color.fromRGBO(0, 78, 131, 10),
-                      ),
-                    );
-                  } else {
-                    if (snapshot.hasData) {
-                      int p = snapshot.data!["percentage"];
-                      print(p);
-                      if (snapshot.data!["percentage"] <= 20) {
-                        Notif.showBigTextNotification(
-                            title: "Water detetction",
-                            body: "your water tank percentage is about $p%",
-                            fln: flutterLocalNotificationsPlugin);
-                        message = 'your water tank percentage is about $p%';
-                      }
-                      bool t() {
-                        if (p < 20) {
-                          return true;
-                        }
-                        return false;
-                      }
+      body: SmartRefresher(
+        controller: refreshController,
+        onRefresh: OnRefresh,
+        child: SafeArea(
+          child: Column(
+            children: [
+              FutureBuilder(
+                  future: FirebaseFirestore.instance
+                      .collection('water_tank')
+                      .doc('tank1')
+                      .get(),
 
-                      return SingleChildScrollView(
-                        child: Center(
-                          child: Column(
-                            children: [
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Text(
-                                '${AppLocale.words[10].getString(context)} :',
-                                style: TextStyle(
-                                    fontSize: 30,
-                                    color: Color.fromRGBO(0, 78, 131, 10),
-                                    fontFamily: "Poppins"),
-                              ),
-                              SizedBox(
-                                height: 30,
-                              ),
-                              Container(
-                                height: 150.0,
-                                width: 150.0,
-                                //lequid custom progress form home page
-                                // child: LiquidCustomProgressIndicator(
-                                //   value: p / 100,
-                                //   valueColor: AlwaysStoppedAnimation(
-                                //     C
-                                //         ? Color.fromARGB(144, 155, 173, 219)
-                                //         : Color.fromARGB(144, 255, 57, 57),
-                                //   ),
-                                //   backgroundColor:
-                                //       Color.fromRGBO(212, 224, 255, 0.565),
-                                //   direction: Axis.vertical,
-                                //   shapePath: CylinderPath(),
-                                //   center: Text(
-                                //     "${p}%",
-                                //     style: TextStyle(
-                                //         color:
-                                //             Color.fromARGB(255, 170, 170, 170),
-                                //         fontSize: 20),
-                                //   ),
-                                // ),
-                                child: CircularPercentIndicator(
-                                  radius: 70.0,
-                                  lineWidth: 15.0,
-                                  percent: p / 100,
-                                  center: Text(
-                                    "${p}%",
-                                    style: TextStyle(
-                                        color:
-                                            Color.fromARGB(255, 170, 170, 170),
-                                        fontSize: 20),
-                                  ),
-                                  progressColor: t()
-                                      ? Color.fromARGB(144, 255, 57, 57)
-                                      : Color.fromRGBO(0, 78, 131, 10),
-                                ),
-                              ),
-                              SizedBox(
-                                height: 20,
-                              ),
-                              Text(
-                                '${AppLocale.words[11].getString(context)} :',
-                                style: TextStyle(
-                                    fontSize: 50,
-                                    color: Color.fromRGBO(0, 78, 131, 10),
-                                    fontFamily: "Poppins"),
-                              ),
-                              SizedBox(
-                                height: 50,
-                              ),
-                            ],
-                          ),
+                  // .where('detector_ref', isEqualTo: '/detector/detector1')
+                  // .get(),
+                  builder: (context, AsyncSnapshot snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return Center(
+                        //child: Text('Loading',style: TextStyle(fontSize: 40.0, fontFamily: "Poppins"),),
+                        child: CircularProgressIndicator(
+                          color: Color.fromRGBO(0, 78, 131, 10),
                         ),
                       );
                     } else {
-                      return Center(
-                        child: Text('no data'),
-                      );
-                    }
-                  }
-                }),
-            FutureBuilder(
-                //future: Firebase_db().Get_data_2Collection_firestore('history'),
-                future: FirebaseFirestore.instance.collection('history').get(),
-                builder: (context,
-                    AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>>
-                        snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return Center(
-                      child: CircularProgressIndicator(
-                          color: Color.fromRGBO(0, 78, 131, 10)),
-                      //child: Text('Loading',style: TextStyle(fontSize: 40.0),),
-                    );
-                  } else if (snapshot.hasData) {
-                    SummaryWaterDb.clear();
-                    List<QueryDocumentSnapshot<Map<String, dynamic>>>
-                        documents = snapshot.data!.docs;
-                    for (var i = 0; i < snapshot.data!.size; i++) {
-                      SummaryWaterDb.add(documents[i].data()['available_capa']);
-                    }
-                    print(SummaryWaterDb);
-                    return Column(
-                      children: [
-                        Center(
-                          child: SizedBox(
-                            height: 200,
-                            child: GraphBar(
-                              SummaryWater: SummaryWaterDb,
+                      if (snapshot.hasData) {
+                        int p = snapshot.data!["percentage"];
+
+                        print(p);
+                        if (p <= 20) {
+                          Notif.showBigTextNotification(
+                              title: "Water detection",
+                              body: "your water tank percentage is about $p%",
+                              fln: flutterLocalNotificationsPlugin);
+                          message = 'your water tank percentage is about $p%';
+                        }
+                        bool t() {
+                          if (p < 20) {
+                            return true;
+                          }
+                          return false;
+                        }
+
+                        return SingleChildScrollView(
+                          child: Center(
+                            child: Column(
+                              children: [
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Text(
+                                  '${AppLocale.words[10].getString(context)} :',
+                                  style: TextStyle(
+                                      fontSize: 30,
+                                      color: Color.fromRGBO(0, 78, 131, 10),
+                                      fontFamily: "Poppins"),
+                                ),
+                                SizedBox(
+                                  height: 30,
+                                ),
+                                Container(
+                                  height: 150.0,
+                                  width: 150.0,
+                                  //lequid custom progress form home page
+                                  // child: LiquidCustomProgressIndicator(
+                                  //   value: p / 100,
+                                  //   valueColor: AlwaysStoppedAnimation(
+                                  //     C
+                                  //         ? Color.fromARGB(144, 155, 173, 219)
+                                  //         : Color.fromARGB(144, 255, 57, 57),
+                                  //   ),
+                                  //   backgroundColor:
+                                  //       Color.fromRGBO(212, 224, 255, 0.565),
+                                  //   direction: Axis.vertical,
+                                  //   shapePath: CylinderPath(),
+                                  //   center: Text(
+                                  //     "${p}%",
+                                  //     style: TextStyle(
+                                  //         color:
+                                  //             Color.fromARGB(255, 170, 170, 170),
+                                  //         fontSize: 20),
+                                  //   ),
+                                  // ),
+                                  child: CircularPercentIndicator(
+                                    radius: 70.0,
+                                    lineWidth: 15.0,
+                                    percent: p / 100,
+                                    center: Text(
+                                      "${p}%",
+                                      style: TextStyle(
+                                          color: Color.fromARGB(
+                                              255, 170, 170, 170),
+                                          fontSize: 20),
+                                    ),
+                                    progressColor: t()
+                                        ? Color.fromARGB(144, 255, 57, 57)
+                                        : Color.fromRGBO(0, 78, 131, 10),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                Text(
+                                  '${AppLocale.words[11].getString(context)} :',
+                                  style: TextStyle(
+                                      fontSize: 50,
+                                      color: Color.fromRGBO(0, 78, 131, 10),
+                                      fontFamily: "Poppins"),
+                                ),
+                                SizedBox(
+                                  height: 50,
+                                ),
+                              ],
                             ),
                           ),
-                        ),
-                      ],
-                    );
-                  }
-                  return Text('error');
-                }),
-          ],
+                        );
+                      } else {
+                        return Center(
+                          child: Text('no data'),
+                        );
+                      }
+                    }
+                  }),
+              FutureBuilder(
+                  //future: Firebase_db().Get_data_2Collection_firestore('history'),
+                  future:
+                      FirebaseFirestore.instance.collection('history').get(),
+                  builder: (context,
+                      AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>>
+                          snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return Center(
+                        child: CircularProgressIndicator(
+                            color: Color.fromRGBO(0, 78, 131, 10)),
+                        //child: Text('Loading',style: TextStyle(fontSize: 40.0),),
+                      );
+                    } else if (snapshot.hasData) {
+                      SummaryWaterDb.clear();
+                      List<QueryDocumentSnapshot<Map<String, dynamic>>>
+                          documents = snapshot.data!.docs;
+                      for (var i = 0; i < snapshot.data!.size; i++) {
+                        SummaryWaterDb.add(
+                            documents[i].data()['available_capa']);
+                      }
+                      print(SummaryWaterDb);
+                      return Column(
+                        children: [
+                          Center(
+                            child: SizedBox(
+                              height: 200,
+                              child: GraphBar(
+                                SummaryWater: SummaryWaterDb,
+                              ),
+                            ),
+                          ),
+                        ],
+                      );
+                    }
+                    return Text('error');
+                  }),
+            ],
+          ),
         ),
       ),
     );

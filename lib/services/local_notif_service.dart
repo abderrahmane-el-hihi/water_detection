@@ -1,4 +1,5 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+
 //import 'package:timezone/timezone.dart' as tz;
 
 // class NotificationService {
@@ -60,7 +61,9 @@ class Notif {
     var initializationsSettings = new InitializationSettings(
       android: androidInitialize,
     );
-    await flutterLocalNotificationsPlugin.initialize(initializationsSettings);
+    await flutterLocalNotificationsPlugin.initialize(
+      initializationsSettings,
+    );
   }
 
   static Future showBigTextNotification(

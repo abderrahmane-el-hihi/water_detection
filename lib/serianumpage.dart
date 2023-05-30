@@ -97,110 +97,115 @@ class _SerialPageState extends State<SerialPage> {
     User? user = FirebaseAuth.instance.currentUser;
     return Scaffold(
       body: Scaffold(
-        body: Stack(
-          children: [
-            Center(
-              child: SingleChildScrollView(
-                child: Column(
-                  children: <Widget>[
-                    if (user != null)
-                      !isUsingGmail(user)
-                          ? Icon(
-                              Icons.account_circle,
-                              size: 128,
-                              color: Color.fromRGBO(217, 217, 217, 1),
-                            )
-                          : ClipRRect(
-                              borderRadius: BorderRadius.circular(100),
-                              child: Image.network(
-                                user.photoURL!,
-                                fit: BoxFit.cover,
-                                height: 128,
-                                width: 128,
+        body: GestureDetector(
+          onTap: () {
+            FocusScope.of(context).unfocus();
+          },
+          child: Stack(
+            children: [
+              Center(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: <Widget>[
+                      if (user != null)
+                        !isUsingGmail(user)
+                            ? Icon(
+                                Icons.account_circle,
+                                size: 128,
+                                color: Color.fromRGBO(217, 217, 217, 1),
+                              )
+                            : ClipRRect(
+                                borderRadius: BorderRadius.circular(100),
+                                child: Image.network(
+                                  user.photoURL!,
+                                  fit: BoxFit.cover,
+                                  height: 128,
+                                  width: 128,
+                                ),
                               ),
-                            ),
-                    SizedBox(
-                      height: 50,
-                    ),
-                    isUsingGmail(user!)
-                        ? Text(
-                            '${user.displayName}',
-                            style: TextStyle(fontFamily: "Poppins"),
-                          )
-                        : Text(
-                            '${getDocumentNameByEmail('ahys@test.com')}',
-                            style: TextStyle(fontFamily: "Poppins"),
-                          ),
-                    SizedBox(
-                      height: 50,
-                    ),
-                    Container(
-                      padding: const EdgeInsets.only(right: 25),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Flexible(
-                            child: Text_Field(
-                                controller: serialcontroller,
-                                hinText: 'Serial Number',
-                                obsecureText: false,
-                                preicon: null),
-                          ),
-                          Container(
-                            height: 60,
-                            width: 60,
-                            decoration: BoxDecoration(
-                              color: Color.fromARGB(0, 255, 255, 255),
-                              borderRadius: BorderRadius.circular(15),
-                              border: Border.all(
-                                width: 2,
-                                color: Color.fromRGBO(0, 78, 131, 10),
-                              ),
-                            ),
-                            child: IconButton(
-                              icon: Icon(
-                                Icons.qr_code_scanner_rounded,
-                                color: Color.fromRGBO(0, 78, 131, 10),
-                              ),
-                              onPressed: OpenQRCodeScanner,
-                            ),
-                          ),
-                        ],
+                      SizedBox(
+                        height: 50,
                       ),
+                      isUsingGmail(user!)
+                          ? Text(
+                              '${user.displayName}',
+                              style: TextStyle(fontFamily: "Poppins"),
+                            )
+                          : Text(
+                              '${getDocumentNameByEmail('ahys@test.com')}',
+                              style: TextStyle(fontFamily: "Poppins"),
+                            ),
+                      SizedBox(
+                        height: 50,
+                      ),
+                      Container(
+                        padding: const EdgeInsets.only(right: 25),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Flexible(
+                              child: Text_Field(
+                                  controller: serialcontroller,
+                                  hinText: 'Serial Number',
+                                  obsecureText: false,
+                                  preicon: null),
+                            ),
+                            Container(
+                              height: 60,
+                              width: 60,
+                              decoration: BoxDecoration(
+                                color: Color.fromARGB(0, 255, 255, 255),
+                                borderRadius: BorderRadius.circular(15),
+                                border: Border.all(
+                                  width: 2,
+                                  color: Color.fromRGBO(0, 78, 131, 10),
+                                ),
+                              ),
+                              child: IconButton(
+                                icon: Icon(
+                                  Icons.qr_code_scanner_rounded,
+                                  color: Color.fromRGBO(0, 78, 131, 10),
+                                ),
+                                onPressed: OpenQRCodeScanner,
+                              ),
+                            ),
+                          ],
+                        ),
 
-                      // child: TextField(
-                      //   controller: serialcontroller,
-                      //   obscureText: false,
-                      //   decoration: InputDecoration(
-                      //     suffixIcon: Icon(Icons.qr_code_scanner_rounded),
-                      //     enabledBorder: OutlineInputBorder(
-                      //         borderRadius: BorderRadius.circular(15),
-                      //         borderSide: BorderSide(
-                      //             color: Color.fromRGBO(179, 179, 179, 1))),
-                      //     focusedBorder: OutlineInputBorder(
-                      //         borderRadius: BorderRadius.circular(15),
-                      //         borderSide:
-                      //             BorderSide(color: Colors.grey.shade400)),
-                      //     fillColor: Color.fromARGB(255, 255, 255, 255),
-                      //     filled: true,
-                      //     hintText: '${AppLocale.words[14].getString(context)}',
-                      //     hintStyle: TextStyle(
-                      //         color: Color.fromRGBO(179, 179, 179, 1)),
-                      //   ),
-                      // ),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    L_Button(
-                      onTap: Submit,
-                      text: '${AppLocale.words[13].getString(context)}',
-                    ),
-                  ],
+                        // child: TextField(
+                        //   controller: serialcontroller,
+                        //   obscureText: false,
+                        //   decoration: InputDecoration(
+                        //     suffixIcon: Icon(Icons.qr_code_scanner_rounded),
+                        //     enabledBorder: OutlineInputBorder(
+                        //         borderRadius: BorderRadius.circular(15),
+                        //         borderSide: BorderSide(
+                        //             color: Color.fromRGBO(179, 179, 179, 1))),
+                        //     focusedBorder: OutlineInputBorder(
+                        //         borderRadius: BorderRadius.circular(15),
+                        //         borderSide:
+                        //             BorderSide(color: Colors.grey.shade400)),
+                        //     fillColor: Color.fromARGB(255, 255, 255, 255),
+                        //     filled: true,
+                        //     hintText: '${AppLocale.words[14].getString(context)}',
+                        //     hintStyle: TextStyle(
+                        //         color: Color.fromRGBO(179, 179, 179, 1)),
+                        //   ),
+                        // ),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      L_Button(
+                        onTap: Submit,
+                        text: '${AppLocale.words[13].getString(context)}',
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
