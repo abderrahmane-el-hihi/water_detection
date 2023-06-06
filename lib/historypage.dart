@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localization/flutter_localization.dart';
-import 'package:waterdetection/HomePage.dart';
+// import 'package:waterdetection/HomePage.dart';
 import 'package:waterdetection/home2page.dart';
 import 'package:waterdetection/settingspage.dart';
 import 'components/graph_bar/graphbar.dart';
