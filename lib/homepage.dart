@@ -71,15 +71,13 @@ class _HomePageState extends State<HomePage> {
 
   RefreshController refreshController =
       RefreshController(initialRefresh: false);
+
   void OnRefresh() async {
-    DocumentSnapshot snapshot = await FirebaseFirestore.instance
+    await FirebaseFirestore.instance
         .collection('water_tank')
         .doc('tank1')
         .get();
 
-    setState(() {
-      int p = snapshot.data() as int;
-    });
     refreshController.refreshCompleted();
   }
 

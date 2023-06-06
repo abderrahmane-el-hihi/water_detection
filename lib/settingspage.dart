@@ -1,20 +1,14 @@
 //import 'dart:async';
 import 'dart:ui';
-
 //import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
-
 import 'package:flutter_localization/flutter_localization.dart';
-import 'package:waterdetection/serianumpage.dart';
 //import 'package:waterdetection/Firebasedb_config/firebase_db.dart';
-
 import 'components/icon_btn_state.dart';
-
 //listen to the _isdark variable state
 
 class ThemeNotifier extends ChangeNotifier {
@@ -47,10 +41,10 @@ class _SettingsPageState extends State<SettingsPage> {
 
   //go to web site method
   void GoToSite() async {
-    final Uri _url = Uri.parse('googlechrome:https://www.google.com');
-    await launchUrl(_url);
-    if (!await launchUrl(_url)) {
-      throw Exception('Could not launch $_url');
+    final Uri url = Uri.parse('googlechrome:https://www.google.com');
+    await launchUrl(url);
+    if (!await launchUrl(url)) {
+      throw Exception('Could not launch $url');
     }
   }
 
@@ -157,6 +151,7 @@ class _SettingsPageState extends State<SettingsPage> {
       child: Scaffold(
         backgroundColor: Theme.of(context).colorScheme.primary,
         appBar: AppBar(
+          leading: null,
           backgroundColor: Theme.of(context).colorScheme.primary,
           elevation: 0,
           title: Text(
@@ -164,17 +159,6 @@ class _SettingsPageState extends State<SettingsPage> {
             style: TextStyle(
                 color: Color.fromRGBO(0, 78, 131, 10), fontFamily: "Poppins"),
           ),
-          leading: IconButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => SerialPage()),
-                );
-              },
-              icon: Icon(
-                Icons.arrow_back_rounded,
-                color: Color.fromRGBO(0, 78, 131, 10),
-              )),
         ),
         body: SingleChildScrollView(
           child: SafeArea(
@@ -359,7 +343,8 @@ class _SettingsPageState extends State<SettingsPage> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  '${AppLocale.words[3].getString(context)}',
+                                  //'${AppLocale.words[3].getString(context)}',
+                                  'Notifications',
                                   style: TextStyle(fontSize: 16),
                                 ),
                                 SwitchBtn(
@@ -523,7 +508,6 @@ mixin AppLocale {
     'Settings',
     'Manage Account',
     'Password',
-    'Privacy',
     'Notifications',
     'Dark mode',
     'Language',

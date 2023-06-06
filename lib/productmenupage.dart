@@ -1,8 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-//import 'package:firebase_auth/firebase_auth.dart';
-
-//import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localization/flutter_localization.dart';
 //import 'package:shimmer/shimmer.dart';
@@ -42,23 +39,25 @@ class _ProductMenuPageState extends State<ProductMenuPage> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Theme.of(context).colorScheme.primary,
-        leading: IconButton(
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => SerialPage()),
-            );
-          },
-          icon: Icon(
-            Icons.arrow_back_rounded,
-            color: Color.fromRGBO(0, 78, 131, 10),
-          ),
-        ),
         title: Text(
           '${AppLocale.words[12].getString(context)}',
           style: TextStyle(
               color: Color.fromRGBO(0, 78, 131, 10), fontFamily: "Poppins"),
         ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => SerialPage()),
+              );
+            },
+            icon: Icon(
+              Icons.add_rounded,
+              color: Color.fromRGBO(0, 78, 131, 10),
+            ),
+          )
+        ],
       ),
       body: SafeArea(
         child: Column(
@@ -72,6 +71,7 @@ class _ProductMenuPageState extends State<ProductMenuPage> {
                 future: FirebaseFirestore.instance.collection('detector').get(),
                 // .where('userRef',
                 //     isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+                // .limit(1)
                 // .get(),
                 builder: (context, AsyncSnapshot snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {

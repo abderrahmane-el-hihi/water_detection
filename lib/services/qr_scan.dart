@@ -1,10 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'dart:async';
-
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:flutter/material.dart';
-
 import '../productmenupage.dart';
 
 class QRScan extends StatefulWidget {
@@ -76,7 +74,6 @@ class _QRScanState extends State<QRScan> {
       FirebaseFirestore.instance.collection('detector').add({
         'ref': '$qrCodeData',
         'userRef': userRef,
-        // other product fields
       });
     }
     Navigator.push(

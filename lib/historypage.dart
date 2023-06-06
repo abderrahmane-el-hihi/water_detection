@@ -1,9 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localization/flutter_localization.dart';
+import 'package:waterdetection/HomePage.dart';
 import 'package:waterdetection/home2page.dart';
 import 'package:waterdetection/settingspage.dart';
 import 'components/graph_bar/graphbar.dart';
+import 'services/export_data.dart';
 
 class DetailsPage extends StatefulWidget {
   const DetailsPage({super.key});
@@ -14,6 +16,12 @@ class DetailsPage extends StatefulWidget {
 
 class _DetailsPageState extends State<DetailsPage> {
   List SummaryWaterDb = [];
+  void fetchData() async {
+    List<Map<String, dynamic>> dataList =
+        await Export_data().fetchDataFromFirestore();
+    print(dataList);
+  }
+  //List<Map<String, dynamic>> data = await Export_data().fetchDataFromFirestore();
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +32,7 @@ class _DetailsPageState extends State<DetailsPage> {
         backgroundColor: Theme.of(context).colorScheme.primary,
         leading: IconButton(
           onPressed: () {
-            Navigator.push(
+            Navigator.pushReplacement(
               context,
               MaterialPageRoute(builder: (context) => SwitchPages()),
             );
@@ -69,6 +77,15 @@ class _DetailsPageState extends State<DetailsPage> {
               color: Color.fromRGBO(0, 78, 131, 10),
             ),
           ),
+          IconButton(
+            onPressed: () {
+              Export_data().exportDataToExcel(fetchData);
+            },
+            icon: Icon(
+              Icons.download_rounded,
+              color: Color.fromRGBO(0, 78, 131, 10),
+            ),
+          )
         ],
       ),
       body: SafeArea(
