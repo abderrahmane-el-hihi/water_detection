@@ -90,7 +90,9 @@
 //   }
 // }
 import 'package:flutter/material.dart';
+import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:waterdetection/services/connect_to_arduino.dart';
 
 class Test extends StatefulWidget {
   @override
@@ -135,6 +137,27 @@ class _TestState extends State<Test> {
     );
   }
 
+  int receivedNumber = 0;
+  late connect_to_server numberReceiver;
+
+  @override
+  void initState() {
+    super.initState();
+    numberReceiver = connect_to_server(
+        '192.168.11.159', 37494); // Replace with your server address and port
+    connect();
+  }
+
+  void connect() {
+    numberReceiver.connectToServer((number) {
+      setState(() {
+        receivedNumber = number;
+      });
+    });
+  }
+
+  //
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -143,55 +166,66 @@ class _TestState extends State<Test> {
           title: Text('My App'),
         ),
         body: Center(
-          child: ElevatedButton(
-            onPressed: () {
-              // showModalBottomSheet(
-              //   context: context,
-              //   builder: (BuildContext context) {
-              //     return Container(
-              //       height: 200,
-              //       child: ListView.builder(
-              //         itemCount: notifications.length,
-              //         itemBuilder: (BuildContext context, int index) {
-              //           return ListTile(
-              //             title: Text(notifications[index]),
-              //             trailing: IconButton(
-              //               icon: Icon(Icons.delete),
-              //               onPressed: () {
-              //                 // Delete the notification.
-              //                 setState(() {
-              //                   notifications.removeAt(index);
-              //                 });
-              //               },
-              //             ),
-              //           );
-              //         },
-              //       ),
-              //     );
-              //   },
-              // );
-              // showDate();
-              TableCalendar(
-                firstDay: DateTime.utc(2022, 1, 1),
-                lastDay: DateTime.utc(2022, 12, 31),
-                focusedDay: _focusedDay,
-                calendarFormat: _calendarFormat,
-                selectedDayPredicate: (day) => isSameDay(_selectedDay, day),
-                onDaySelected: (selectedDay, focusedDay) {
-                  setState(() {
-                    _selectedDay = selectedDay;
-                    _focusedDay = focusedDay;
-                  });
-                },
-                onFormatChanged: (format) {
-                  setState(() {
-                    _calendarFormat = format;
-                  });
-                },
-                onDayLongPressed: _onDayLongPressed,
-              );
-            },
-            child: Text('Show Notifications'),
+          // child: ElevatedButton(
+          //   onPressed: () {
+          //     // showModalBottomSheet(
+          //     //   context: context,
+          //     //   builder: (BuildContext context) {
+          //     //     return Container(
+          //     //       height: 200,
+          //     //       child: ListView.builder(
+          //     //         itemCount: notifications.length,
+          //     //         itemBuilder: (BuildContext context, int index) {
+          //     //           return ListTile(
+          //     //             title: Text(notifications[index]),
+          //     //             trailing: IconButton(
+          //     //               icon: Icon(Icons.delete),
+          //     //               onPressed: () {
+          //     //                 // Delete the notification.
+          //     //                 setState(() {
+          //     //                   notifications.removeAt(index);
+          //     //                 });
+          //     //               },
+          //     //             ),
+          //     //           );
+          //     //         },
+          //     //       ),
+          //     //     );
+          //     //   },
+          //     // );
+          //     // showDate();
+          //     TableCalendar(
+          //       firstDay: DateTime.utc(2022, 1, 1),
+          //       lastDay: DateTime.utc(2022, 12, 31),
+          //       focusedDay: _focusedDay,
+          //       calendarFormat: _calendarFormat,
+          //       selectedDayPredicate: (day) => isSameDay(_selectedDay, day),
+          //       onDaySelected: (selectedDay, focusedDay) {
+          //         setState(() {
+          //           _selectedDay = selectedDay;
+          //           _focusedDay = focusedDay;
+          //         });
+          //       },
+          //       onFormatChanged: (format) {
+          //         setState(() {
+          //           _calendarFormat = format;
+          //         });
+          //       },
+          //       onDayLongPressed: _onDayLongPressed,
+          //     );
+          //   },
+          //   child: Text('Show Notifications'),
+          // ),
+          child: CircularPercentIndicator(
+            radius: 70.0,
+            lineWidth: 15.0,
+            percent: receivedNumber / 100,
+            center: Text(
+              "${receivedNumber}%",
+              style: TextStyle(
+                  color: Color.fromARGB(255, 170, 170, 170), fontSize: 20),
+            ),
+            progressColor: Color.fromRGBO(0, 78, 131, 10),
           ),
         ),
       ),

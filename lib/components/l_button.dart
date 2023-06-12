@@ -6,8 +6,10 @@ class L_Button extends StatefulWidget {
   final Function() onTap;
 
   final String text;
+  final IconData? icon;
   const L_Button({
     super.key,
+    this.icon,
     required this.onTap,
     required this.text,
   });
@@ -33,10 +35,20 @@ class _L_ButtonState extends State<L_Button> {
           borderRadius: BorderRadius.circular(15),
         ),
         child: Center(
-          child: Text(
-            _isPressed ? widget.text : widget.text,
-            style: TextStyle(
-                color: Colors.white, fontSize: 16, fontFamily: "Poppins"),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                widget.icon,
+                color: Colors.white,
+              ),
+              SizedBox(width: 10),
+              Text(
+                _isPressed ? widget.text : widget.text,
+                style: TextStyle(
+                    color: Colors.white, fontSize: 16, fontFamily: "Poppins"),
+              ),
+            ],
           ),
         ),
       ),

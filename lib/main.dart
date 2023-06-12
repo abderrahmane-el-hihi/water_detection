@@ -6,8 +6,10 @@ import 'package:flutter/services.dart';
 //import 'package:splashscreen/splashscreen.dart';
 import 'package:waterdetection/auth_page.dart';
 import 'package:waterdetection/components/darkTheme.dart';
+import 'package:waterdetection/services/connect_to_arduino.dart';
 import 'package:waterdetection/settingspage.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:waterdetection/test.dart';
 import 'components/lightTheme.dart';
 import 'firebase_options.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -45,6 +47,9 @@ void main() async {
   );
   //to here
   //await Hive.initFlutter();
+  //connect to py local server
+  //connect_to_server().Connect();
+  //
   runApp(const MyApp());
 }
 
@@ -94,7 +99,7 @@ class _MyAppState extends State<MyApp> {
           localizationsDelegates: _localization.localizationsDelegates,
           //theme: notifier.isDark ? ThemeData.dark() : ThemeData.light(),
           theme: lightTheme,
-          darkTheme: darkTheme,
+          //darkTheme: darkTheme,
           debugShowCheckedModeBanner: false,
 
           // home: Consumer<AuthProvider>(

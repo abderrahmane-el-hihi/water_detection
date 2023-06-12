@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localization/flutter_localization.dart';
+import 'package:waterdetection/components/l_button.dart';
 // import 'package:waterdetection/HomePage.dart';
 import 'package:waterdetection/home2page.dart';
 import 'package:waterdetection/settingspage.dart';
@@ -21,7 +22,30 @@ class _DetailsPageState extends State<DetailsPage> {
         await Export_data().fetchDataFromFirestore();
     print(dataList);
   }
+
   //List<Map<String, dynamic>> data = await Export_data().fetchDataFromFirestore();
+  void PickDate() {
+    showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2036),
+      // builder: (BuildContext context, Widget? child) {
+      //   return Theme(
+      //     data: ThemeData.light().copyWith(
+      //       primaryColor: Color.fromRGBO(0, 78, 131, 10),
+      //       buttonTheme: ButtonThemeData(
+      //         textTheme: ButtonTextTheme.primary,
+      //         shape: RoundedRectangleBorder(
+      //           borderRadius: BorderRadius.circular(8.0),
+      //         ),
+      //       ),
+      //     ),
+      //     child: child!,
+      //   );
+      // },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,45 +72,6 @@ class _DetailsPageState extends State<DetailsPage> {
             color: Color.fromRGBO(0, 78, 131, 10),
           ),
         ),
-        actions: [
-          IconButton(
-            onPressed: () {
-              showModalBottomSheet(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        //color: Colors.black,
-                      ),
-                      padding: EdgeInsets.all(10),
-                      child: Column(
-                        children: [
-                          Text('Notifications'),
-                          Divider(
-                            color: Color.fromARGB(255, 222, 228, 226),
-                            thickness: 1,
-                          ),
-                        ],
-                      ),
-                    );
-                  });
-            },
-            icon: Icon(
-              Icons.notifications_rounded,
-              color: Color.fromRGBO(0, 78, 131, 10),
-            ),
-          ),
-          IconButton(
-            onPressed: () {
-              Export_data().exportDataToExcel(fetchData);
-            },
-            icon: Icon(
-              Icons.download_rounded,
-              color: Color.fromRGBO(0, 78, 131, 10),
-            ),
-          )
-        ],
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -118,7 +103,7 @@ class _DetailsPageState extends State<DetailsPage> {
                           children: [
                             Center(
                               child: SizedBox(
-                                height: 200,
+                                height: 220,
                                 child: GraphBar(
                                   SummaryWater: SummaryWaterDb,
                                 ),
@@ -126,6 +111,40 @@ class _DetailsPageState extends State<DetailsPage> {
                             ),
                             SizedBox(
                               height: 20,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Flexible(
+                                  child: L_Button(
+                                    onTap: PickDate,
+                                    text: 'pick a date',
+                                    icon: Icons.calendar_month_rounded,
+                                  ),
+                                ),
+                                Container(
+                                  height: 60,
+                                  width: 60,
+                                  decoration: BoxDecoration(
+                                    color: Color.fromARGB(0, 255, 255, 255),
+                                    borderRadius: BorderRadius.circular(15),
+                                    border: Border.all(
+                                      width: 2,
+                                      color: Color.fromRGBO(0, 78, 131, 10),
+                                    ),
+                                  ),
+                                  child: IconButton(
+                                    onPressed: () {
+                                      Export_data()
+                                          .exportDataToExcel(fetchData);
+                                    },
+                                    icon: Icon(
+                                      Icons.download_rounded,
+                                      color: Color.fromRGBO(0, 78, 131, 10),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ],
                         );
