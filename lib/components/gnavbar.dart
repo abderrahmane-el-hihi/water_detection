@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localization/flutter_localization.dart';
 //import 'package:flutter_localization/flutter_localization.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+
+import '../settingspage.dart';
 //import 'package:waterdetection/settingspage.dart';
 //import '../Home2page.dart';
 //import '../homepage.dart';
@@ -30,13 +33,11 @@ class GNavBar extends StatelessWidget {
       tabs: [
         GButton(
           icon: Icons.home_rounded,
-          //text: '${AppLocale.words[9].getString(context)}',
-          text: 'Home',
+          text: '${AppLocale.words[8].getString(context)}',
         ),
         GButton(
           icon: Icons.settings_rounded,
-          //text: '${AppLocale.words[0].getString(context)}',
-          text: 'Settings',
+          text: '${AppLocale.words[0].getString(context)}',
         ),
       ],
     );

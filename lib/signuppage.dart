@@ -71,7 +71,7 @@ class _SignUpPageState extends State<SignUpPage> {
               child: Center(
                 child: Column(
                   children: [
-                    SizedBox(height: 50),
+                    SizedBox(height: 25),
                     Text(
                       '${AppLocale.words[17].getString(context)}',
                       style: TextStyle(
@@ -79,7 +79,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           fontSize: 16,
                           fontWeight: FontWeight.w600),
                     ),
-                    SizedBox(height: 75),
+                    SizedBox(height: 50),
                     //name textfield
                     Text_Field(
                       controller: namecontroller,
@@ -118,8 +118,6 @@ class _SignUpPageState extends State<SignUpPage> {
                       onTap: SignUp,
                       text: '${AppLocale.words[17].getString(context)}',
                     ),
-
-                    //SizedBox(height: 25),
 
                     SizedBox(height: 25),
 

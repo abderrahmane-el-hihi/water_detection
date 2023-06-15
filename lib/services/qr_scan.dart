@@ -26,9 +26,13 @@ class _QRScanState extends State<QRScan> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Scanner le code QR'),
+        title: Text(
+          'Scan QR code',
+          style: TextStyle(color: Colors.white),
+        ),
         backgroundColor: Color.fromRGBO(0, 78, 131, 10),
         elevation: 0,
+        leading: null,
       ),
       body: Column(
         children: [

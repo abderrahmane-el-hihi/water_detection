@@ -41,6 +41,8 @@ class _HomePageState extends State<HomePage> {
     numberReceiver.connectToServer((number) {
       setState(() {
         receivedNumber = number;
+        SummaryWaterDb.removeAt(0);
+        SummaryWaterDb.add(number);
       });
     });
   }
@@ -53,7 +55,7 @@ class _HomePageState extends State<HomePage> {
     // timer = Timer.periodic(Duration(seconds: 900), (Timer t) => getData());
     addNotification(message);
     numberReceiver = connect_to_server(
-        '192.168.11.159', 37494); // Replace with your server address and port
+        '192.168.1.104', 37494); // Replace with your server address and port
     connect();
   }
 
@@ -90,10 +92,10 @@ class _HomePageState extends State<HomePage> {
       RefreshController(initialRefresh: false);
 
   void OnRefresh() async {
-    await FirebaseFirestore.instance
-        .collection('water_tank')
-        .doc('tank1')
-        .get();
+    // await FirebaseFirestore.instance
+    //     .collection('water_tank')
+    //     .doc('tank1')
+    //     .get();
 
     refreshController.refreshCompleted();
   }
@@ -143,87 +145,6 @@ class _HomePageState extends State<HomePage> {
               color: Color.fromRGBO(0, 78, 131, 10),
             ),
           ),
-          IconButton(
-            onPressed: () {
-              // showModalBottomSheet(
-              //   context: context,
-              //   builder: (BuildContext context) {
-              //     return Container(
-              //       decoration: BoxDecoration(
-              //         borderRadius: BorderRadius.circular(10),
-              //       ),
-              //       padding: EdgeInsets.all(10),
-              //       child: Column(
-              //         children: <Widget>[
-              //           Text('${AppLocale.words[3].getString(context)}'),
-              //           Divider(
-              //             color: Color.fromARGB(255, 222, 228, 226),
-              //             thickness: 1,
-              //           ),
-              //           Expanded(
-              //             child: ListView.builder(
-              //               itemCount: notifications.length,
-              //               itemBuilder: (BuildContext context, int index) {
-              //                 return ListTile(
-              //                   title: Text(notifications[index]),
-              //                   trailing: IconButton(
-              //                     icon: Icon(Icons.delete),
-              //                     onPressed: () {
-              //                       // Remove notification when delete button is pressed
-              //                       removeNotification(notifications[index]);
-              //                     },
-              //                   ),
-              //                 );
-              //               },
-              //             ),
-              //           ),
-              //         ],
-              //       ),
-              //     );
-              //   },
-              // );
-              showModalBottomSheet(
-                context: context,
-                builder: (BuildContext context) {
-                  return Container(
-                    height: 200,
-                    child: Column(
-                      children: [
-                        Text('Notifications'),
-                        Divider(
-                          color: Color.fromARGB(255, 222, 228, 226),
-                          thickness: 1,
-                        ),
-                        Expanded(
-                          child: ListView.builder(
-                            itemCount: notifications.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              return ListTile(
-                                title: Text(notifications[index]),
-                                trailing: IconButton(
-                                  icon: Icon(Icons.delete),
-                                  onPressed: () {
-                                    // Delete the notification.
-                                    setState(() {
-                                      notifications.removeAt(index);
-                                    });
-                                  },
-                                ),
-                              );
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              );
-            },
-            icon: Icon(
-              Icons.notifications_rounded,
-              color: Color.fromRGBO(0, 78, 131, 10),
-            ),
-          ),
         ],
       ),
       body: SmartRefresher(
@@ -231,8 +152,97 @@ class _HomePageState extends State<HomePage> {
         onRefresh: OnRefresh,
         child: SafeArea(
           child: Column(
-            children: [
-              // FutureBuilder(
+            children: <Widget>[
+              SizedBox(
+                height: 10,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text(
+                      '${AppLocale.words[10].getString(context)} :',
+                      style: TextStyle(
+                          fontSize: 24,
+                          color: Color.fromRGBO(0, 78, 131, 10),
+                          fontFamily: "Poppins"),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 50,
+              ),
+              CircularPercentIndicator(
+                radius: 100.0,
+                lineWidth: 15.0,
+                percent: receivedNumber / 100,
+                center: Text(
+                  "${receivedNumber}%",
+                  style: TextStyle(
+                      color: Color.fromARGB(255, 170, 170, 170), fontSize: 20),
+                ),
+                progressColor: t()
+                    ? Color.fromARGB(144, 255, 57, 57)
+                    : Color.fromRGBO(0, 78, 131, 10),
+              ),
+              SizedBox(
+                height: 50,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text(
+                      '${AppLocale.words[11].getString(context)} :',
+                      style: TextStyle(
+                          fontSize: 24,
+                          color: Color.fromRGBO(0, 78, 131, 10),
+                          fontFamily: "Poppins"),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 25,
+              ),
+              SizedBox(
+                height: 200,
+                // child: GraphBar(
+                //   SummaryWater: SummaryWaterDb,
+                // ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+
+
+// CircularPercentIndicator(
+//   radius: 300,
+//   lineWidth: 20,
+//   progressColor: Color.fromRGBO(0, 78, 131, 10),
+//   backgroundColor: Color.fromARGB(255, 189, 189, 189),
+//   circularStrokeCap: CircularStrokeCap.round,
+//   percent: 0.7,
+//   center: Text(
+//     '70%',
+//     style: TextStyle(
+//       fontSize: 50,
+//       color: Color.fromRGBO(0, 78, 131, 10),
+//     ),
+//   ),
+// ),
+
+//----------------read dat from water_tank collection in firebase
+
+// FutureBuilder(
               //     future: FirebaseFirestore.instance
               //         .collection('water_tank')
               //         .doc('tank1')
@@ -347,102 +357,42 @@ class _HomePageState extends State<HomePage> {
               //       }
               //     }),
 
-              SizedBox(
-                height: 10,
-              ),
-              Text(
-                '${AppLocale.words[10].getString(context)} :',
-                style: TextStyle(
-                    fontSize: 30,
-                    color: Color.fromRGBO(0, 78, 131, 10),
-                    fontFamily: "Poppins"),
-              ),
-              SizedBox(
-                height: 30,
-              ),
-              CircularPercentIndicator(
-                radius: 70.0,
-                lineWidth: 15.0,
-                percent: receivedNumber / 100,
-                center: Text(
-                  "${receivedNumber}%",
-                  style: TextStyle(
-                      color: Color.fromARGB(255, 170, 170, 170), fontSize: 20),
-                ),
-                progressColor: t()
-                    ? Color.fromARGB(144, 255, 57, 57)
-                    : Color.fromRGBO(0, 78, 131, 10),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Text(
-                '${AppLocale.words[11].getString(context)} :',
-                style: TextStyle(
-                    fontSize: 50,
-                    color: Color.fromRGBO(0, 78, 131, 10),
-                    fontFamily: "Poppins"),
-              ),
-              SizedBox(
-                height: 50,
-              ),
-              FutureBuilder(
-                  future:
-                      FirebaseFirestore.instance.collection('history').get(),
-                  builder: (context,
-                      AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>>
-                          snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return Center(
-                        child: CircularProgressIndicator(
-                            color: Color.fromRGBO(0, 78, 131, 10)),
-                      );
-                    } else if (snapshot.hasData) {
-                      SummaryWaterDb.clear();
-                      List<QueryDocumentSnapshot<Map<String, dynamic>>>
-                          documents = snapshot.data!.docs;
-                      for (var i = 0; i < snapshot.data!.size; i++) {
-                        SummaryWaterDb.add(
-                            documents[i].data()['available_capa']);
-                      }
-                      print(SummaryWaterDb);
-                      return Column(
-                        children: [
-                          Center(
-                            child: SizedBox(
-                              height: 200,
-                              child: GraphBar(
-                                SummaryWater: SummaryWaterDb,
-                              ),
-                            ),
-                          ),
-                        ],
-                      );
-                    }
-                    return Text('error');
-                  }),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
 
 
+//----------------read dat from history collection in firebase
 
-// CircularPercentIndicator(
-//   radius: 300,
-//   lineWidth: 20,
-//   progressColor: Color.fromRGBO(0, 78, 131, 10),
-//   backgroundColor: Color.fromARGB(255, 189, 189, 189),
-//   circularStrokeCap: CircularStrokeCap.round,
-//   percent: 0.7,
-//   center: Text(
-//     '70%',
-//     style: TextStyle(
-//       fontSize: 50,
-//       color: Color.fromRGBO(0, 78, 131, 10),
-//     ),
-//   ),
-// ),
+// FutureBuilder(
+//                   future:
+//                       FirebaseFirestore.instance.collection('history').get(),
+//                   builder: (context,
+//                       AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>>
+//                           snapshot) {
+//                     if (snapshot.connectionState == ConnectionState.waiting) {
+//                       return Center(
+//                         child: CircularProgressIndicator(
+//                             color: Color.fromRGBO(0, 78, 131, 10)),
+//                       );
+//                     } else if (snapshot.hasData) {
+//                       SummaryWaterDb.clear();
+//                       List<QueryDocumentSnapshot<Map<String, dynamic>>>
+//                           documents = snapshot.data!.docs;
+//                       for (var i = 0; i < snapshot.data!.size; i++) {
+//                         SummaryWaterDb.add(
+//                             documents[i].data()['available_capa']);
+//                       }
+//                       print(SummaryWaterDb);
+//                       return Column(
+//                         children: [
+//                           Center(
+//                             child: SizedBox(
+//                               height: 200,
+//                               child: GraphBar(
+//                                 SummaryWater: SummaryWaterDb,
+//                               ),
+//                             ),
+//                           ),
+//                         ],
+//                       );
+//                     }
+//                     return Text('error');
+//                   }),

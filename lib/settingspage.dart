@@ -166,16 +166,11 @@ class _SettingsPageState extends State<SettingsPage> {
               child: Column(
                 children: [
                   SizedBox(
-                    height: 10,
+                    height: 30,
                   ),
                   Container(
-                    //padding: EdgeInsets.only(right: 150),
                     height: 70,
-                    //width: 240,
                     width: MediaQuery.of(context).size.width * 0.7,
-
-                    //color: Colors.black,
-
                     decoration: BoxDecoration(
                       color: Color.fromARGB(0, 255, 255, 255),
                       borderRadius: BorderRadius.circular(15),
@@ -212,7 +207,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     ),
                   ),
                   SizedBox(
-                    height: 15,
+                    height: 50,
                   ),
                   Container(
                       margin: EdgeInsets.symmetric(horizontal: 30),
@@ -220,7 +215,7 @@ class _SettingsPageState extends State<SettingsPage> {
                           color: Color.fromRGBO(179, 179, 179, 1),
                           thickness: 1)),
                   SizedBox(
-                    height: 20,
+                    height: 10,
                   ),
                   Container(
                     margin: EdgeInsets.symmetric(horizontal: 60),
@@ -330,66 +325,66 @@ class _SettingsPageState extends State<SettingsPage> {
                   Container(
                     margin: EdgeInsets.symmetric(horizontal: 60),
                     child: Column(children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Icon(
-                            Icons.notifications_rounded,
-                            color: Color.fromRGBO(0, 78, 131, 10),
-                          ),
-                          Container(
-                            width: MediaQuery.of(context).size.width * 0.55,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  //'${AppLocale.words[3].getString(context)}',
-                                  'Notifications',
-                                  style: TextStyle(fontSize: 16),
-                                ),
-                                SwitchBtn(
-                                  activecolor: Color.fromRGBO(121, 158, 255, 1),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //   children: [
+                      //     Icon(
+                      //       Icons.notifications_rounded,
+                      //       color: Color.fromRGBO(0, 78, 131, 10),
+                      //     ),
+                      //     Container(
+                      //       width: MediaQuery.of(context).size.width * 0.55,
+                      //       child: Row(
+                      //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //         children: [
+                      //           Text(
+                      //             //'${AppLocale.words[3].getString(context)}',
+                      //             'Notifications',
+                      //             style: TextStyle(fontSize: 16),
+                      //           ),
+                      //           SwitchBtn(
+                      //             activecolor: Color.fromRGBO(121, 158, 255, 1),
+                      //           ),
+                      //         ],
+                      //       ),
+                      //     ),
+                      //   ],
+                      // ),
                       SizedBox(
                         height: 5,
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Icon(Icons.wb_sunny_rounded,
-                              color: Color.fromRGBO(0, 78, 131, 10)),
-                          Container(
-                            width: MediaQuery.of(context).size.width * 0.55,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  '${AppLocale.words[4].getString(context)}',
-                                  style: TextStyle(fontSize: 16),
-                                ),
-                                Switch(
-                                  activeColor: Color.fromRGBO(121, 158, 255, 1),
-                                  value: Provider.of<ThemeNotifier>(context)
-                                      ._isDark,
-                                  onChanged: (value) {
-                                    Provider.of<ThemeNotifier>(context,
-                                            listen: false)
-                                        .isDark = value;
-                                  },
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 15,
-                      ),
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //   children: [
+                      //     Icon(Icons.wb_sunny_rounded,
+                      //         color: Color.fromRGBO(0, 78, 131, 10)),
+                      //     Container(
+                      //       width: MediaQuery.of(context).size.width * 0.55,
+                      //       child: Row(
+                      //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //         children: [
+                      //           Text(
+                      //             '${AppLocale.words[4].getString(context)}',
+                      //             style: TextStyle(fontSize: 16),
+                      //           ),
+                      //           Switch(
+                      //             activeColor: Color.fromRGBO(121, 158, 255, 1),
+                      //             value: Provider.of<ThemeNotifier>(context)
+                      //                 ._isDark,
+                      //             onChanged: (value) {
+                      //               Provider.of<ThemeNotifier>(context,
+                      //                       listen: false)
+                      //                   .isDark = value;
+                      //             },
+                      //           ),
+                      //         ],
+                      //       ),
+                      //     ),
+                      //   ],
+                      // ),
+                      // SizedBox(
+                      //   height: 15,
+                      // ),
                       //showing languages to translate the app
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -423,7 +418,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     ]),
                   ),
                   SizedBox(
-                    height: 20,
+                    height: 10,
                   ),
                   Container(
                       margin: EdgeInsets.symmetric(horizontal: 30),
@@ -465,14 +460,12 @@ class _SettingsPageState extends State<SettingsPage> {
                     ),
                   ),
                   SizedBox(
-                    height: 20,
+                    height: 50,
                   ),
                   GestureDetector(
                     onTap: SignOut,
                     child: Container(
-                      //width: 120,
                       width: MediaQuery.of(context).size.width * 0.5,
-
                       height: 50,
                       decoration: BoxDecoration(
                         color: Color.fromARGB(0, 255, 255, 255),
@@ -523,7 +516,9 @@ mixin AppLocale {
     'History',
     'Privacy',
     'Sign Up',
-    'Sign In'
+    'Sign In',
+    'pick a date',
+    'Week measures: ',
   ];
 
   static Map<String, dynamic> EN = {
@@ -547,6 +542,8 @@ mixin AppLocale {
     words[16]: 'Privacy',
     words[17]: 'Sign Up',
     words[18]: 'Sign In',
+    words[19]: 'Pick a date',
+    words[20]: 'Week measures: ',
   };
   static Map<String, dynamic> FR = {
     title: 'Localisation',
@@ -569,6 +566,8 @@ mixin AppLocale {
     words[16]: 'Vie privée',
     words[17]: 'S\'inscrire',
     words[18]: 'Connexion',
+    words[19]: 'choisire une date',
+    words[20]: 'Les mesures de semaine: ',
   };
   static const Map<String, dynamic> AR = {title: 'الترجمه'};
 }

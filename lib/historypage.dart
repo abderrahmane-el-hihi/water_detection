@@ -78,7 +78,7 @@ class _DetailsPageState extends State<DetailsPage> {
           child: Column(
             children: [
               SizedBox(
-                height: 100,
+                height: 50,
               ),
               Center(
                 child: FutureBuilder(
@@ -97,10 +97,27 @@ class _DetailsPageState extends State<DetailsPage> {
                           SummaryWaterDb.add(
                               documents[i].data()['available_capa']);
                         }
-                        print(SummaryWaterDb);
-
                         return Column(
                           children: [
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 16),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    '${AppLocale.words[20].getString(context)}',
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        color: Color.fromRGBO(0, 78, 131, 10),
+                                        fontFamily: "Poppins"),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(
+                              height: 30,
+                            ),
                             Center(
                               child: SizedBox(
                                 height: 220,
@@ -113,18 +130,16 @@ class _DetailsPageState extends State<DetailsPage> {
                               height: 20,
                             ),
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
-                                Flexible(
-                                  child: L_Button(
-                                    onTap: PickDate,
-                                    text: 'pick a date',
-                                    icon: Icons.calendar_month_rounded,
-                                  ),
+                                L_Button_2(
+                                  onTap: PickDate,
+                                  text:
+                                      '${AppLocale.words[19].getString(context)}',
+                                  icon: Icons.calendar_month_rounded,
                                 ),
                                 Container(
-                                  height: 60,
-                                  width: 60,
+                                  height: 80,
+                                  width: 80,
                                   decoration: BoxDecoration(
                                     color: Color.fromARGB(0, 255, 255, 255),
                                     borderRadius: BorderRadius.circular(15),
@@ -141,6 +156,7 @@ class _DetailsPageState extends State<DetailsPage> {
                                     icon: Icon(
                                       Icons.download_rounded,
                                       color: Color.fromRGBO(0, 78, 131, 10),
+                                      size: 34,
                                     ),
                                   ),
                                 ),
