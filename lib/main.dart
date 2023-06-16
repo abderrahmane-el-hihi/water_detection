@@ -47,9 +47,7 @@ void main() async {
   );
   //to here
   //await Hive.initFlutter();
-  //connect to py local server
-  //connect_to_server().Connect();
-  //
+
   runApp(const MyApp());
 }
 

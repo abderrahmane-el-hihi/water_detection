@@ -41,8 +41,8 @@ class _HomePageState extends State<HomePage> {
     numberReceiver.connectToServer((number) {
       setState(() {
         receivedNumber = number;
-        SummaryWaterDb.removeAt(0);
-        SummaryWaterDb.add(number);
+        //SummaryWaterDb.removeAt(0);
+        //SummaryWaterDb.add(number);
       });
     });
   }
@@ -53,36 +53,13 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     Notif.initialize(flutterLocalNotificationsPlugin);
     // timer = Timer.periodic(Duration(seconds: 900), (Timer t) => getData());
-    addNotification(message);
-    numberReceiver = connect_to_server(
-        '192.168.1.104', 37494); // Replace with your server address and port
+    numberReceiver = connect_to_server('192.168.11.159', 54900);
     connect();
   }
 
   void ToSettings() {
     Navigator.push(
         context, MaterialPageRoute(builder: (context) => SettingsPage()));
-  }
-
-  List<String> notifications = []; // List to store notifications
-
-  // Method to add a notification to the list and schedule a local notification
-  Future<void> addNotification(String notification) async {
-    setState(() {
-      notifications.add(notification);
-    });
-  }
-
-  // Method to remove a notification from the list
-  void removeNotification(String notification) {
-    setState(() {
-      notifications.remove(notification);
-    });
-  }
-
-  Future<void> onSelectNotification(String? payload) async {
-    // Handle notification tap event here
-    print('Notification tapped: $payload');
   }
 
   List SummaryWaterDb = [];
@@ -102,6 +79,11 @@ class _HomePageState extends State<HomePage> {
 
   bool t() {
     if (receivedNumber < 20) {
+      Notif.showBigTextNotification(
+          title: "Water detection",
+          body: "alert water level",
+          fln: flutterLocalNotificationsPlugin);
+      message = 'your water tank percentage is about $receivedNumber%';
       return true;
     }
     return false;
@@ -222,8 +204,6 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-
-
 // CircularPercentIndicator(
 //   radius: 300,
 //   lineWidth: 20,
@@ -243,121 +223,119 @@ class _HomePageState extends State<HomePage> {
 //----------------read dat from water_tank collection in firebase
 
 // FutureBuilder(
-              //     future: FirebaseFirestore.instance
-              //         .collection('water_tank')
-              //         .doc('tank1')
-              //         .get(),
+//     future: FirebaseFirestore.instance
+//         .collection('water_tank')
+//         .doc('tank1')
+//         .get(),
 
-              //     // .where('detector_ref', isEqualTo: '/detector/detector1')
-              //     // .get(),
-              //     builder: (context, AsyncSnapshot snapshot) {
-              //       if (snapshot.connectionState == ConnectionState.waiting) {
-              //         return Center(
-              //           //child: Text('Loading',style: TextStyle(fontSize: 40.0, fontFamily: "Poppins"),),
-              //           child: CircularProgressIndicator(
-              //             color: Color.fromRGBO(0, 78, 131, 10),
-              //           ),
-              //         );
-              //       } else {
-              //         if (snapshot.hasData) {
-              //           int p = snapshot.data!["percentage"];
-              //           print(p);
-              //           if (p <= 20) {
-              //             Notif.showBigTextNotification(
-              //                 title: "Water detection",
-              //                 body: "alert water level",
-              //                 fln: flutterLocalNotificationsPlugin);
-              //             message = 'your water tank percentage is about $p%';
-              //           }
-              //           bool t() {
-              //             if (p < 20) {
-              //               return true;
-              //             }
-              //             return false;
-              //           }
+//     // .where('detector_ref', isEqualTo: '/detector/detector1')
+//     // .get(),
+//     builder: (context, AsyncSnapshot snapshot) {
+//       if (snapshot.connectionState == ConnectionState.waiting) {
+//         return Center(
+//           //child: Text('Loading',style: TextStyle(fontSize: 40.0, fontFamily: "Poppins"),),
+//           child: CircularProgressIndicator(
+//             color: Color.fromRGBO(0, 78, 131, 10),
+//           ),
+//         );
+//       } else {
+//         if (snapshot.hasData) {
+//           int p = snapshot.data!["percentage"];
+//           print(p);
+//           if (p <= 20) {
+//             Notif.showBigTextNotification(
+//                 title: "Water detection",
+//                 body: "alert water level",
+//                 fln: flutterLocalNotificationsPlugin);
+//             message = 'your water tank percentage is about $p%';
+//           }
+//           bool t() {
+//             if (p < 20) {
+//               return true;
+//             }
+//             return false;
+//           }
 
-              //           return SingleChildScrollView(
-              //             child: Center(
-              //               child: Column(
-              //                 children: [
-              //                   SizedBox(
-              //                     height: 10,
-              //                   ),
-              //                   Text(
-              //                     '${AppLocale.words[10].getString(context)} :',
-              //                     style: TextStyle(
-              //                         fontSize: 30,
-              //                         color: Color.fromRGBO(0, 78, 131, 10),
-              //                         fontFamily: "Poppins"),
-              //                   ),
-              //                   SizedBox(
-              //                     height: 30,
-              //                   ),
-              //                   Container(
-              //                     height: 150.0,
-              //                     width: 150.0,
-              //                     //lequid custom progress form home page
-              //                     // child: LiquidCustomProgressIndicator(
-              //                     //   value: p / 100,
-              //                     //   valueColor: AlwaysStoppedAnimation(
-              //                     //     C
-              //                     //         ? Color.fromARGB(144, 155, 173, 219)
-              //                     //         : Color.fromARGB(144, 255, 57, 57),
-              //                     //   ),
-              //                     //   backgroundColor:
-              //                     //       Color.fromRGBO(212, 224, 255, 0.565),
-              //                     //   direction: Axis.vertical,
-              //                     //   shapePath: CylinderPath(),
-              //                     //   center: Text(
-              //                     //     "${p}%",
-              //                     //     style: TextStyle(
-              //                     //         color:
-              //                     //             Color.fromARGB(255, 170, 170, 170),
-              //                     //         fontSize: 20),
-              //                     //   ),
-              //                     // ),
-              //                     child: CircularPercentIndicator(
-              //                       radius: 70.0,
-              //                       lineWidth: 15.0,
-              //                       percent: p / 100,
-              //                       center: Text(
-              //                         "${p}%",
-              //                         style: TextStyle(
-              //                             color: Color.fromARGB(
-              //                                 255, 170, 170, 170),
-              //                             fontSize: 20),
-              //                       ),
-              //                       progressColor: t()
-              //                           ? Color.fromARGB(144, 255, 57, 57)
-              //                           : Color.fromRGBO(0, 78, 131, 10),
-              //                     ),
-              //                   ),
-              //                   SizedBox(
-              //                     height: 20,
-              //                   ),
-              //                   Text(
-              //                     '${AppLocale.words[11].getString(context)} :',
-              //                     style: TextStyle(
-              //                         fontSize: 50,
-              //                         color: Color.fromRGBO(0, 78, 131, 10),
-              //                         fontFamily: "Poppins"),
-              //                   ),
-              //                   SizedBox(
-              //                     height: 50,
-              //                   ),
-              //                 ],
-              //               ),
-              //             ),
-              //           );
-              //         } else {
-              //           return Center(
-              //             child: Text('no data'),
-              //           );
-              //         }
-              //       }
-              //     }),
-
-
+//           return SingleChildScrollView(
+//             child: Center(
+//               child: Column(
+//                 children: [
+//                   SizedBox(
+//                     height: 10,
+//                   ),
+//                   Text(
+//                     '${AppLocale.words[10].getString(context)} :',
+//                     style: TextStyle(
+//                         fontSize: 30,
+//                         color: Color.fromRGBO(0, 78, 131, 10),
+//                         fontFamily: "Poppins"),
+//                   ),
+//                   SizedBox(
+//                     height: 30,
+//                   ),
+//                   Container(
+//                     height: 150.0,
+//                     width: 150.0,
+//                     //lequid custom progress form home page
+//                     // child: LiquidCustomProgressIndicator(
+//                     //   value: p / 100,
+//                     //   valueColor: AlwaysStoppedAnimation(
+//                     //     C
+//                     //         ? Color.fromARGB(144, 155, 173, 219)
+//                     //         : Color.fromARGB(144, 255, 57, 57),
+//                     //   ),
+//                     //   backgroundColor:
+//                     //       Color.fromRGBO(212, 224, 255, 0.565),
+//                     //   direction: Axis.vertical,
+//                     //   shapePath: CylinderPath(),
+//                     //   center: Text(
+//                     //     "${p}%",
+//                     //     style: TextStyle(
+//                     //         color:
+//                     //             Color.fromARGB(255, 170, 170, 170),
+//                     //         fontSize: 20),
+//                     //   ),
+//                     // ),
+//                     child: CircularPercentIndicator(
+//                       radius: 70.0,
+//                       lineWidth: 15.0,
+//                       percent: p / 100,
+//                       center: Text(
+//                         "${p}%",
+//                         style: TextStyle(
+//                             color: Color.fromARGB(
+//                                 255, 170, 170, 170),
+//                             fontSize: 20),
+//                       ),
+//                       progressColor: t()
+//                           ? Color.fromARGB(144, 255, 57, 57)
+//                           : Color.fromRGBO(0, 78, 131, 10),
+//                     ),
+//                   ),
+//                   SizedBox(
+//                     height: 20,
+//                   ),
+//                   Text(
+//                     '${AppLocale.words[11].getString(context)} :',
+//                     style: TextStyle(
+//                         fontSize: 50,
+//                         color: Color.fromRGBO(0, 78, 131, 10),
+//                         fontFamily: "Poppins"),
+//                   ),
+//                   SizedBox(
+//                     height: 50,
+//                   ),
+//                 ],
+//               ),
+//             ),
+//           );
+//         } else {
+//           return Center(
+//             child: Text('no data'),
+//           );
+//         }
+//       }
+//     }),
 
 //----------------read dat from history collection in firebase
 

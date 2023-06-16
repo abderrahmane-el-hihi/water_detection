@@ -1,5 +1,4 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-
 //import 'package:timezone/timezone.dart' as tz;
 
 // class NotificationService {
@@ -74,8 +73,8 @@ class Notif {
       required FlutterLocalNotificationsPlugin fln}) async {
     AndroidNotificationDetails androidPlatformChannelSpecifics =
         new AndroidNotificationDetails(
-      'you_can_name_it_whatever1',
-      'channel_name',
+      '',
+      '',
       playSound: true,
       //sound: RawResourceAndroidNotificationSound('notification'),
       importance: Importance.max,
@@ -85,5 +84,27 @@ class Notif {
       android: androidPlatformChannelSpecifics,
     );
     await fln.show(0, title, body, not);
+  }
+
+  static Future showBackgroundNotification(
+      {var id = 1,
+      required String title,
+      required String body,
+      var payload,
+      required FlutterLocalNotificationsPlugin fln}) async {
+    await fln.periodicallyShow(
+      id,
+      title,
+      body,
+      RepeatInterval.everyMinute,
+      NotificationDetails(
+        android: new AndroidNotificationDetails(
+          '',
+          '',
+          importance: Importance.max,
+          priority: Priority.high,
+        ),
+      ),
+    );
   }
 }

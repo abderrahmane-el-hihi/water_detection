@@ -2,25 +2,48 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localization/flutter_localization.dart';
 import 'package:waterdetection/components/l_button.dart';
-// import 'package:waterdetection/HomePage.dart';
 import 'package:waterdetection/home2page.dart';
 import 'package:waterdetection/settingspage.dart';
 import 'components/graph_bar/graphbar.dart';
+import 'services/connect_to_arduino.dart';
 import 'services/export_data.dart';
 
 class DetailsPage extends StatefulWidget {
   const DetailsPage({super.key});
-
   @override
   State<DetailsPage> createState() => _DetailsPageState();
 }
 
 class _DetailsPageState extends State<DetailsPage> {
   List SummaryWaterDb = [];
-  void fetchData() async {
-    List<Map<String, dynamic>> dataList =
-        await Export_data().fetchDataFromFirestore();
-    print(dataList);
+  int receivedNumber = 0;
+  late connect_to_server numberReceiver;
+  void connect() {
+    numberReceiver.connectToServer((number) {
+      setState(() {
+        receivedNumber = number;
+      });
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    numberReceiver = connect_to_server('192.168.11.159', 54900);
+    connect();
+  }
+
+  // void fetchData() async {
+  //   List<Map<String, dynamic>> dataList =
+  //       await ExportData().fetchDataFromFirestore();
+  //   print(dataList);
+  // }
+  List<int> data = [];
+  FillDataList() {
+    for (var i = 0; i < 5; i++) {
+      data.add(receivedNumber);
+    }
+    print(data.toString());
   }
 
   //List<Map<String, dynamic>> data = await Export_data().fetchDataFromFirestore();
@@ -150,8 +173,8 @@ class _DetailsPageState extends State<DetailsPage> {
                                   ),
                                   child: IconButton(
                                     onPressed: () {
-                                      Export_data()
-                                          .exportDataToExcel(fetchData);
+                                      ExportData()
+                                          .saveDataToJSON(FillDataList());
                                     },
                                     icon: Icon(
                                       Icons.download_rounded,
