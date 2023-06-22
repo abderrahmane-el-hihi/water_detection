@@ -1,12 +1,8 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-//import 'package:hive/hive.dart';
-//import 'package:hive_flutter/hive_flutter.dart';
-//import 'package:splashscreen/splashscreen.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:waterdetection/auth_page.dart';
-import 'package:waterdetection/components/darkTheme.dart';
-import 'package:waterdetection/services/connect_to_arduino.dart';
 import 'package:waterdetection/settingspage.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:waterdetection/test.dart';
@@ -14,7 +10,7 @@ import 'components/lightTheme.dart';
 import 'firebase_options.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_localization/flutter_localization.dart';
-import 'package:provider/provider.dart';
+import 'package:animated_splash_screen/animated_splash_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -89,49 +85,18 @@ class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<ThemeNotifier>(
-      create: (_) => ThemeNotifier(),
-      child: Consumer<ThemeNotifier>(builder: (context, notifier, child) {
-        return MaterialApp(
-          supportedLocales: _localization.supportedLocales,
-          localizationsDelegates: _localization.localizationsDelegates,
-          //theme: notifier.isDark ? ThemeData.dark() : ThemeData.light(),
-          theme: lightTheme,
-          //darkTheme: darkTheme,
-          debugShowCheckedModeBanner: false,
-
-          // home: Consumer<AuthProvider>(
-          //   builder: (context, authProvider, child) {
-          //     if (authProvider.user != null) {
-          //       return HomePage();
-          //     } else {
-          //       return AuthPage();
-          //     }
-          //   },
-          // ),
-          home: AuthPage(),
-          //home: SerialPage(),
-          //home: ProductMenuPage(),
-          //home: MyWidget(),
-          // home: Test(),
-          //splash screen
-          // home: SplashScreen(
-          //   seconds: 3,
-          //   navigateAfterSeconds: AuthPage(),
-          //   // title: Text(
-          //   //   'Water Detection App',
-          //   //   style: TextStyle(
-          //   //     color: Color.fromRGBO(0, 78, 131, 10),
-          //   //   ),
-          //   // ),
-          //   //image: Image.asset('assets/social_svg/codrops.svg'),
-          //   photoSize: 100,
-          // ),
-          //home: WaterDrop(),
-          //home: FingerprintSwitch(),
-          //home: StartScreen(),
-        );
-      }),
+    return MaterialApp(
+      supportedLocales: _localization.supportedLocales,
+      localizationsDelegates: _localization.localizationsDelegates,
+      theme: lightTheme,
+      //darkTheme: darkTheme,
+      debugShowCheckedModeBanner: false,
+      // home: AuthPage(),
+      // home: Test(),
+      home: AnimatedSplashScreen(
+        splash: 'assets/images/codrops.png',
+        nextScreen: AuthPage(),
+      ),
     );
   }
 }

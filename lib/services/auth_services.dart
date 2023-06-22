@@ -18,6 +18,3 @@ class AuthService {
     return await FirebaseAuth.instance.signInWithCredential(Credential);
   }
 }
-/*class AuthService {
-  SignInWithG() async {}
-}*/

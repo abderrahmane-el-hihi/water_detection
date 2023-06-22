@@ -21,8 +21,6 @@ class _L_ButtonState extends State<L_Button> {
     return InkWell(
       onTap: widget.onTap,
       child: Container(
-        //width: 290,
-        //height: 58,
         padding: EdgeInsets.all(25),
         margin: EdgeInsets.symmetric(horizontal: 25),
         decoration: BoxDecoration(

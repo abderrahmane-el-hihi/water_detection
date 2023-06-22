@@ -103,8 +103,6 @@ class _LoginPageState extends State<LoginPage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    //SizedBox(height: 50),
-                    //Icon(Icons.lock,size: 100,),
                     SizedBox(height: 50),
 
                     Text(
@@ -134,7 +132,7 @@ class _LoginPageState extends State<LoginPage> {
                       preicon: Icons.lock,
                     ),
                     SizedBox(height: 10),
-                    //signin buuton
+                    //signin buton
                     L_Button(
                       onTap: SignIn,
                       text: '${AppLocale.words[18].getString(context)}',
@@ -145,7 +143,7 @@ class _LoginPageState extends State<LoginPage> {
                     GestureDetector(
                       onTap: widget.ontap,
                       child: Text(
-                        'don\'t have account',
+                        '${AppLocale.words[21].getString(context)}',
                         style: TextStyle(
                             color: Color.fromRGBO(0, 78, 131, 10),
                             fontFamily: "Poppins"),

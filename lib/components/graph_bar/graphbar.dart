@@ -1,6 +1,5 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-// import 'package:mongo_dart/mongo_dart.dart';
 import 'package:waterdetection/components/graph_bar/bar_data.dart';
 
 class GraphBar extends StatelessWidget {

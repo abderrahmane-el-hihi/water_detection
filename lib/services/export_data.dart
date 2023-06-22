@@ -1,113 +1,52 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:excel/excel.dart';
-import 'dart:convert';
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
+import 'package:open_file/open_file.dart';
 
-// class Export_data {
-//   Future<List<Map<String, dynamic>>> fetchDataFromFirestore() async {
-//     try {
-//       final QuerySnapshot<Map<String, dynamic>> snapshot =
-//           await FirebaseFirestore.instance.collection('history').get();
-
-//       final List<Map<String, dynamic>> data =
-//           snapshot.docs.map((doc) => doc.data()).toList();
-
-//       return data;
-//     } catch (e) {
-//       // Handle any potential errors
-//       print('Error fetching data from Firestore: $e');
-//       return [];
-//     }
-//   }
-
-//   Future exportDataToExcel(data) async {
-//     final excel = Excel.createExcel();
-//     final sheet = excel['Sheet1'];
-//     // Set the column headers
-//     sheet.appendRow([
-//       'Date',
-//       // 'Start Percentage',
-//       // 'Finish Percentage',
-//       'Percentage Consumed'
-//     ]);
-//     // Add data rows
-//     for (final item in data) {
-//       final date = item['date'].toString();
-//       // final startPercentage = item['start_percentage'].toString();
-//       // final finishPercentage = item['finish_percentage'].toString();
-//       final consumedPercentage = item['consumed_percentage'].toString();
-//       sheet.appendRow(
-//           //[date, startPercentage, finishPercentage, consumedPercentage]);
-//           [date, consumedPercentage]);
-//     }
-//     // Save the workbook to a file
-//     await excel.save(fileName: 'exported_data.xlsx');
-//   }
-// }
 class ExportData {
-  // Future<List<Map<String, dynamic>>> fetchDataFromFirestore() async {
-  //   try {
-  //     final QuerySnapshot<Map<String, dynamic>> snapshot =
-  //         await FirebaseFirestore.instance.collection('history').get();
+  Future<void> exportCollectionToExcel(String collectionName) async {
+    final QuerySnapshot snapshot =
+        await FirebaseFirestore.instance.collection(collectionName).get();
 
-  //     final List<Map<String, dynamic>> data =
-  //         snapshot.docs.map((doc) => doc.data()).toList();
+    if (snapshot.docs.isNotEmpty) {
+      final Excel excel = Excel.createExcel();
+      final Sheet sheet = excel['Sheet1'];
 
-  //     return data;
-  //   } catch (e) {
-  //     // Handle any potential errors
-  //     print('Error fetching data from Firestore: $e');
-  //     return [];
-  //   }
-  // }
+      // Add column headers
+      final List<String> columnHeaders =
+          (snapshot.docs.first.data() as Map<String, dynamic>).keys.toList();
+      for (var i = 0; i < columnHeaders.length; i++) {
+        sheet
+            .cell(CellIndex.indexByColumnRow(columnIndex: i, rowIndex: 0))
+            .value = columnHeaders[i];
+      }
 
-  // Future<void> exportDataToExcel() async {
-  //   final data = await fetchDataFromFirestore();
-  //   final excel = Excel.createExcel();
-  //   final sheet = excel['Sheet1'];
-  //   // Set the column headers
-  //   sheet.appendRow([
-  //     'Date',
-  //     // 'Start Percentage',
-  //     // 'Finish Percentage',
-  //     'Percentage Consumed'
-  //   ]);
-  //   // Add data rows
-  //   for (final item in data) {
-  //     final date = item['date'].toString();
-  //     // final startPercentage = item['start_percentage'].toString();
-  //     // final finishPercentage = item['finish_percentage'].toString();
-  //     final consumedPercentage = item['consumed_percentage'].toString();
-  //     sheet.appendRow(
-  //         //[date, startPercentage, finishPercentage, consumedPercentage]);
-  //         [date, consumedPercentage]);
-  //   }
-  //   // Save the workbook to a file
-  //   await excel.save(fileName: 'exported_data.xlsx');
-  //   print('exported_data.xlsx');
-  // }
-  Future<void> saveDataToJSON(List<int> data) async {
-    final String fileName = 'data.json';
-    // Create a directory to store the JSON file
-    final Directory directory = await getApplicationDocumentsDirectory();
-    final File file = File('${directory.path}/$fileName');
-    // Prepare the data with timestamps
-    final List<Map<String, dynamic>> formattedData = [];
-    final DateTime now = DateTime.now();
-    for (final item in data) {
-      final String timestamp = now.toString();
-      final Map<String, dynamic> formattedItem = {
-        'time': timestamp,
-        'measurement': item,
-      };
-      formattedData.add(formattedItem);
+      // Add document data
+      for (var i = 0; i < snapshot.docs.length; i++) {
+        final Map<String, dynamic> data =
+            snapshot.docs[i].data() as Map<String, dynamic>;
+        final List<dynamic> values = data.values.toList();
+
+        for (var j = 0; j < values.length; j++) {
+          sheet
+              .cell(CellIndex.indexByColumnRow(columnIndex: j, rowIndex: i + 1))
+              .value = values[j];
+        }
+      }
+
+      // Save the Excel file
+      final Directory appDocumentsDirectory =
+          await getApplicationDocumentsDirectory();
+      final String filePath = 'Download/file.xlsx';
+      final List<int>? excelBytes = excel.encode();
+      final File file = File(filePath);
+      file.createSync(recursive: true);
+      file.writeAsBytesSync(excelBytes!, flush: true);
+      OpenFile.open(filePath);
+      print('Excel file exported successfully!');
+    } else {
+      print('No documents found in the collection.');
     }
-    // Convert the data to JSON
-    final String jsonData = json.encode(formattedData);
-    // Write the JSON data to the file
-    await file.writeAsString(jsonData);
-    print('Data saved successfully.');
-    await saveDataToJSON(data);
   }
 }

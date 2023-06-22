@@ -89,10 +89,13 @@
 //     );
 //   }
 // }
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:waterdetection/services/connect_to_arduino.dart';
+
+import 'components/graph_bar/graphbar.dart';
 
 class Test extends StatefulWidget {
   @override
@@ -147,6 +150,8 @@ class _TestState extends State<Test> {
         '192.168.11.159', 37494); // Replace with your server address and port
     connect();
   }
+
+  List SummaryWaterDb2 = [];
 
   void connect() {
     numberReceiver.connectToServer((number) {
@@ -216,17 +221,40 @@ class _TestState extends State<Test> {
           //   },
           //   child: Text('Show Notifications'),
           // ),
-          child: CircularPercentIndicator(
-            radius: 70.0,
-            lineWidth: 15.0,
-            percent: receivedNumber / 100,
-            center: Text(
-              "${receivedNumber}%",
-              style: TextStyle(
-                  color: Color.fromARGB(255, 170, 170, 170), fontSize: 20),
-            ),
-            progressColor: Color.fromRGBO(0, 78, 131, 10),
-          ),
+          // child: CircularPercentIndicator(
+          //   radius: 70.0,
+          //   lineWidth: 15.0,
+          //   percent: receivedNumber / 100,
+          //   center: Text(
+          //     "${receivedNumber}%",
+          //     style: TextStyle(
+          //         color: Color.fromARGB(255, 170, 170, 170), fontSize: 20),
+          //   ),
+          //   progressColor: Color.fromRGBO(0, 78, 131, 10),
+          // ),
+          child: FutureBuilder(
+              future: FirebaseFirestore.instance.collection('history').get(),
+              builder: (context,
+                  AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return CircularProgressIndicator();
+                } else if (snapshot.hasData) {
+                  SummaryWaterDb2.clear();
+                  List<QueryDocumentSnapshot<Map<String, dynamic>>> documents =
+                      snapshot.data!.docs;
+                  for (var i = 0; i < snapshot.data!.size; i++) {
+                    SummaryWaterDb2.add(documents[i].data()['available_capa']);
+                  }
+                }
+                return Center(
+                  child: SizedBox(
+                    height: 220,
+                    child: GraphBar(
+                      SummaryWater: SummaryWaterDb2,
+                    ),
+                  ),
+                );
+              }),
         ),
       ),
     );

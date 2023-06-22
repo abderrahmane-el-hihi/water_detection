@@ -7,8 +7,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_localization/flutter_localization.dart';
+import 'package:waterdetection/auth_page.dart';
+import 'package:waterdetection/loginpage.dart';
 //import 'package:waterdetection/Firebasedb_config/firebase_db.dart';
 import 'components/icon_btn_state.dart';
+import 'productmenupage.dart';
 //listen to the _isdark variable state
 
 class ThemeNotifier extends ChangeNotifier {
@@ -36,12 +39,28 @@ class _SettingsPageState extends State<SettingsPage> {
   bool isDark = false;
   //signout method
   void SignOut() {
-    FirebaseAuth.instance.signOut();
+    FirebaseAuth.instance.signOut().then((value) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => AuthPage()),
+      );
+    }).catchError((error) {});
+    // FirebaseAuth.instance.signOut();
   }
 
   //go to web site method
-  void GoToSite() async {
-    final Uri url = Uri.parse('googlechrome:https://www.google.com');
+  void GoToContactUs() async {
+    final Uri url = Uri.parse(
+        'googlechrome:http://waterdetection.great-site.net/contact%20us.html');
+    await launchUrl(url);
+    if (!await launchUrl(url)) {
+      throw Exception('Could not launch $url');
+    }
+  }
+
+  void GoToProfile() async {
+    final Uri url = Uri.parse(
+        'googlechrome:http://waterdetection.great-site.net/profile.html');
     await launchUrl(url);
     if (!await launchUrl(url)) {
       throw Exception('Could not launch $url');
@@ -151,13 +170,18 @@ class _SettingsPageState extends State<SettingsPage> {
       child: Scaffold(
         backgroundColor: Theme.of(context).colorScheme.primary,
         appBar: AppBar(
-          leading: null,
+          automaticallyImplyLeading: false,
           backgroundColor: Theme.of(context).colorScheme.primary,
           elevation: 0,
-          title: Text(
-            '${AppLocale.words[0].getString(context)}',
-            style: TextStyle(
-                color: Color.fromRGBO(0, 78, 131, 10), fontFamily: "Poppins"),
+          title: Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 45,
+            ),
+            child: Text(
+              '${AppLocale.words[0].getString(context)}',
+              style: TextStyle(
+                  color: Color.fromRGBO(0, 78, 131, 10), fontFamily: "Poppins"),
+            ),
           ),
         ),
         body: SingleChildScrollView(
@@ -287,7 +311,7 @@ class _SettingsPageState extends State<SettingsPage> {
                               color: Color.fromRGBO(0, 78, 131, 10),
                             ),
                             GestureDetector(
-                              onTap: GoToSite,
+                              onTap: GoToProfile,
                               child: Container(
                                 width: MediaQuery.of(context).size.width * 0.55,
                                 child: Row(
@@ -438,7 +462,7 @@ class _SettingsPageState extends State<SettingsPage> {
                           color: Color.fromRGBO(0, 78, 131, 10),
                         ),
                         GestureDetector(
-                          onTap: GoToSite,
+                          onTap: GoToContactUs,
                           child: Container(
                             width: MediaQuery.of(context).size.width * 0.55,
                             child: Row(
@@ -519,6 +543,9 @@ mixin AppLocale {
     'Sign In',
     'pick a date',
     'Week measures: ',
+    'don\'t have account',
+    'already have account',
+    'All mesures'
   ];
 
   static Map<String, dynamic> EN = {
@@ -544,6 +571,9 @@ mixin AppLocale {
     words[18]: 'Sign In',
     words[19]: 'Pick a date',
     words[20]: 'Week measures: ',
+    words[21]: 'don\'t have account',
+    words[22]: 'already have account',
+    words[23]: 'All mesures',
   };
   static Map<String, dynamic> FR = {
     title: 'Localisation',
@@ -568,6 +598,9 @@ mixin AppLocale {
     words[18]: 'Connexion',
     words[19]: 'choisire une date',
     words[20]: 'Les mesures de semaine: ',
+    words[21]: 'n\'avez pas de compte',
+    words[22]: 'Vous avez déjà un compte',
+    words[23]: 'Toutes les mesures',
   };
   static const Map<String, dynamic> AR = {title: 'الترجمه'};
 }

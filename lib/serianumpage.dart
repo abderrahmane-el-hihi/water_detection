@@ -11,6 +11,7 @@ import 'package:waterdetection/productmenupage.dart';
 import 'package:waterdetection/settingspage.dart';
 import 'services/qr_scan.dart';
 //import 'signuppage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SerialPage extends StatefulWidget {
   SerialPage({super.key});
@@ -38,6 +39,7 @@ class _SerialPageState extends State<SerialPage> {
         FirebaseFirestore.instance.collection('detector').add({
           'ref': serialcontroller.text,
           'userRef': userRef,
+          'userid': FirebaseAuth.instance.currentUser!.uid,
         });
       }
       Navigator.push(
@@ -92,6 +94,22 @@ class _SerialPageState extends State<SerialPage> {
     );
   }
 
+  Future<void> saveSerialNumber(BuildContext context) async {
+    String serialNumber = serialcontroller.text;
+    // Perform your validation or condition checks here
+    bool isSerialNumberEntered = serialNumber.isNotEmpty;
+    if (isSerialNumberEntered) {
+      // Save the flag in SharedPreferences
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.setBool('isSerialNumberEntered', true);
+      // Navigate to the Product Menu page
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => ProductMenuPage()),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     User? user = FirebaseAuth.instance.currentUser;
@@ -132,7 +150,7 @@ class _SerialPageState extends State<SerialPage> {
                               style: TextStyle(fontFamily: "Poppins"),
                             )
                           : Text(
-                              '${getDocumentNameByEmail('ahys@test.com')}',
+                              '${FirebaseFirestore.instance.collection('compt').where('email', isEqualTo: FirebaseAuth.instance.currentUser?.email).get()}',
                               style: TextStyle(fontFamily: "Poppins"),
                             ),
                       SizedBox(
@@ -197,7 +215,7 @@ class _SerialPageState extends State<SerialPage> {
                         height: 20,
                       ),
                       L_Button(
-                        onTap: Submit,
+                        onTap: () => saveSerialNumber(context),
                         text: '${AppLocale.words[13].getString(context)}',
                       ),
                     ],

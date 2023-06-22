@@ -15,6 +15,10 @@ class _QRScanState extends State<QRScan> {
   QRViewController? controller;
 
   bool isScanning = false;
+  void back() {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => ProductMenuPage()));
+  }
 
   @override
   void dispose() {
@@ -32,7 +36,12 @@ class _QRScanState extends State<QRScan> {
         ),
         backgroundColor: Color.fromRGBO(0, 78, 131, 10),
         elevation: 0,
-        leading: null,
+        leading: IconButton(
+            onPressed: back,
+            icon: Icon(
+              Icons.arrow_back_rounded,
+              color: Colors.white,
+            )),
       ),
       body: Column(
         children: [

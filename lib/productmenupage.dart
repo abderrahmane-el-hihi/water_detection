@@ -44,6 +44,7 @@ class _ProductMenuPageState extends State<ProductMenuPage> {
           style: TextStyle(
               color: Color.fromRGBO(0, 78, 131, 10), fontFamily: "Poppins"),
         ),
+        automaticallyImplyLeading: false,
         actions: [
           IconButton(
             onPressed: () {
@@ -66,8 +67,6 @@ class _ProductMenuPageState extends State<ProductMenuPage> {
               height: 20,
             ),
             FutureBuilder(
-                // future: MongodbConf.GetData("product"),
-                // future: Firebase_db().Get_data_Collection_firestore('detector'),
                 future: FirebaseFirestore.instance.collection('detector').get(),
                 // .where('userRef',
                 //     isEqualTo: FirebaseAuth.instance.currentUser!.uid)

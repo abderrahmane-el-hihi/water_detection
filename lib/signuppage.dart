@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_localization/flutter_localization.dart';
 import 'package:waterdetection/components/g_f_button.dart';
 import 'package:waterdetection/components/l_button.dart';
@@ -9,6 +8,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:waterdetection/Firebasedb_config/firebase_db.dart';
 
 import 'package:waterdetection/settingspage.dart';
+
+import 'services/auth_services.dart';
 
 class SignUpPage extends StatefulWidget {
   final Function()? ontap;
@@ -20,7 +21,6 @@ class SignUpPage extends StatefulWidget {
 
 class _SignUpPageState extends State<SignUpPage> {
   //text editing controllers
-
   final emailcontroller = TextEditingController();
   final passwcontroller = TextEditingController();
   final namecontroller = TextEditingController();
@@ -33,23 +33,11 @@ class _SignUpPageState extends State<SignUpPage> {
     });
     await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: emailcontroller.text, password: passwcontroller.text);
-
     Firebase_db().Write_Data("compt", data);
     i++;
   }
 
   bool _isPressed = false;
-
-  void SignIn() {}
-
-  Future<UserCredential> signInWithFacebook() async {
-    final LoginResult loginResult = await FacebookAuth.instance.login();
-
-    final OAuthCredential facebookAuthCredential =
-        FacebookAuthProvider.credential(loginResult.accessToken!.token);
-
-    return FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
-  }
 
   late Map<String, dynamic> data = {
     'email': emailcontroller.text,
@@ -155,7 +143,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         //google
                         G_F_Button(
                           text: '',
-                          onTap: SignIn,
+                          onTap: (() => AuthService().SignInWithG()),
                           //text: 'Google',
                           svgpath: 'assets/social_svg/google.svg',
                           h: 100,
@@ -179,7 +167,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     GestureDetector(
                       onTap: widget.ontap,
                       child: Text(
-                        'already have account',
+                        '${AppLocale.words[21].getString(context)}',
                         style: TextStyle(
                             color: Color.fromRGBO(0, 78, 131, 10),
                             fontFamily: 'Poppins'),

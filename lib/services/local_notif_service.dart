@@ -66,7 +66,7 @@ class Notif {
   }
 
   static Future showBigTextNotification(
-      {var id = 0,
+      {var id = 2,
       required String title,
       required String body,
       var payload,
@@ -86,25 +86,25 @@ class Notif {
     await fln.show(0, title, body, not);
   }
 
-  static Future showBackgroundNotification(
-      {var id = 1,
-      required String title,
-      required String body,
-      var payload,
-      required FlutterLocalNotificationsPlugin fln}) async {
-    await fln.periodicallyShow(
-      id,
-      title,
-      body,
-      RepeatInterval.everyMinute,
-      NotificationDetails(
-        android: new AndroidNotificationDetails(
-          '',
-          '',
-          importance: Importance.max,
-          priority: Priority.high,
-        ),
-      ),
-    );
-  }
+  // static Future showBackgroundNotification(
+  //     {var id = 1,
+  //     required String title,
+  //     required String body,
+  //     var payload,
+  //     required FlutterLocalNotificationsPlugin fln}) async {
+  //   await fln.periodicallyShow(
+  //     id,
+  //     title,
+  //     body,
+  //     RepeatInterval.everyMinute,
+  //     NotificationDetails(
+  //       android: new AndroidNotificationDetails(
+  //         '',
+  //         '',
+  //         importance: Importance.max,
+  //         priority: Priority.high,
+  //       ),
+  //     ),
+  //   );
+  // }
 }

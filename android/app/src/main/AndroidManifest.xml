@@ -10,6 +10,8 @@
     <uses-feature android:name="android.hardware.camera.autofocus" /> -->
     <!-- <uses-permission android:name="android.permission.USE_BIOMETRIC" /> -->
     <!-- <uses-permission android:name="android.permission.USE_FINGERPRINT" /> -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
 
 
 
@@ -18,7 +20,9 @@
    <application
         android:label="Water Detection"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/ic_launcher"
+        android:requestLegacyExternalStorage="true">
+        <!-- delete here if there a problem ^ -->
         <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
         
     <activity android:name="com.facebook.FacebookActivity"
