@@ -1,11 +1,11 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+
 import 'package:waterdetection/auth_page.dart';
 import 'package:waterdetection/settingspage.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:waterdetection/test.dart';
+
 import 'components/lightTheme.dart';
 import 'firebase_options.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -41,8 +41,6 @@ void main() async {
     name: 'favorite_food',
     value: 'favoriteFood',
   );
-  //to here
-  //await Hive.initFlutter();
 
   runApp(const MyApp());
 }
@@ -89,10 +87,8 @@ class _MyAppState extends State<MyApp> {
       supportedLocales: _localization.supportedLocales,
       localizationsDelegates: _localization.localizationsDelegates,
       theme: lightTheme,
-      //darkTheme: darkTheme,
       debugShowCheckedModeBanner: false,
       // home: AuthPage(),
-      // home: Test(),
       home: AnimatedSplashScreen(
         splash: 'assets/images/codrops.png',
         nextScreen: AuthPage(),

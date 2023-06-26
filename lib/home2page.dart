@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:waterdetection/components/gnavbar.dart';
-//import 'package:waterdetection/historypage.dart';
 import 'package:waterdetection/homepage.dart';
 import 'package:waterdetection/settingspage.dart';
 

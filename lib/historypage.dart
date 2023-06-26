@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localization/flutter_localization.dart';
 import 'package:intl/intl.dart';
 import 'package:percent_indicator/percent_indicator.dart';
-import 'package:waterdetection/components/l_button.dart';
 import 'package:waterdetection/home2page.dart';
 import 'package:waterdetection/settingspage.dart';
 import 'components/graph_bar/graphbar.dart';
@@ -22,21 +21,9 @@ class _DetailsPageState extends State<DetailsPage> {
   List<DateTime> date = [];
   late DateTime dateTime;
 
-  // int receivedNumber = 0;
-  // late connect_to_server numberReceiver;
-  // void connect() {
-  //   numberReceiver.connectToServer((number) {
-  //     setState(() {
-  //       receivedNumber = number;
-  //     });
-  //   });
-  // }
-
   @override
   void initState() {
     super.initState();
-    // numberReceiver = connect_to_server('192.168.11.162', 35080);
-    // connect();
   }
 
   @override
@@ -242,99 +229,3 @@ class _DetailsPageState extends State<DetailsPage> {
     );
   }
 }
-
-
-
-
-
-
-// Center(
-              //   child: FutureBuilder(
-              //       future:
-              //           FirebaseFirestore.instance.collection('history').get(),
-              //       builder: (context,
-              //           AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>>
-              //               snapshot) {
-              //         if (snapshot.connectionState == ConnectionState.waiting) {
-              //           return CircularProgressIndicator();
-              //         } else if (snapshot.hasData) {
-              //           SummaryWaterDb.clear();
-              //           List<QueryDocumentSnapshot<Map<String, dynamic>>>
-              //               documents = snapshot.data!.docs;
-              //           for (var i = 0; i < snapshot.data!.size; i++) {
-              //             SummaryWaterDb.add(
-              //                 documents[i].data()['available_capa']);
-              //           }
-              //           return Column(
-              //             children: [
-              //               Padding(
-              //                 padding:
-              //                     const EdgeInsets.symmetric(horizontal: 16),
-              //                 child: Row(
-              //                   mainAxisAlignment: MainAxisAlignment.start,
-              //                   children: [
-              //                     Text(
-              //                       '${AppLocale.words[20].getString(context)}',
-              //                       style: TextStyle(
-              //                           fontSize: 20,
-              //                           color: Color.fromRGBO(0, 78, 131, 10),
-              //                           fontFamily: "Poppins"),
-              //                     ),
-              //                   ],
-              //                 ),
-              //               ),
-              //               SizedBox(
-              //                 height: 30,
-              //               ),
-              //               Center(
-              //                 child: SizedBox(
-              //                   height: 220,
-              //                   child: GraphBar(
-              //                     SummaryWater: SummaryWaterDb,
-              //                   ),
-              //                 ),
-              //               ),
-              //               SizedBox(
-              //                 height: 20,
-              //               ),
-              //               Row(
-              //                 children: [
-              //                   L_Button_2(
-              //                     onTap: pickadate,
-              //                     text:
-              //                         '${AppLocale.words[19].getString(context)}',
-              //                     icon: Icons.calendar_month_rounded,
-              //                   ),
-              //                   SizedBox(
-              //                     width: 37,
-              //                   ),
-              //                   Container(
-              //                     height: 80,
-              //                     width: 80,
-              //                     decoration: BoxDecoration(
-              //                       borderRadius: BorderRadius.circular(15),
-              //                       border: Border.all(
-              //                         width: 2,
-              //                         color: Color.fromRGBO(0, 78, 131, 10),
-              //                       ),
-              //                     ),
-              //                     child: IconButton(
-              //                       onPressed: () {
-              //                         ExportData()
-              //                             .exportCollectionToExcel('history');
-              //                       },
-              //                       icon: Icon(
-              //                         Icons.download_rounded,
-              //                         color: Color.fromRGBO(0, 78, 131, 10),
-              //                         size: 34,
-              //                       ),
-              //                     ),
-              //                   ),
-              //                 ],
-              //               ),
-              //             ],
-              //           );
-              //         }
-              //         return Text('error');
-              //       }),
-              // ),

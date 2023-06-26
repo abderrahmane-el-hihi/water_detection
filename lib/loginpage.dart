@@ -185,27 +185,12 @@ class _LoginPageState extends State<LoginPage> {
                       children: [
                         //google
                         G_F_Button(
-                          //text: 'Google',
                           text: '',
                           onTap: (() => AuthService().SignInWithG()),
-                          //text: 'Google',
                           svgpath: 'assets/social_svg/google.svg',
                           h: 100,
                           w: 100,
                         ),
-
-                        //Padding(padding: const EdgeInsets.symmetric(horizontal: 15.0)),
-
-                        //facebook
-                        // G_F_Button(
-                        //   onTap: () async {
-                        //     //await signInWithFacebook();
-                        //   },
-                        //   //text: 'Facebook',
-                        //   svgpath: 'assets/social_svg/facebook-svgrepo-com.svg',
-                        //   h: 50,
-                        //   w: 50,
-                        // ),
                       ],
                     ),
                   ],

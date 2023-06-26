@@ -13,6 +13,5 @@ ThemeData lightTheme = ThemeData(
   colorScheme: ColorScheme.light(
       background: Colors.white,
       primary: Colors.white,
-      //secondary: Color.fromRGBO(0, 78, 131, 10)
       secondary: Colors.transparent),
 );

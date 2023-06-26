@@ -1,12 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localization/flutter_localization.dart';
-//import 'package:shimmer/shimmer.dart';
-//import 'package:waterdetection/components/gnavbar.dart';
 import 'package:waterdetection/home2page.dart';
-//import 'package:waterdetection/homepage.dart';
-//import 'package:waterdetection/Firebasedb_config/firebase_db.dart';
 import 'package:waterdetection/serianumpage.dart';
 import 'package:waterdetection/settingspage.dart';
 
@@ -68,10 +63,6 @@ class _ProductMenuPageState extends State<ProductMenuPage> {
             ),
             FutureBuilder(
                 future: FirebaseFirestore.instance.collection('detector').get(),
-                // .where('userRef',
-                //     isEqualTo: FirebaseAuth.instance.currentUser!.uid)
-                // .limit(1)
-                // .get(),
                 builder: (context, AsyncSnapshot snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return Center(
@@ -90,7 +81,6 @@ class _ProductMenuPageState extends State<ProductMenuPage> {
                                     margin:
                                         EdgeInsets.symmetric(horizontal: 10),
                                     decoration: BoxDecoration(
-                                      //color: Theme.of(context).cardTheme.color,
                                       color: Colors.transparent,
                                       border: Border.all(
                                         color: Color.fromRGBO(0, 78, 131, 10),
@@ -132,112 +122,3 @@ class _ProductMenuPageState extends State<ProductMenuPage> {
     );
   }
 }
-
-
-
-
-
-
-
-
-// SingleChildScrollView(
-//             child: Container(
-//               padding: EdgeInsets.all(30),
-//               child: Column(
-//                 crossAxisAlignment: CrossAxisAlignment.start,
-//                 children: [
-//                   Container(
-//                     child: ListTile(
-//                         title: Text(
-//                           'Products',
-//                           style: TextStyle(
-//                             color: Color.fromRGBO(0, 78, 131, 10),
-//                           ),
-//                         ),
-//                         leading: IconButton(
-//                           onPressed: Back,
-//                           icon: Icon(
-//                             Icons.arrow_back_rounded,
-//                             color: Color.fromRGBO(0, 78, 131, 10),
-//                           ),
-//                         )),
-//                   ),
-//                   SizedBox(
-//                     height: 20,
-//                   ),
-//                   Container(
-//                     decoration: BoxDecoration(
-//                       color: Color.fromARGB(255, 255, 255, 255),
-//                       border: Border.all(
-//                         color: Color.fromRGBO(0, 78, 131, 10),
-//                         width: 1,
-//                       ),
-//                       borderRadius: BorderRadius.circular(15),
-//                     ),
-//                     child: ListTile(
-//                         onTap: ToHome,
-//                         title: Text(
-//                           'ceterne ',
-//                           style: TextStyle(
-//                             color: Color.fromRGBO(0, 78, 131, 10),
-//                           ),
-//                         ),
-//                         leading: Icon(
-//                           Icons.abc,
-//                           color: Color.fromRGBO(0, 78, 131, 10),
-//                         )),
-//                   ),
-//                   SizedBox(
-//                     height: 20,
-//                   ),
-//                   Container(
-//                     decoration: BoxDecoration(
-//                       color: Color.fromARGB(255, 255, 255, 255),
-//                       border: Border.all(
-//                         color: Color.fromRGBO(0, 78, 131, 10),
-//                         width: 1,
-//                       ),
-//                       borderRadius: BorderRadius.circular(15),
-//                     ),
-//                     child: ListTile(
-//                         onTap: ToHome,
-//                         title: Text(
-//                           'ceterne ',
-//                           style: TextStyle(
-//                             color: Color.fromRGBO(0, 78, 131, 10),
-//                           ),
-//                         ),
-//                         leading: Icon(
-//                           Icons.abc,
-//                           color: Color.fromRGBO(0, 78, 131, 10),
-//                         )),
-//                   ),
-//                   SizedBox(
-//                     height: 20,
-//                   ),
-//                   Container(
-//                     decoration: BoxDecoration(
-//                       color: Color.fromARGB(255, 255, 255, 255),
-//                       border: Border.all(
-//                         color: Color.fromRGBO(0, 78, 131, 10),
-//                         width: 1,
-//                       ),
-//                       borderRadius: BorderRadius.circular(15),
-//                     ),
-//                     child: ListTile(
-//                         onTap: ToHome,
-//                         title: Text(
-//                           'ceterne ',
-//                           style: TextStyle(
-//                             color: Color.fromRGBO(0, 78, 131, 10),
-//                           ),
-//                         ),
-//                         leading: Icon(
-//                           Icons.abc,
-//                           color: Color.fromRGBO(0, 78, 131, 10),
-//                         )),
-//                   ),
-//                 ],
-//               ),
-//             ),
-//           ),

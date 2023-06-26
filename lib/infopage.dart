@@ -24,7 +24,6 @@ class _InfoPageState extends State<InfoPage> {
                   borderRadius: BorderRadius.circular(15),
                 ),
                 onPressed: () {},
-                //splashColor: Color.fromARGB(248, 0, 34, 57),
                 child: Icon(Icons.arrow_forward_rounded),
               ),
             ),

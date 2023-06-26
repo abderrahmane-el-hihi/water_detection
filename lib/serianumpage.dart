@@ -5,12 +5,11 @@ import 'package:flutter_localization/flutter_localization.dart';
 
 import 'package:waterdetection/components/l_button.dart';
 import 'package:waterdetection/components/text_field.dart';
-//import 'package:waterdetection/homepage.dart';
-//import 'package:waterdetection/loginpage.dart';
+
 import 'package:waterdetection/productmenupage.dart';
 import 'package:waterdetection/settingspage.dart';
 import 'services/qr_scan.dart';
-//import 'signuppage.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SerialPage extends StatefulWidget {
@@ -189,27 +188,6 @@ class _SerialPageState extends State<SerialPage> {
                             ),
                           ],
                         ),
-
-                        // child: TextField(
-                        //   controller: serialcontroller,
-                        //   obscureText: false,
-                        //   decoration: InputDecoration(
-                        //     suffixIcon: Icon(Icons.qr_code_scanner_rounded),
-                        //     enabledBorder: OutlineInputBorder(
-                        //         borderRadius: BorderRadius.circular(15),
-                        //         borderSide: BorderSide(
-                        //             color: Color.fromRGBO(179, 179, 179, 1))),
-                        //     focusedBorder: OutlineInputBorder(
-                        //         borderRadius: BorderRadius.circular(15),
-                        //         borderSide:
-                        //             BorderSide(color: Colors.grey.shade400)),
-                        //     fillColor: Color.fromARGB(255, 255, 255, 255),
-                        //     filled: true,
-                        //     hintText: '${AppLocale.words[14].getString(context)}',
-                        //     hintStyle: TextStyle(
-                        //         color: Color.fromRGBO(179, 179, 179, 1)),
-                        //   ),
-                        // ),
                       ),
                       SizedBox(
                         height: 20,
@@ -229,65 +207,3 @@ class _SerialPageState extends State<SerialPage> {
     );
   }
 }
-
-
-/*
- * final Firestore firestore = Firestore.instance;
-  final CollectionReference optionsRef = firestore.collection("options");
-
-  // Get all options from the "options" collection
-  Stream<QuerySnapshot> stream = optionsRef.snapshots();
-
-
-
-  StreamBuilder<QuerySnapshot>(
-  stream: stream,
-  builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-    if (snapshot.hasData) {
-      List<DocumentSnapshot> options = snapshot.data.documents;
-      if (options.length == 1) {
-        return SingleOptionPage(options[0]);
-      } else {
-        return MultipleOptionPage(options);
-      }
-    } else if (snapshot.hasError) {
-      return Text("Error: ${snapshot.error}");
-    } else {
-      return CircularProgressIndicator();
-    }
-  },
-)
-
-
-class SingleOptionPage extends StatelessWidget {
-  final DocumentSnapshot option;
-  SingleOptionPage(this.option);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      // ... display a single option
-    );
-  }
-}
-
-class MultipleOptionPage extends StatelessWidget {
-  final List<DocumentSnapshot> options;
-  MultipleOptionPage(this.options);
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: options.length,
-      itemBuilder: (BuildContext context, int index) {
-        return ListTile(
-          title: Text(options[index]['name']),
-          // ... other properties
-        );
-      },
-    );
-  }
-}
-
-
- */

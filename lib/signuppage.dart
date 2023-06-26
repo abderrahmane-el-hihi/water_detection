@@ -3,12 +3,9 @@ import 'package:flutter_localization/flutter_localization.dart';
 import 'package:waterdetection/components/g_f_button.dart';
 import 'package:waterdetection/components/l_button.dart';
 import 'package:waterdetection/components/text_field.dart';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:waterdetection/Firebasedb_config/firebase_db.dart';
-
 import 'package:waterdetection/settingspage.dart';
-
 import 'services/auth_services.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -144,22 +141,10 @@ class _SignUpPageState extends State<SignUpPage> {
                         G_F_Button(
                           text: '',
                           onTap: (() => AuthService().SignInWithG()),
-                          //text: 'Google',
                           svgpath: 'assets/social_svg/google.svg',
                           h: 100,
                           w: 100,
                         ),
-
-                        //facebook
-                        // G_F_Button(
-                        //   onTap: () async {
-                        //     //await signInWithFacebook();
-                        //   },
-                        //   //text: 'Facebook',
-                        //   svgpath: 'assets/social_svg/facebook-svgrepo-com.svg',
-                        //   h: 50,
-                        //   w: 50,
-                        // ),
                       ],
                     ),
                     SizedBox(height: 25),

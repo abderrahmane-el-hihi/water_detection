@@ -1,18 +1,12 @@
-//import 'dart:async';
 import 'dart:ui';
-//import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_localization/flutter_localization.dart';
 import 'package:waterdetection/auth_page.dart';
-import 'package:waterdetection/loginpage.dart';
-//import 'package:waterdetection/Firebasedb_config/firebase_db.dart';
-import 'components/icon_btn_state.dart';
-import 'productmenupage.dart';
-//listen to the _isdark variable state
 
 class ThemeNotifier extends ChangeNotifier {
   bool _isDark = false;
@@ -68,11 +62,7 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   //control push notifications method
-  void Notifications() {
-    //if toggle btn on
-
-    //if toggle btn off
-  }
+  void Notifications() {}
 
   void SelectLanguage() {
     showModalBottomSheet(
@@ -82,7 +72,6 @@ class _SettingsPageState extends State<SettingsPage> {
           child: Wrap(
             children: [
               ListTile(
-                //contentPadding: EdgeInsets.only(left: 170),
                 title: Container(child: Center(child: Text('Arabic'))),
                 onTap: () => {},
               ),
@@ -139,13 +128,6 @@ class _SettingsPageState extends State<SettingsPage> {
                 _localization.translate('en');
               },
             ),
-            /*CupertinoActionSheetAction(
-              child: Text('Cancel'),
-              isDestructiveAction: true,
-              onPressed: () {
-                Navigator.pop(context, 'Cancel');
-              },
-            ),*/
           ],
         );
       },
@@ -349,66 +331,10 @@ class _SettingsPageState extends State<SettingsPage> {
                   Container(
                     margin: EdgeInsets.symmetric(horizontal: 60),
                     child: Column(children: [
-                      // Row(
-                      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      //   children: [
-                      //     Icon(
-                      //       Icons.notifications_rounded,
-                      //       color: Color.fromRGBO(0, 78, 131, 10),
-                      //     ),
-                      //     Container(
-                      //       width: MediaQuery.of(context).size.width * 0.55,
-                      //       child: Row(
-                      //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      //         children: [
-                      //           Text(
-                      //             //'${AppLocale.words[3].getString(context)}',
-                      //             'Notifications',
-                      //             style: TextStyle(fontSize: 16),
-                      //           ),
-                      //           SwitchBtn(
-                      //             activecolor: Color.fromRGBO(121, 158, 255, 1),
-                      //           ),
-                      //         ],
-                      //       ),
-                      //     ),
-                      //   ],
-                      // ),
                       SizedBox(
                         height: 5,
                       ),
-                      // Row(
-                      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      //   children: [
-                      //     Icon(Icons.wb_sunny_rounded,
-                      //         color: Color.fromRGBO(0, 78, 131, 10)),
-                      //     Container(
-                      //       width: MediaQuery.of(context).size.width * 0.55,
-                      //       child: Row(
-                      //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      //         children: [
-                      //           Text(
-                      //             '${AppLocale.words[4].getString(context)}',
-                      //             style: TextStyle(fontSize: 16),
-                      //           ),
-                      //           Switch(
-                      //             activeColor: Color.fromRGBO(121, 158, 255, 1),
-                      //             value: Provider.of<ThemeNotifier>(context)
-                      //                 ._isDark,
-                      //             onChanged: (value) {
-                      //               Provider.of<ThemeNotifier>(context,
-                      //                       listen: false)
-                      //                   .isDark = value;
-                      //             },
-                      //           ),
-                      //         ],
-                      //       ),
-                      //     ),
-                      //   ],
-                      // ),
-                      // SizedBox(
-                      //   height: 15,
-                      // ),
+
                       //showing languages to translate the app
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
