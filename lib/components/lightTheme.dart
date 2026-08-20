@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 ThemeData lightTheme = ThemeData(
   useMaterial3: true,
   brightness: Brightness.light,
-  appBarTheme: AppBarTheme(backgroundColor: Colors.white),
+  appBarTheme: AppBarTheme(),
   textSelectionTheme: TextSelectionThemeData(
     cursorColor: Colors.black,
   ),
-  bottomAppBarTheme: BottomAppBarTheme(color: Colors.white),
-  primaryColorDark: Color.fromRGBO(0, 78, 131, 10),
-  cardTheme: CardTheme(color: Color.fromRGBO(0, 78, 131, 10)),
+  bottomAppBarTheme: BottomAppBarThemeData(),
+  primaryColorDark: Color(0xFF00BCD4),
+  cardTheme: CardThemeData(color: Colors.white, elevation: 4.0),
   colorScheme: ColorScheme.light(
       background: Colors.white,
       primary: Colors.white,

@@ -57,14 +57,14 @@ class _HomePageState extends State<HomePage> {
             );
           },
           icon: Icon(
-            Icons.arrow_back_rounded,
-            color: Color.fromRGBO(0, 78, 131, 10),
+            Icons.arrow_back_ios_new,
+            color: Color(0xFF00BCD4),
           ),
         ),
         title: Text(
           '${AppLocale.words[9].getString(context)}',
           style: TextStyle(
-              color: Color.fromRGBO(0, 78, 131, 10), fontFamily: "Poppins"),
+              color: Color(0xFF00BCD4), fontFamily: "Poppins"),
         ),
         actions: [
           IconButton(
@@ -75,8 +75,8 @@ class _HomePageState extends State<HomePage> {
               );
             },
             icon: Icon(
-              Icons.calendar_month_rounded,
-              color: Color.fromRGBO(0, 78, 131, 10),
+              Icons.calendar_today_outlined,
+              color: Color(0xFF00BCD4),
             ),
           ),
         ],
@@ -96,7 +96,7 @@ class _HomePageState extends State<HomePage> {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return Center(
                       child: CircularProgressIndicator(
-                        color: Color.fromRGBO(0, 78, 131, 10),
+                        color: Color(0xFF00BCD4),
                       ),
                     );
                   } else {
@@ -130,7 +130,7 @@ class _HomePageState extends State<HomePage> {
                                       '${AppLocale.words[10].getString(context)} :',
                                       style: TextStyle(
                                           fontSize: 24,
-                                          color: Color.fromRGBO(0, 78, 131, 10),
+                                          color: Color(0xFF00BCD4),
                                           fontFamily: "Poppins"),
                                     ),
                                   ],
@@ -144,7 +144,7 @@ class _HomePageState extends State<HomePage> {
                                 width: 150.0,
                                 child: CircularPercentIndicator(
                                   radius: 70.0,
-                                  lineWidth: 15.0,
+                                  lineWidth: 8.0,
                                   percent: p / 100,
                                   center: Text(
                                     "${p}%",
@@ -155,7 +155,7 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                   progressColor: t()
                                       ? Color.fromARGB(144, 255, 57, 57)
-                                      : Color.fromRGBO(0, 78, 131, 10),
+                                      : Color(0xFF00BCD4),
                                 ),
                               ),
                               SizedBox(
@@ -198,7 +198,7 @@ class _HomePageState extends State<HomePage> {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return Center(
                       child: CircularProgressIndicator(
-                          color: Color.fromRGBO(0, 78, 131, 10)),
+                          color: Color(0xFF00BCD4)),
                     );
                   } else if (snapshot.hasData) {
                     SummaryWaterDb.clear();
