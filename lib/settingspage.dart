@@ -162,7 +162,7 @@ class _SettingsPageState extends State<SettingsPage> {
             child: Text(
               '${AppLocale.words[0].getString(context)}',
               style: TextStyle(
-                  color: Color.fromRGBO(0, 78, 131, 10), fontFamily: "Poppins"),
+                  color: Color(0xFF00BCD4), fontFamily: "Poppins"),
             ),
           ),
         ),
@@ -182,7 +182,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       borderRadius: BorderRadius.circular(15),
                       border: Border.all(
                         width: 2,
-                        color: Color.fromRGBO(0, 78, 131, 10),
+                        color: Color(0xFFEEEEEE),
                       ),
                     ),
                     child: Row(
@@ -191,7 +191,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         if (user != null)
                           !isUsingGmail(user)
                               ? Icon(
-                                  Icons.account_circle,
+                                  Icons.person_outline,
                                   size: 32,
                                   color: Color.fromRGBO(217, 217, 217, 1),
                                 )
@@ -231,8 +231,8 @@ class _SettingsPageState extends State<SettingsPage> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Icon(
-                              Icons.account_circle,
-                              color: Color.fromRGBO(0, 78, 131, 10),
+                              Icons.person_outline,
+                              color: Color(0xFF00BCD4),
                             ),
                             Container(
                               width: MediaQuery.of(context).size.width * 0.55,
@@ -246,7 +246,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                   ),
                                   Icon(
                                     Icons.arrow_forward_ios_rounded,
-                                    color: Color.fromRGBO(0, 78, 131, 10),
+                                    color: Color(0xFF00BCD4),
                                   ),
                                 ],
                               ),
@@ -260,8 +260,8 @@ class _SettingsPageState extends State<SettingsPage> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Icon(
-                              Icons.lock_rounded,
-                              color: Color.fromRGBO(0, 78, 131, 10),
+                              Icons.lock_outline,
+                              color: Color(0xFF00BCD4),
                             ),
                             Container(
                               width: MediaQuery.of(context).size.width * 0.55,
@@ -275,7 +275,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                   ),
                                   Icon(
                                     Icons.arrow_forward_ios_rounded,
-                                    color: Color.fromRGBO(0, 78, 131, 10),
+                                    color: Color(0xFF00BCD4),
                                   ),
                                 ],
                               ),
@@ -289,8 +289,8 @@ class _SettingsPageState extends State<SettingsPage> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Icon(
-                              Icons.policy_rounded,
-                              color: Color.fromRGBO(0, 78, 131, 10),
+                              Icons.privacy_tip_outlined,
+                              color: Color(0xFF00BCD4),
                             ),
                             GestureDetector(
                               onTap: GoToProfile,
@@ -306,7 +306,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                     ),
                                     Icon(
                                       Icons.arrow_forward_ios_rounded,
-                                      color: Color.fromRGBO(0, 78, 131, 10),
+                                      color: Color(0xFF00BCD4),
                                     ),
                                   ],
                                 ),
@@ -340,8 +340,8 @@ class _SettingsPageState extends State<SettingsPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Icon(
-                            Icons.translate_rounded,
-                            color: Color.fromRGBO(0, 78, 131, 10),
+                            Icons.language_outlined,
+                            color: Color(0xFF00BCD4),
                           ),
                           GestureDetector(
                             onTap: SelectLang,
@@ -357,7 +357,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                   ),
                                   Icon(
                                     Icons.arrow_forward_ios_rounded,
-                                    color: Color.fromRGBO(0, 78, 131, 10),
+                                    color: Color(0xFF00BCD4),
                                   ),
                                 ],
                               ),
@@ -384,8 +384,8 @@ class _SettingsPageState extends State<SettingsPage> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Icon(
-                          Icons.headset_mic_rounded,
-                          color: Color.fromRGBO(0, 78, 131, 10),
+                          Icons.headset_mic_outlined,
+                          color: Color(0xFF00BCD4),
                         ),
                         GestureDetector(
                           onTap: GoToContactUs,
@@ -400,7 +400,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                 ),
                                 Icon(
                                   Icons.arrow_forward_ios_rounded,
-                                  color: Color.fromRGBO(0, 78, 131, 10),
+                                  color: Color(0xFF00BCD4),
                                 ),
                               ],
                             ),
@@ -422,14 +422,14 @@ class _SettingsPageState extends State<SettingsPage> {
                         borderRadius: BorderRadius.circular(15),
                         border: Border.all(
                           width: 1,
-                          color: Color.fromRGBO(0, 78, 131, 10),
+                          color: Color(0xFFEEEEEE),
                         ),
                       ),
                       child: Center(
                         child: Text(
                           '${AppLocale.words[7].getString(context)}',
                           style: TextStyle(
-                            color: Color.fromRGBO(0, 78, 131, 10),
+                            color: Color(0xFF00BCD4),
                           ),
                         ),
                       ),

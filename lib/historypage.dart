@@ -41,14 +41,14 @@ class _DetailsPageState extends State<DetailsPage> {
             );
           },
           icon: Icon(
-            Icons.arrow_back_rounded,
-            color: Color.fromRGBO(0, 78, 131, 10),
+            Icons.arrow_back_ios_new,
+            color: Color(0xFF00BCD4),
           ),
         ),
         title: Text(
           '${AppLocale.words[15].getString(context)}',
           style: TextStyle(
-            color: Color.fromRGBO(0, 78, 131, 10),
+            color: Color(0xFF00BCD4),
           ),
         ),
         actions: [
@@ -57,8 +57,8 @@ class _DetailsPageState extends State<DetailsPage> {
               ExportData().exportCollectionToExcel('history');
             },
             icon: Icon(
-              Icons.download_rounded,
-              color: Color.fromRGBO(0, 78, 131, 10),
+              Icons.download_outlined,
+              color: Color(0xFF00BCD4),
             ),
           ),
         ],
@@ -101,7 +101,7 @@ class _DetailsPageState extends State<DetailsPage> {
                                       '${AppLocale.words[20].getString(context)}',
                                       style: TextStyle(
                                           fontSize: 20,
-                                          color: Color.fromRGBO(0, 78, 131, 10),
+                                          color: Color(0xFF00BCD4),
                                           fontFamily: "Poppins"),
                                     ),
                                   ],
@@ -132,7 +132,7 @@ class _DetailsPageState extends State<DetailsPage> {
                           '${AppLocale.words[23].getString(context)}',
                           style: TextStyle(
                               fontSize: 20,
-                              color: Color.fromRGBO(0, 78, 131, 10),
+                              color: Color(0xFF00BCD4),
                               fontFamily: "Poppins"),
                         ),
                       ],
@@ -173,8 +173,8 @@ class _DetailsPageState extends State<DetailsPage> {
                                           color: Colors.transparent,
                                           border: Border.all(
                                             color:
-                                                Color.fromRGBO(0, 78, 131, 10),
-                                            width: 1,
+                                                Color(0xFFEEEEEE),
+                                            width: 1.5,
                                           ),
                                           borderRadius:
                                               BorderRadius.circular(15),
@@ -194,7 +194,7 @@ class _DetailsPageState extends State<DetailsPage> {
                                               ),
                                               CircularPercentIndicator(
                                                 radius: 15,
-                                                lineWidth: 4,
+                                                lineWidth: 3,
                                                 percent: mesures[index] / 100,
                                                 progressColor:
                                                     mesures[index] < 20
