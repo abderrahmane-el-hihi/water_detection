@@ -10,7 +10,7 @@ import 'services/auth_services.dart';
 
 class SignUpPage extends StatefulWidget {
   final Function()? ontap;
-  SignUpPage({super.key, required this.ontap});
+  const SignUpPage({super.key, required this.ontap});
 
   @override
   State<SignUpPage> createState() => _SignUpPageState();
@@ -46,7 +46,7 @@ class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Theme.of(context).colorScheme.background,
+        backgroundColor: Theme.of(context).colorScheme.surface,
         body: GestureDetector(
           onTap: () {
             FocusScope.of(context).unfocus();
@@ -56,15 +56,15 @@ class _SignUpPageState extends State<SignUpPage> {
               child: Center(
                 child: Column(
                   children: [
-                    SizedBox(height: 25),
+                    const SizedBox(height: 25),
                     Text(
-                      '${AppLocale.words[17].getString(context)}',
+                      AppLocale.words[17].getString(context),
                       style: TextStyle(
                           color: Colors.grey[700],
                           fontSize: 16,
                           fontWeight: FontWeight.w600),
                     ),
-                    SizedBox(height: 50),
+                    const SizedBox(height: 50),
                     //name textfield
                     Text_Field(
                       controller: namecontroller,
@@ -72,7 +72,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       obsecureText: false,
                       preicon: Icons.person,
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     //last name textfield
                     Text_Field(
                       controller: lnamecontroller,
@@ -80,7 +80,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       obsecureText: false,
                       preicon: Icons.person,
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     //email textfield
                     Text_Field(
                       controller: emailcontroller,
@@ -89,7 +89,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       preicon: Icons.email_rounded,
                     ),
 
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     //password textfield
                     Text_Field(
                       controller: passwcontroller,
@@ -97,17 +97,17 @@ class _SignUpPageState extends State<SignUpPage> {
                       obsecureText: true,
                       preicon: Icons.lock,
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     //sign up buton
                     L_Button(
                       onTap: SignUp,
-                      text: '${AppLocale.words[17].getString(context)}',
+                      text: AppLocale.words[17].getString(context),
                     ),
 
-                    SizedBox(height: 25),
+                    const SizedBox(height: 25),
 
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 25.0),
                       child: Row(
                         children: [
                           Expanded(
@@ -117,7 +117,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           ),
                           Padding(
                             padding:
-                                const EdgeInsets.symmetric(horizontal: 25.0),
+                                EdgeInsets.symmetric(horizontal: 25.0),
                             child: Text(
                               'OR',
                               style: TextStyle(
@@ -132,7 +132,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         ],
                       ),
                     ),
-                    SizedBox(height: 50),
+                    const SizedBox(height: 50),
                     //google and facebook buttons
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -147,13 +147,13 @@ class _SignUpPageState extends State<SignUpPage> {
                         ),
                       ],
                     ),
-                    SizedBox(height: 25),
+                    const SizedBox(height: 25),
                     //alredy have account
                     GestureDetector(
                       onTap: widget.ontap,
                       child: Text(
-                        '${AppLocale.words[21].getString(context)}',
-                        style: TextStyle(
+                        AppLocale.words[21].getString(context),
+                        style: const TextStyle(
                             color: Color.fromRGBO(0, 78, 131, 10),
                             fontFamily: 'Poppins'),
                       ),

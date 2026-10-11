@@ -4,8 +4,8 @@ class Notif {
   static Future initialize(
       FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin) async {
     var androidInitialize =
-        new AndroidInitializationSettings('@mipmap/ic_launcher');
-    var initializationsSettings = new InitializationSettings(
+        const AndroidInitializationSettings('@mipmap/ic_launcher');
+    var initializationsSettings = InitializationSettings(
       android: androidInitialize,
     );
     await flutterLocalNotificationsPlugin.initialize(
@@ -20,7 +20,7 @@ class Notif {
       var payload,
       required FlutterLocalNotificationsPlugin fln}) async {
     AndroidNotificationDetails androidPlatformChannelSpecifics =
-        new AndroidNotificationDetails(
+        const AndroidNotificationDetails(
       '',
       '',
       playSound: true,

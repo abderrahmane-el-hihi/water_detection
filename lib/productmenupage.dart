@@ -6,7 +6,7 @@ import 'package:waterdetection/serianumpage.dart';
 import 'package:waterdetection/settingspage.dart';
 
 class ProductMenuPage extends StatefulWidget {
-  ProductMenuPage({super.key});
+  const ProductMenuPage({super.key});
 
   @override
   State<ProductMenuPage> createState() => _ProductMenuPageState();
@@ -15,7 +15,7 @@ class ProductMenuPage extends StatefulWidget {
 class _ProductMenuPageState extends State<ProductMenuPage> {
   void Back() {
     Navigator.push(
-        context, MaterialPageRoute(builder: ((context) => SerialPage())));
+        context, MaterialPageRoute(builder: ((context) => const SerialPage())));
   }
 
   List<Map<String, dynamic>> Data = [];
@@ -23,7 +23,7 @@ class _ProductMenuPageState extends State<ProductMenuPage> {
   void ToHome() {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => SwitchPages()),
+      MaterialPageRoute(builder: (context) => const SwitchPages()),
     );
   }
 
@@ -35,8 +35,8 @@ class _ProductMenuPageState extends State<ProductMenuPage> {
         elevation: 0,
         backgroundColor: Theme.of(context).colorScheme.primary,
         title: Text(
-          '${AppLocale.words[12].getString(context)}',
-          style: TextStyle(
+          AppLocale.words[12].getString(context),
+          style: const TextStyle(
               color: Color.fromRGBO(0, 78, 131, 10), fontFamily: "Poppins"),
         ),
         automaticallyImplyLeading: false,
@@ -45,10 +45,10 @@ class _ProductMenuPageState extends State<ProductMenuPage> {
             onPressed: () {
               Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (context) => SerialPage()),
+                MaterialPageRoute(builder: (context) => const SerialPage()),
               );
             },
-            icon: Icon(
+            icon: const Icon(
               Icons.add_rounded,
               color: Color.fromRGBO(0, 78, 131, 10),
             ),
@@ -58,14 +58,14 @@ class _ProductMenuPageState extends State<ProductMenuPage> {
       body: SafeArea(
         child: Column(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             FutureBuilder(
                 future: FirebaseFirestore.instance.collection('detector').get(),
                 builder: (context, AsyncSnapshot snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return Center(
+                    return const Center(
                       child: CircularProgressIndicator(),
                     );
                   } else {
@@ -79,11 +79,11 @@ class _ProductMenuPageState extends State<ProductMenuPage> {
                                 children: [
                                   Container(
                                     margin:
-                                        EdgeInsets.symmetric(horizontal: 10),
+                                        const EdgeInsets.symmetric(horizontal: 10),
                                     decoration: BoxDecoration(
                                       color: Colors.transparent,
                                       border: Border.all(
-                                        color: Color.fromRGBO(0, 78, 131, 10),
+                                        color: const Color.fromRGBO(0, 78, 131, 10),
                                         width: 1,
                                       ),
                                       borderRadius: BorderRadius.circular(15),
@@ -92,17 +92,17 @@ class _ProductMenuPageState extends State<ProductMenuPage> {
                                         onTap: ToHome,
                                         title: Text(
                                           'ceterne ${index + 1}',
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                               color: Color.fromRGBO(
                                                   0, 78, 131, 10),
                                               fontFamily: "Poppins"),
                                         ),
-                                        leading: Icon(
+                                        leading: const Icon(
                                           Icons.abc,
                                           color: Color.fromRGBO(0, 78, 131, 10),
                                         )),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 20,
                                   ),
                                 ],
@@ -110,7 +110,7 @@ class _ProductMenuPageState extends State<ProductMenuPage> {
                             }),
                       );
                     } else {
-                      return Center(
+                      return const Center(
                         child: Text('no data'),
                       );
                     }

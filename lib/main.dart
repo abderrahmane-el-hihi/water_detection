@@ -68,7 +68,7 @@ class _MyAppState extends State<MyApp> {
       mapLocales: [
         MapLocale('en', AppLocale.EN),
         MapLocale('fr', AppLocale.FR),
-        MapLocale('ar', AppLocale.AR),
+        const MapLocale('ar', AppLocale.AR),
       ],
       initLanguageCode: 'en',
     );
@@ -91,7 +91,7 @@ class _MyAppState extends State<MyApp> {
       // home: AuthPage(),
       home: AnimatedSplashScreen(
         splash: 'assets/images/codrops.png',
-        nextScreen: AuthPage(),
+        nextScreen: const AuthPage(),
       ),
     );
   }

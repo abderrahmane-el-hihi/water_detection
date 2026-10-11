@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import '../productmenupage.dart';
 
 class QRScan extends StatefulWidget {
+  const QRScan({super.key});
+
   @override
   _QRScanState createState() => _QRScanState();
 }
@@ -17,7 +19,7 @@ class _QRScanState extends State<QRScan> {
   bool isScanning = false;
   void back() {
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => ProductMenuPage()));
+        context, MaterialPageRoute(builder: (context) => const ProductMenuPage()));
   }
 
   @override
@@ -30,15 +32,15 @@ class _QRScanState extends State<QRScan> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Scan QR code',
           style: TextStyle(color: Colors.white),
         ),
-        backgroundColor: Color.fromRGBO(0, 78, 131, 10),
+        backgroundColor: const Color.fromRGBO(0, 78, 131, 10),
         elevation: 0,
         leading: IconButton(
             onPressed: back,
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_back_rounded,
               color: Colors.white,
             )),
@@ -85,13 +87,13 @@ class _QRScanState extends State<QRScan> {
     // Create a new product document and set the user reference field
     if (userRef != null) {
       FirebaseFirestore.instance.collection('detector').add({
-        'ref': '$qrCodeData',
+        'ref': qrCodeData,
         'userRef': userRef,
       });
     }
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => ProductMenuPage()),
+      MaterialPageRoute(builder: (context) => const ProductMenuPage()),
     );
   }
 }

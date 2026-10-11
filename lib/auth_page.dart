@@ -22,9 +22,9 @@ class AuthPage extends StatelessWidget {
           builder: (context, snapshot) {
             //user logged in
             if (snapshot.hasData) {
-              return SerialPage();
+              return const SerialPage();
             } else {
-              return SigninorUp();
+              return const SigninorUp();
             }
           }),
     );

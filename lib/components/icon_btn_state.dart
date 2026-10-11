@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class SwitchBtn extends StatefulWidget {
   final activecolor;
@@ -29,7 +27,7 @@ class _SwitchBtnState extends State<SwitchBtn> {
       onChanged: ((value) {
         (bool newstate) => onChanged(newstate);
       }),
-      activeColor: widget.activecolor,
+      activeThumbColor: widget.activecolor,
     );
   }
 }

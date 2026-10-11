@@ -37,17 +37,17 @@ class _DetailsPageState extends State<DetailsPage> {
           onPressed: () {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => SwitchPages()),
+              MaterialPageRoute(builder: (context) => const SwitchPages()),
             );
           },
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back_ios_new,
             color: Color(0xFF00BCD4),
           ),
         ),
         title: Text(
-          '${AppLocale.words[15].getString(context)}',
-          style: TextStyle(
+          AppLocale.words[15].getString(context),
+          style: const TextStyle(
             color: Color(0xFF00BCD4),
           ),
         ),
@@ -56,7 +56,7 @@ class _DetailsPageState extends State<DetailsPage> {
             onPressed: () {
               ExportData().exportCollectionToExcel('history');
             },
-            icon: Icon(
+            icon: const Icon(
               Icons.download_outlined,
               color: Color(0xFF00BCD4),
             ),
@@ -78,7 +78,7 @@ class _DetailsPageState extends State<DetailsPage> {
                               snapshot) {
                         if (snapshot.connectionState ==
                             ConnectionState.waiting) {
-                          return CircularProgressIndicator();
+                          return const CircularProgressIndicator();
                         } else if (snapshot.hasData) {
                           SummaryWaterDb2.clear();
                           List<QueryDocumentSnapshot<Map<String, dynamic>>>
@@ -98,8 +98,8 @@ class _DetailsPageState extends State<DetailsPage> {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
                                     Text(
-                                      '${AppLocale.words[20].getString(context)}',
-                                      style: TextStyle(
+                                      AppLocale.words[20].getString(context),
+                                      style: const TextStyle(
                                           fontSize: 20,
                                           color: Color(0xFF00BCD4),
                                           fontFamily: "Poppins"),
@@ -107,7 +107,7 @@ class _DetailsPageState extends State<DetailsPage> {
                                   ],
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 30,
                               ),
                               SizedBox(
@@ -120,7 +120,7 @@ class _DetailsPageState extends State<DetailsPage> {
                           ),
                         );
                       }),
-                  SizedBox(
+                  const SizedBox(
                     height: 30,
                   ),
                   Padding(
@@ -129,8 +129,8 @@ class _DetailsPageState extends State<DetailsPage> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Text(
-                          '${AppLocale.words[23].getString(context)}',
-                          style: TextStyle(
+                          AppLocale.words[23].getString(context),
+                          style: const TextStyle(
                               fontSize: 20,
                               color: Color(0xFF00BCD4),
                               fontFamily: "Poppins"),
@@ -138,7 +138,7 @@ class _DetailsPageState extends State<DetailsPage> {
                       ],
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   FutureBuilder(
@@ -148,7 +148,7 @@ class _DetailsPageState extends State<DetailsPage> {
                       builder: (context, AsyncSnapshot snapshot) {
                         if (snapshot.connectionState ==
                             ConnectionState.waiting) {
-                          return CircularProgressIndicator();
+                          return const CircularProgressIndicator();
                         } else if (snapshot.hasData) {
                           mesures.clear();
                           for (var i = 0; i < snapshot.data.size; i++) {
@@ -159,7 +159,7 @@ class _DetailsPageState extends State<DetailsPage> {
                             date.add(dateTime);
                           }
 
-                          return Container(
+                          return SizedBox(
                             height: MediaQuery.of(context).size.height * 0.4,
                             child: ListView.builder(
                                 itemCount: mesures.length,
@@ -167,13 +167,13 @@ class _DetailsPageState extends State<DetailsPage> {
                                   return Column(
                                     children: [
                                       Container(
-                                        margin: EdgeInsets.symmetric(
+                                        margin: const EdgeInsets.symmetric(
                                             horizontal: 10),
                                         decoration: BoxDecoration(
                                           color: Colors.transparent,
                                           border: Border.all(
                                             color:
-                                                Color(0xFFEEEEEE),
+                                                const Color(0xFFEEEEEE),
                                             width: 1.5,
                                           ),
                                           borderRadius:
@@ -184,12 +184,12 @@ class _DetailsPageState extends State<DetailsPage> {
                                             children: [
                                               Text(
                                                 '${DateFormat('dd-MM-yyyy').format(date[index])}: ${mesures[index]}%',
-                                                style: TextStyle(
+                                                style: const TextStyle(
                                                     color: Color.fromRGBO(
                                                         0, 78, 131, 10),
                                                     fontFamily: "Poppins"),
                                               ),
-                                              SizedBox(
+                                              const SizedBox(
                                                 width: 80,
                                               ),
                                               CircularPercentIndicator(
@@ -198,16 +198,16 @@ class _DetailsPageState extends State<DetailsPage> {
                                                 percent: mesures[index] / 100,
                                                 progressColor:
                                                     mesures[index] < 20
-                                                        ? Color.fromARGB(
+                                                        ? const Color.fromARGB(
                                                             144, 255, 57, 57)
-                                                        : Color.fromRGBO(
+                                                        : const Color.fromRGBO(
                                                             0, 78, 131, 10),
                                               ),
                                             ],
                                           ),
                                         ),
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         height: 20,
                                       ),
                                     ],
@@ -215,7 +215,7 @@ class _DetailsPageState extends State<DetailsPage> {
                                 }),
                           );
                         } else {
-                          return Center(
+                          return const Center(
                             child: Text('no data'),
                           );
                         }

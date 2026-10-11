@@ -1,4 +1,3 @@
-import 'dart:ui';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -36,7 +35,7 @@ class _SettingsPageState extends State<SettingsPage> {
     FirebaseAuth.instance.signOut().then((value) {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => AuthPage()),
+        MaterialPageRoute(builder: (context) => const AuthPage()),
       );
     }).catchError((error) {});
     // FirebaseAuth.instance.signOut();
@@ -72,23 +71,23 @@ class _SettingsPageState extends State<SettingsPage> {
           child: Wrap(
             children: [
               ListTile(
-                title: Container(child: Center(child: Text('Arabic'))),
+                title: Container(child: const Center(child: Text('Arabic'))),
                 onTap: () => {},
               ),
               Container(
-                  margin: EdgeInsets.symmetric(horizontal: 30),
-                  child: Divider(
+                  margin: const EdgeInsets.symmetric(horizontal: 30),
+                  child: const Divider(
                       color: Color.fromRGBO(179, 179, 179, 1), thickness: 1)),
               ListTile(
-                title: Container(child: Center(child: Text('French'))),
+                title: Container(child: const Center(child: Text('French'))),
                 onTap: () => {},
               ),
               Container(
-                  margin: EdgeInsets.symmetric(horizontal: 30),
-                  child: Divider(
+                  margin: const EdgeInsets.symmetric(horizontal: 30),
+                  child: const Divider(
                       color: Color.fromRGBO(179, 179, 179, 1), thickness: 1)),
               ListTile(
-                title: Container(child: Center(child: Text('English'))),
+                title: Container(child: const Center(child: Text('English'))),
                 onTap: () => {},
               ),
             ],
@@ -103,13 +102,13 @@ class _SettingsPageState extends State<SettingsPage> {
       context: context,
       builder: (BuildContext context) {
         return CupertinoActionSheet(
-          title: Text(
+          title: const Text(
             'Select Language',
             style: TextStyle(fontFamily: "Poppins"),
           ),
           actions: <Widget>[
             CupertinoActionSheetAction(
-              child: Text('French',
+              child: const Text('French',
                   style: TextStyle(
                       color: Color.fromRGBO(121, 158, 255, 1),
                       fontFamily: "Poppins")),
@@ -119,7 +118,7 @@ class _SettingsPageState extends State<SettingsPage> {
               },
             ),
             CupertinoActionSheetAction(
-              child: Text('English',
+              child: const Text('English',
                   style: TextStyle(
                       color: Color.fromRGBO(121, 158, 255, 1),
                       fontFamily: "Poppins")),
@@ -160,8 +159,8 @@ class _SettingsPageState extends State<SettingsPage> {
               horizontal: 45,
             ),
             child: Text(
-              '${AppLocale.words[0].getString(context)}',
-              style: TextStyle(
+              AppLocale.words[0].getString(context),
+              style: const TextStyle(
                   color: Color(0xFF00BCD4), fontFamily: "Poppins"),
             ),
           ),
@@ -171,18 +170,18 @@ class _SettingsPageState extends State<SettingsPage> {
             child: Center(
               child: Column(
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     height: 30,
                   ),
                   Container(
                     height: 70,
                     width: MediaQuery.of(context).size.width * 0.7,
                     decoration: BoxDecoration(
-                      color: Color.fromARGB(0, 255, 255, 255),
+                      color: const Color.fromARGB(0, 255, 255, 255),
                       borderRadius: BorderRadius.circular(15),
                       border: Border.all(
                         width: 2,
-                        color: Color(0xFFEEEEEE),
+                        color: const Color(0xFFEEEEEE),
                       ),
                     ),
                     child: Row(
@@ -190,7 +189,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       children: <Widget>[
                         if (user != null)
                           !isUsingGmail(user)
-                              ? Icon(
+                              ? const Icon(
                                   Icons.person_outline,
                                   size: 32,
                                   color: Color.fromRGBO(217, 217, 217, 1),
@@ -205,46 +204,46 @@ class _SettingsPageState extends State<SettingsPage> {
                                   ),
                                 ),
                         Padding(
-                            padding: EdgeInsets.only(left: 20),
+                            padding: const EdgeInsets.only(left: 20),
                             child: Text(
                               "${user?.displayName}",
                             )),
                       ],
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 50,
                   ),
                   Container(
-                      margin: EdgeInsets.symmetric(horizontal: 30),
-                      child: Divider(
+                      margin: const EdgeInsets.symmetric(horizontal: 30),
+                      child: const Divider(
                           color: Color.fromRGBO(179, 179, 179, 1),
                           thickness: 1)),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   Container(
-                    margin: EdgeInsets.symmetric(horizontal: 60),
+                    margin: const EdgeInsets.symmetric(horizontal: 60),
                     child: Column(
                       children: [
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Icon(
+                            const Icon(
                               Icons.person_outline,
                               color: Color(0xFF00BCD4),
                             ),
-                            Container(
+                            SizedBox(
                               width: MediaQuery.of(context).size.width * 0.55,
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    '${AppLocale.words[1].getString(context)}',
-                                    style: TextStyle(fontSize: 16),
+                                    AppLocale.words[1].getString(context),
+                                    style: const TextStyle(fontSize: 16),
                                   ),
-                                  Icon(
+                                  const Icon(
                                     Icons.arrow_forward_ios_rounded,
                                     color: Color(0xFF00BCD4),
                                   ),
@@ -253,27 +252,27 @@ class _SettingsPageState extends State<SettingsPage> {
                             ),
                           ],
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Icon(
+                            const Icon(
                               Icons.lock_outline,
                               color: Color(0xFF00BCD4),
                             ),
-                            Container(
+                            SizedBox(
                               width: MediaQuery.of(context).size.width * 0.55,
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    '${AppLocale.words[2].getString(context)}',
-                                    style: TextStyle(fontSize: 16),
+                                    AppLocale.words[2].getString(context),
+                                    style: const TextStyle(fontSize: 16),
                                   ),
-                                  Icon(
+                                  const Icon(
                                     Icons.arrow_forward_ios_rounded,
                                     color: Color(0xFF00BCD4),
                                   ),
@@ -282,29 +281,29 @@ class _SettingsPageState extends State<SettingsPage> {
                             ),
                           ],
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Icon(
+                            const Icon(
                               Icons.privacy_tip_outlined,
                               color: Color(0xFF00BCD4),
                             ),
                             GestureDetector(
                               onTap: GoToProfile,
-                              child: Container(
+                              child: SizedBox(
                                 width: MediaQuery.of(context).size.width * 0.55,
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      '${AppLocale.words[16].getString(context)}',
-                                      style: TextStyle(fontSize: 16),
+                                      AppLocale.words[16].getString(context),
+                                      style: const TextStyle(fontSize: 16),
                                     ),
-                                    Icon(
+                                    const Icon(
                                       Icons.arrow_forward_ios_rounded,
                                       color: Color(0xFF00BCD4),
                                     ),
@@ -317,21 +316,21 @@ class _SettingsPageState extends State<SettingsPage> {
                       ],
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 5,
                   ),
                   Container(
-                      margin: EdgeInsets.symmetric(horizontal: 30),
-                      child: Divider(
+                      margin: const EdgeInsets.symmetric(horizontal: 30),
+                      child: const Divider(
                           color: Color.fromRGBO(179, 179, 179, 1),
                           thickness: 1)),
-                  SizedBox(
+                  const SizedBox(
                     height: 5,
                   ),
                   Container(
-                    margin: EdgeInsets.symmetric(horizontal: 60),
+                    margin: const EdgeInsets.symmetric(horizontal: 60),
                     child: Column(children: [
-                      SizedBox(
+                      const SizedBox(
                         height: 5,
                       ),
 
@@ -339,23 +338,23 @@ class _SettingsPageState extends State<SettingsPage> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Icon(
+                          const Icon(
                             Icons.language_outlined,
                             color: Color(0xFF00BCD4),
                           ),
                           GestureDetector(
                             onTap: SelectLang,
-                            child: Container(
+                            child: SizedBox(
                               width: MediaQuery.of(context).size.width * 0.55,
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    '${AppLocale.words[5].getString(context)}',
-                                    style: TextStyle(fontSize: 16),
+                                    AppLocale.words[5].getString(context),
+                                    style: const TextStyle(fontSize: 16),
                                   ),
-                                  Icon(
+                                  const Icon(
                                     Icons.arrow_forward_ios_rounded,
                                     color: Color(0xFF00BCD4),
                                   ),
@@ -367,38 +366,38 @@ class _SettingsPageState extends State<SettingsPage> {
                       ),
                     ]),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   Container(
-                      margin: EdgeInsets.symmetric(horizontal: 30),
-                      child: Divider(
+                      margin: const EdgeInsets.symmetric(horizontal: 30),
+                      child: const Divider(
                           color: Color.fromRGBO(179, 179, 179, 1),
                           thickness: 1)),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   Container(
-                    margin: EdgeInsets.symmetric(horizontal: 60),
+                    margin: const EdgeInsets.symmetric(horizontal: 60),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Icon(
+                        const Icon(
                           Icons.headset_mic_outlined,
                           color: Color(0xFF00BCD4),
                         ),
                         GestureDetector(
                           onTap: GoToContactUs,
-                          child: Container(
+                          child: SizedBox(
                             width: MediaQuery.of(context).size.width * 0.55,
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  '${AppLocale.words[6].getString(context)}',
-                                  style: TextStyle(fontSize: 16),
+                                  AppLocale.words[6].getString(context),
+                                  style: const TextStyle(fontSize: 16),
                                 ),
-                                Icon(
+                                const Icon(
                                   Icons.arrow_forward_ios_rounded,
                                   color: Color(0xFF00BCD4),
                                 ),
@@ -409,7 +408,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       ],
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 50,
                   ),
                   GestureDetector(
@@ -418,17 +417,17 @@ class _SettingsPageState extends State<SettingsPage> {
                       width: MediaQuery.of(context).size.width * 0.5,
                       height: 50,
                       decoration: BoxDecoration(
-                        color: Color.fromARGB(0, 255, 255, 255),
+                        color: const Color.fromARGB(0, 255, 255, 255),
                         borderRadius: BorderRadius.circular(15),
                         border: Border.all(
                           width: 1,
-                          color: Color(0xFFEEEEEE),
+                          color: const Color(0xFFEEEEEE),
                         ),
                       ),
                       child: Center(
                         child: Text(
-                          '${AppLocale.words[7].getString(context)}',
-                          style: TextStyle(
+                          AppLocale.words[7].getString(context),
+                          style: const TextStyle(
                             color: Color(0xFF00BCD4),
                           ),
                         ),
