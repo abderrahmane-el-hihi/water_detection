@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Firebase_db {
-  Write_Data(String Collection_name, Map<String, dynamic> Data) {
+  Write_Data(String collectionName, Map<String, dynamic> Data) {
     CollectionReference Collection =
-        FirebaseFirestore.instance.collection(Collection_name);
+        FirebaseFirestore.instance.collection(collectionName);
     Collection.add(Data).then((DocumentReference docRef) {
       print('Document added with ID: ${docRef.id}');
     }).catchError((error) {
@@ -14,7 +14,7 @@ class Firebase_db {
   Get_data_on_date() async {
     late List<int> mesures;
     DateTime endDate = DateTime.now();
-    DateTime startDate = endDate.subtract(Duration(days: 7));
+    DateTime startDate = endDate.subtract(const Duration(days: 7));
     CollectionReference collection =
         FirebaseFirestore.instance.collection('history');
     Query query = collection

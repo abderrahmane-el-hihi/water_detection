@@ -13,7 +13,7 @@ import 'services/qr_scan.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SerialPage extends StatefulWidget {
-  SerialPage({super.key});
+  const SerialPage({super.key});
 
   @override
   State<SerialPage> createState() => _SerialPageState();
@@ -43,13 +43,13 @@ class _SerialPageState extends State<SerialPage> {
       }
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => ProductMenuPage()),
+        MaterialPageRoute(builder: (context) => const ProductMenuPage()),
       );
     } else {
       showDialog(
         context: context,
         builder: (context) {
-          return AlertDialog(
+          return const AlertDialog(
             title: Text(
               'Enter product ref or scan QR code',
               style: TextStyle(fontFamily: "Poppins"),
@@ -76,7 +76,7 @@ class _SerialPageState extends State<SerialPage> {
         .where('email', isEqualTo: email)
         .get();
 
-    if (snapshot.docs.length > 0) {
+    if (snapshot.docs.isNotEmpty) {
       print(snapshot.docs[0].get('username'));
       return snapshot.docs[0].get('username');
     } else {
@@ -88,7 +88,7 @@ class _SerialPageState extends State<SerialPage> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => QRScan(),
+        builder: (context) => const QRScan(),
       ),
     );
   }
@@ -104,7 +104,7 @@ class _SerialPageState extends State<SerialPage> {
       // Navigate to the Product Menu page
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => ProductMenuPage()),
+        MaterialPageRoute(builder: (context) => const ProductMenuPage()),
       );
     }
   }
@@ -126,7 +126,7 @@ class _SerialPageState extends State<SerialPage> {
                     children: <Widget>[
                       if (user != null)
                         !isUsingGmail(user)
-                            ? Icon(
+                            ? const Icon(
                                 Icons.account_circle,
                                 size: 128,
                                 color: Color.fromRGBO(217, 217, 217, 1),
@@ -140,19 +140,19 @@ class _SerialPageState extends State<SerialPage> {
                                   width: 128,
                                 ),
                               ),
-                      SizedBox(
+                      const SizedBox(
                         height: 50,
                       ),
                       isUsingGmail(user!)
                           ? Text(
                               '${user.displayName}',
-                              style: TextStyle(fontFamily: "Poppins"),
+                              style: const TextStyle(fontFamily: "Poppins"),
                             )
                           : Text(
                               '${FirebaseFirestore.instance.collection('compt').where('email', isEqualTo: FirebaseAuth.instance.currentUser?.email).get()}',
-                              style: TextStyle(fontFamily: "Poppins"),
+                              style: const TextStyle(fontFamily: "Poppins"),
                             ),
-                      SizedBox(
+                      const SizedBox(
                         height: 50,
                       ),
                       Container(
@@ -171,15 +171,15 @@ class _SerialPageState extends State<SerialPage> {
                               height: 60,
                               width: 60,
                               decoration: BoxDecoration(
-                                color: Color.fromARGB(0, 255, 255, 255),
+                                color: const Color.fromARGB(0, 255, 255, 255),
                                 borderRadius: BorderRadius.circular(15),
                                 border: Border.all(
                                   width: 2,
-                                  color: Color.fromRGBO(0, 78, 131, 10),
+                                  color: const Color.fromRGBO(0, 78, 131, 10),
                                 ),
                               ),
                               child: IconButton(
-                                icon: Icon(
+                                icon: const Icon(
                                   Icons.qr_code_scanner_rounded,
                                   color: Color.fromRGBO(0, 78, 131, 10),
                                 ),
@@ -189,12 +189,12 @@ class _SerialPageState extends State<SerialPage> {
                           ],
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       L_Button(
                         onTap: () => saveSerialNumber(context),
-                        text: '${AppLocale.words[13].getString(context)}',
+                        text: AppLocale.words[13].getString(context),
                       ),
                     ],
                   ),

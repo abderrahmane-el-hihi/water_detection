@@ -27,11 +27,23 @@ class G_F_Button extends StatelessWidget {
           //height: 58,
           height: MediaQuery.of(context).size.height * 0.1,
 
+          //padding: EdgeInsets.all(25),
+          margin: const EdgeInsets.symmetric(horizontal: 30),
+          //padding: EdgeInsets.all(0),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(15),
+            color: const Color.fromRGBO(255, 255, 255, 1),
+            border: Border.all(
+              color: const Color.fromRGBO(179, 179, 179, 1),
+              width: 1,
+            ),
+          ),
+
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SvgPicture.asset(
-                '${svgpath}',
+                svgpath,
                 height: h,
                 width: w,
               ),
@@ -39,25 +51,13 @@ class G_F_Button extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 10),
                 child: Text(
                   text,
-                  style: TextStyle(
+                  style: const TextStyle(
                       color: Color.fromRGBO(179, 179, 179, 1),
                       fontSize: 16,
                       fontFamily: "Poppins"),
                 ),
               ),
             ],
-          ),
-
-          //padding: EdgeInsets.all(25),
-          margin: EdgeInsets.symmetric(horizontal: 30),
-          //padding: EdgeInsets.all(0),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15),
-            color: Color.fromRGBO(255, 255, 255, 1),
-            border: Border.all(
-              color: Color.fromRGBO(179, 179, 179, 1),
-              width: 1,
-            ),
           ),
         ),
       ),

@@ -15,7 +15,7 @@ class _InfoPageState extends State<InfoPage> {
         child: Column(
           children: [
             Container(
-              margin: EdgeInsets.only(
+              margin: const EdgeInsets.only(
                 left: 290,
                 top: 670,
               ),
@@ -24,7 +24,7 @@ class _InfoPageState extends State<InfoPage> {
                   borderRadius: BorderRadius.circular(15),
                 ),
                 onPressed: () {},
-                child: Icon(Icons.arrow_forward_rounded),
+                child: const Icon(Icons.arrow_forward_rounded),
               ),
             ),
           ],

@@ -28,15 +28,15 @@ class Text_Field extends StatelessWidget {
           ),
           enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(15),
-              borderSide: BorderSide(color: Color.fromRGBO(179, 179, 179, 1))),
+              borderSide: const BorderSide(color: Color.fromRGBO(179, 179, 179, 1))),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(15),
-            borderSide: BorderSide(color: Color.fromRGBO(0, 78, 131, 10)),
+            borderSide: const BorderSide(color: Color.fromRGBO(0, 78, 131, 10)),
           ),
           fillColor: Theme.of(context).colorScheme.secondary,
           filled: true,
           hintText: hinText,
-          hintStyle: TextStyle(color: Color.fromRGBO(179, 179, 179, 1)),
+          hintStyle: const TextStyle(color: Color.fromRGBO(179, 179, 179, 1)),
         ),
       ),
     );

@@ -50,7 +50,7 @@ class _LoginPageState extends State<LoginPage> {
         showDialog(
           context: context,
           builder: (context) {
-            return AlertDialog(
+            return const AlertDialog(
               title: Text(
                 'Incorrect E-mail',
                 style: TextStyle(fontFamily: "Poppins"),
@@ -63,7 +63,7 @@ class _LoginPageState extends State<LoginPage> {
         showDialog(
           context: context,
           builder: (context) {
-            return AlertDialog(
+            return const AlertDialog(
               title: Text(
                 'Incorrect Password',
                 style: TextStyle(fontFamily: "Poppins"),
@@ -92,7 +92,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Theme.of(context).colorScheme.background,
+        backgroundColor: Theme.of(context).colorScheme.surface,
         body: GestureDetector(
           onTap: () {
             FocusScope.of(context).unfocus();
@@ -103,17 +103,17 @@ class _LoginPageState extends State<LoginPage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SizedBox(height: 50),
+                    const SizedBox(height: 50),
 
                     Text(
-                      '${AppLocale.words[18].getString(context)}',
+                      AppLocale.words[18].getString(context),
                       style: TextStyle(
                           color: Colors.grey[700],
                           fontSize: 16,
                           fontFamily: "Poppins",
                           fontWeight: FontWeight.w600),
                     ),
-                    SizedBox(height: 50),
+                    const SizedBox(height: 50),
 
                     //email textfield
                     Text_Field(
@@ -123,7 +123,7 @@ class _LoginPageState extends State<LoginPage> {
                       preicon: Icons.email_rounded,
                     ),
 
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     //password textfield
                     Text_Field(
                       controller: passwcontroller,
@@ -131,28 +131,28 @@ class _LoginPageState extends State<LoginPage> {
                       obsecureText: true,
                       preicon: Icons.lock,
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     //signin buton
                     L_Button(
                       onTap: SignIn,
-                      text: '${AppLocale.words[18].getString(context)}',
+                      text: AppLocale.words[18].getString(context),
                     ),
 
-                    SizedBox(height: 25),
+                    const SizedBox(height: 25),
                     //dont have account
                     GestureDetector(
                       onTap: widget.ontap,
                       child: Text(
-                        '${AppLocale.words[21].getString(context)}',
-                        style: TextStyle(
+                        AppLocale.words[21].getString(context),
+                        style: const TextStyle(
                             color: Color.fromRGBO(0, 78, 131, 10),
                             fontFamily: "Poppins"),
                       ),
                     ),
-                    SizedBox(height: 25),
+                    const SizedBox(height: 25),
 
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 25.0),
                       child: Row(
                         children: [
                           Expanded(
@@ -162,7 +162,7 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                           Padding(
                             padding:
-                                const EdgeInsets.symmetric(horizontal: 25.0),
+                                EdgeInsets.symmetric(horizontal: 25.0),
                             child: Text(
                               'OR',
                               style: TextStyle(
@@ -178,7 +178,7 @@ class _LoginPageState extends State<LoginPage> {
                         ],
                       ),
                     ),
-                    SizedBox(height: 50),
+                    const SizedBox(height: 50),
                     //google and facebook buttons
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,

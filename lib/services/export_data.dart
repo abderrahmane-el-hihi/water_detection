@@ -19,7 +19,7 @@ class ExportData {
       for (var i = 0; i < columnHeaders.length; i++) {
         sheet
             .cell(CellIndex.indexByColumnRow(columnIndex: i, rowIndex: 0))
-            .value = columnHeaders[i];
+            .value = TextCellValue(columnHeaders[i]);
       }
 
       // Add document data
@@ -29,16 +29,27 @@ class ExportData {
         final List<dynamic> values = data.values.toList();
 
         for (var j = 0; j < values.length; j++) {
+          final value = values[j];
+          CellValue cellValue;
+          if (value is String) {
+            cellValue = TextCellValue(value);
+          } else if (value is num) {
+            cellValue = DoubleCellValue(value.toDouble());
+          } else if (value is bool) {
+            cellValue = BoolCellValue(value);
+          } else {
+            cellValue = TextCellValue(value.toString());
+          }
           sheet
               .cell(CellIndex.indexByColumnRow(columnIndex: j, rowIndex: i + 1))
-              .value = values[j];
+              .value = cellValue;
         }
       }
 
       // Save the Excel file
       final Directory appDocumentsDirectory =
           await getApplicationDocumentsDirectory();
-      final String filePath = 'Download/file.xlsx';
+      const String filePath = 'Download/file.xlsx';
       final List<int>? excelBytes = excel.encode();
       final File file = File(filePath);
       file.createSync(recursive: true);

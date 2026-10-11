@@ -19,7 +19,7 @@ class _SwitchPAgesState extends State<SwitchPages> {
     });
   }
 
-  List<Widget> pages = [HomePage(), SettingsPage()];
+  List<Widget> pages = [const HomePage(), const SettingsPage()];
 
   @override
   Widget build(BuildContext context) {

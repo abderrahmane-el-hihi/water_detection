@@ -27,9 +27,9 @@ class GraphBar extends StatelessWidget {
       BarChartData(
         maxY: 100,
         minY: 0,
-        gridData: FlGridData(show: false),
+        gridData: const FlGridData(show: false),
         borderData: FlBorderData(show: false),
-        titlesData: FlTitlesData(
+        titlesData: const FlTitlesData(
           show: true,
           bottomTitles: AxisTitles(
               sideTitles: SideTitles(
@@ -44,12 +44,12 @@ class GraphBar extends StatelessWidget {
                   barRods: [
                     BarChartRodData(
                       toY: data.y.toDouble(),
-                      color: Color.fromRGBO(0, 78, 131, 10),
+                      color: const Color.fromRGBO(0, 78, 131, 10),
                       width: 20,
                       borderRadius: BorderRadius.circular(4),
                       backDrawRodData: BackgroundBarChartRodData(
                           show: true,
-                          color: Color.fromARGB(255, 181, 181, 181),
+                          color: const Color.fromARGB(255, 181, 181, 181),
                           fromY: 100),
                     ),
                   ],
@@ -69,53 +69,53 @@ Widget getBottomTitles(double val, TitleMeta meta) {
   Widget text;
   switch (val.toInt()) {
     case 0:
-      text = Text(
+      text = const Text(
         'M',
         style: style,
       );
       break;
     case 1:
-      text = Text(
+      text = const Text(
         'T',
         style: style,
       );
       break;
     case 2:
-      text = Text(
+      text = const Text(
         'W',
         style: style,
       );
       break;
     case 3:
-      text = Text(
+      text = const Text(
         'T',
         style: style,
       );
       break;
     case 4:
-      text = Text(
+      text = const Text(
         'F',
         style: style,
       );
       break;
     case 5:
-      text = Text(
+      text = const Text(
         'S',
         style: style,
       );
       break;
     case 6:
-      text = Text(
+      text = const Text(
         'S',
         style: style,
       );
       break;
     default:
-      text = Text(
+      text = const Text(
         '',
         style: style,
       );
       break;
   }
-  return SideTitleWidget(child: text, axisSide: meta.axisSide);
+  return SideTitleWidget(meta: meta, child: text);
 }

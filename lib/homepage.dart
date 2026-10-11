@@ -12,7 +12,7 @@ import 'historypage.dart';
 import 'services/local_notif_service.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({super.key});
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -33,7 +33,7 @@ class _HomePageState extends State<HomePage> {
 
   void ToSettings() {
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => SettingsPage()));
+        context, MaterialPageRoute(builder: (context) => const SettingsPage()));
   }
 
   List SummaryWaterDb = [];
@@ -53,17 +53,17 @@ class _HomePageState extends State<HomePage> {
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => ProductMenuPage()),
+              MaterialPageRoute(builder: (context) => const ProductMenuPage()),
             );
           },
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back_ios_new,
             color: Color(0xFF00BCD4),
           ),
         ),
         title: Text(
-          '${AppLocale.words[9].getString(context)}',
-          style: TextStyle(
+          AppLocale.words[9].getString(context),
+          style: const TextStyle(
               color: Color(0xFF00BCD4), fontFamily: "Poppins"),
         ),
         actions: [
@@ -71,10 +71,10 @@ class _HomePageState extends State<HomePage> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => DetailsPage()),
+                MaterialPageRoute(builder: (context) => const DetailsPage()),
               );
             },
-            icon: Icon(
+            icon: const Icon(
               Icons.calendar_today_outlined,
               color: Color(0xFF00BCD4),
             ),
@@ -84,7 +84,7 @@ class _HomePageState extends State<HomePage> {
       body: SafeArea(
         child: Column(
           children: <Widget>[
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             FutureBuilder(
@@ -94,7 +94,7 @@ class _HomePageState extends State<HomePage> {
                     .get(),
                 builder: (context, AsyncSnapshot snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return Center(
+                    return const Center(
                       child: CircularProgressIndicator(
                         color: Color(0xFF00BCD4),
                       ),
@@ -128,7 +128,7 @@ class _HomePageState extends State<HomePage> {
                                   children: [
                                     Text(
                                       '${AppLocale.words[10].getString(context)} :',
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           fontSize: 24,
                                           color: Color(0xFF00BCD4),
                                           fontFamily: "Poppins"),
@@ -136,10 +136,10 @@ class _HomePageState extends State<HomePage> {
                                   ],
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 30,
                               ),
-                              Container(
+                              SizedBox(
                                 height: 150.0,
                                 width: 150.0,
                                 child: CircularPercentIndicator(
@@ -147,18 +147,18 @@ class _HomePageState extends State<HomePage> {
                                   lineWidth: 8.0,
                                   percent: p / 100,
                                   center: Text(
-                                    "${p}%",
-                                    style: TextStyle(
+                                    "$p%",
+                                    style: const TextStyle(
                                         color:
                                             Color.fromARGB(255, 170, 170, 170),
                                         fontSize: 20),
                                   ),
                                   progressColor: t()
-                                      ? Color.fromARGB(144, 255, 57, 57)
-                                      : Color(0xFF00BCD4),
+                                      ? const Color.fromARGB(144, 255, 57, 57)
+                                      : const Color(0xFF00BCD4),
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 20,
                               ),
                               Padding(
@@ -169,14 +169,14 @@ class _HomePageState extends State<HomePage> {
                                     children: [
                                       Text(
                                           '${AppLocale.words[11].getString(context)} :',
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                               fontSize: 24,
                                               color: Color.fromRGBO(
                                                   0, 78, 131, 10),
                                               fontFamily: "Poppins")),
                                     ]),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 50,
                               ),
                             ],
@@ -184,7 +184,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                       );
                     } else {
-                      return Center(
+                      return const Center(
                         child: Text('no data'),
                       );
                     }
@@ -196,7 +196,7 @@ class _HomePageState extends State<HomePage> {
                     AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>>
                         snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return Center(
+                    return const Center(
                       child: CircularProgressIndicator(
                           color: Color(0xFF00BCD4)),
                     );
@@ -221,7 +221,7 @@ class _HomePageState extends State<HomePage> {
                       ],
                     );
                   }
-                  return Text('error');
+                  return const Text('error');
                 }),
           ],
         ),
